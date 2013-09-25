@@ -9,9 +9,9 @@ class Vector
 {
 public:
 	unsigned int *array;
-	size_t length;
+	int length;
 
-	Vector (size_t size){
+	Vector (int size){
 		length = size;
 		array = new unsigned int[length];
 		for (int i = 0; i < length; ++i)
@@ -20,10 +20,14 @@ public:
 		}
 	}
 
-    unsigned int get (int index){
+    unsigned int get (int index) const{
     	if (index > length-1 || index < 0)
     		throw std::out_of_range("Out of range!");
     	return array[index];
+    }
+
+    void modifyTHIS (){
+    	array = NULL;
     }
 
     Vector & operator=(const Vector & s) {
