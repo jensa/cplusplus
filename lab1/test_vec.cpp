@@ -5,21 +5,27 @@
 
 int main()
 {
+    std::cout << "Constructors" << "\n";
     // Några saker som ska fungera:
     Vector a(7);           // initiering med 7 element
     Vector b(a);           // kopieringskonstruktor 
     Vector c = a;          // kopieringskonstruktor 
 
+    std::cout << "Tilldelning" << "\n";
     a = b;                 // tilldelning genom kopiering
+    std::cout << "....wat" << "\n";
     a[5] = 7;              // tilldelning till element
 
+    std::cout << "DEL 3" << "\n";
     const Vector e(10);    // konstant objekt med 10 element
     int i = e[5];          // const int oper[](int) const körs
     i = a[0];              // vektorn är nollindexerad
     i = a[5];              // int oper[](int) körs
     
+    std::cout << "DEL 4" << "\n";
     a[5]++;                // öka värdet till 8
 
+    std::cout << "DEL 5" << "\n";
     try {
         i = e[10];             // försöker hämta element som ligger utanför e
     } catch (std::out_of_range e) {

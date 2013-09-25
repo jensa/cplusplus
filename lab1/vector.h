@@ -5,9 +5,10 @@ class Vector
 		int length;
 		
 		Vector (int size);
+		Vector (const Vector & vec);
 		unsigned int get (int index) const;
 		Vector & operator=(const Vector & s);
-		const unsigned int &operator[](const int & index) const;
+		unsigned int &operator[](const int & index) const;
 
 	private:
 		void fitArray (const Vector & vec);
