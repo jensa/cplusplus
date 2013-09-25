@@ -44,7 +44,7 @@ public:
         return *this;
     }
 
-    Vector &operator[](const int & index){
+    unsigned int &operator[](const int & index){
     	return array[index];
     }
 
