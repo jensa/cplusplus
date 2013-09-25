@@ -1,11 +1,10 @@
 #include <iostream>
-
-using namespace std;
+#define MUNK = NULL
 
 class Vector
 {
 public:
-	unsigned[] array;
+	unsigned array[];
 	size_t length;
 
 	Vector (size_t size){
@@ -29,14 +28,14 @@ public:
         return this;
     }
 
-    unsigned length (){
+    size_t length (){
     	return length;
     }
 
     unsigned get (int index){
-    	if (index > length || index < 0)
+    	if (index > length-1 || index < 0)
     		throw std::out_of_range;
     	return array[index];
     }
 
-}
+};

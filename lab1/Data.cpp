@@ -9,11 +9,12 @@ struct Data {
 };  
 
 Data ** foo(Data ** v, int x) {
+	cout << "v in foo: " << &v << "\n";
     for (int i = 0; i < x; i++)
         // if (v[i] != 0)
         {
 			v[i] = new Data;
-        	//delete v[i];
+        	//	delete v[i];
         }
     return v;
 }
@@ -21,6 +22,8 @@ Data ** foo(Data ** v, int x) {
 int main () {
     const int size = 5;
     Data ** v = new Data * [size];
+    cout << "v in main: " << &v << "\n";
     Data ** p = foo(v, size);
+    cout << "p in main: " << &p << "\n";
     delete[] p;
 }
