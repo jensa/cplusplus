@@ -20,9 +20,8 @@ Vector::Vector (const Vector & vec){
 	fitArray (vec);
 	length = vec.getLength();
 	for (int i = 0; i < vec.getLength(); ++i)
-	{
-		int boeg = vec.get(i);
-		array[i]  = boeg;
+	{ 
+		array[i] = vec.get(i); 
 	}
 }
 
@@ -42,9 +41,10 @@ unsigned int Vector::get (int index) const{
 
 Vector & Vector::operator=(const Vector & vec) {
 	fitArray (vec);
-	for (int i = 0; i < vec.getLength()-1; ++i)
+	length = vec.getLength();
+	for (int i = 0; i < vec.getLength(); ++i)
 	{
-		array[i] = vec.get(i); //LANGAR SEGFAULT :()
+		array[i] = vec.get(i);
 	}
     return *this;
 }
@@ -61,4 +61,14 @@ void Vector::fitArray (const Vector & vec){
 			delete[] array;
 		array = new unsigned int[vec.getLength()];
 	}
+}
+
+void Vector::print () {
+	std::cout << "[";
+	for (int i = 0; i < length; i++){
+		std::cout << get(i);
+		if (i != length-1)
+			std::cout << ",";
+	}
+	std::cout << "]" << "\n";
 }

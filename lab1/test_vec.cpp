@@ -10,11 +10,12 @@ int main()
     Vector a(7);           // initiering med 7 element
     Vector b(a);           // kopieringskonstruktor 
     Vector c = a;          // kopieringskonstruktor
-    Vector z(0); 
 
     std::cout << "Tilldelning" << "\n";
     a = b;                 // tilldelning genom kopiering
     a[5] = 7;              // tilldelning till element
+
+    std::cout << a[4] << "\n";
 
     std::cout << "DEL 3" << "\n";
     const Vector e(10);    // konstant objekt med 10 element
@@ -32,14 +33,23 @@ int main()
         std::cout << e.what() << std::endl;
     }
 
-    Vector x(3);
+    Vector x(10);
     x[0] = 1;
     x[1] = 2;
     x[2] = 3;
+    x[3] = 4;
+    x[4] = 5;
+    x[5] = 6;
+    x[6] = 7;
+    x[7] = 8;
+    x[8] = 9;
+    x[9] = 10;
 
-    Vector y(x);
-    std::cout << x[0] << "," << x[1] << "," << x[2] << "\n";
-    std::cout << y[0] << "," << y[1] << "," << y[2] << "\n";
+    Vector y(5);
+
+    y = x;
+    x.print();
+    y.print();
 
 #if 0
     // Diverse saker att testa
