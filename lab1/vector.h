@@ -2,6 +2,8 @@ class Vector
 {
 	int length;
 	unsigned int *array;
+	bool arrayCreated;
+
 	public:
 		Vector (int size);
 		Vector (const Vector & vec);

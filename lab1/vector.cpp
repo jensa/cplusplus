@@ -7,6 +7,7 @@
 Vector::Vector (int size){
 	length = size;
 	array = new unsigned int[length];
+	arrayCreated = 1;
 	for (int i = 0; i < length; ++i)
 	{
 		array[i] = 0;
@@ -15,6 +16,7 @@ Vector::Vector (int size){
 
 //Copy contructor
 Vector::Vector (const Vector & vec){
+	arrayCreated = 0;
 	fitArray (vec);
 	length = vec.getLength();
 	for (int i = 0; i < vec.getLength(); ++i)
@@ -44,12 +46,15 @@ Vector & Vector::operator=(const Vector & vec) {
 }
 
 unsigned int & Vector::operator[](const int & index) const{
+	if (index > length-1 || index < 0)
+		throw std::out_of_range("Out of range!");
 	return array[index];
 }
 
 void Vector::fitArray (const Vector & vec){
 	if (vec.getLength() != length){
-		//delete[] array;
+		if (arrayCreated)
+			delete[] array;
 		array = new unsigned int[vec.getLength()];
 	}
 }

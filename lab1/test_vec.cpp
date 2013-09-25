@@ -30,7 +30,16 @@ int main()
     } catch (std::out_of_range e) {
         std::cout << e.what() << std::endl;
     }
-    
+
+    Vector x(3);
+    x[0] = 1;
+    x[1] = 2;
+    x[4] = 3;
+
+    Vector y(x);
+    std::cout << x[0] << "," << x[1] << "," << x[2] << "\n";
+    std::cout << y[0] << "," << y[1] << "," << y[2] << "\n";
+
 #if 0
     // Diverse saker att testa
     e[5] = 3;              // fel: (kompilerar ej) tilldelning till const
