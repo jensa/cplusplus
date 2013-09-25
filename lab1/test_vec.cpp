@@ -13,7 +13,6 @@ int main()
 
     std::cout << "Tilldelning" << "\n";
     a = b;                 // tilldelning genom kopiering
-    std::cout << "....wat" << "\n";
     a[5] = 7;              // tilldelning till element
 
     std::cout << "DEL 3" << "\n";

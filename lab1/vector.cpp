@@ -4,7 +4,6 @@
 
 #define MUNK = NULL
 
-
 Vector::Vector (int size){
 	length = size;
 	array = new unsigned int[length];
@@ -17,10 +16,16 @@ Vector::Vector (int size){
 //Copy contructor
 Vector::Vector (const Vector & vec){
 	fitArray (vec);
-	for (int i = 0; i < vec.length; ++i)
+	length = vec.getLength();
+	for (int i = 0; i < vec.getLength(); ++i)
 	{
-		array[i] = vec.get(i);
+		int boeg = vec.get(i);
+		array[i]  = boeg;
 	}
+}
+
+int Vector::getLength() const{
+	return length;
 }
 
 unsigned int Vector::get (int index) const{
@@ -31,9 +36,9 @@ unsigned int Vector::get (int index) const{
 
 Vector & Vector::operator=(const Vector & vec) {
 	fitArray (vec);
-	for (int i = 0; i < vec.length; ++i)
+	for (int i = 0; i < vec.getLength()-1; ++i)
 	{
-		array[i] = vec.get(i);
+		array[i] = vec.get(i); //LANGAR SEGFAULT :()
 	}
     return *this;
 }
@@ -43,8 +48,8 @@ unsigned int & Vector::operator[](const int & index) const{
 }
 
 void Vector::fitArray (const Vector & vec){
-	if (vec.length != length){
-		delete[] array;
-		array = new unsigned[vec.length];
+	if (vec.getLength() != length){
+		//delete[] array;
+		array = new unsigned int[vec.getLength()];
 	}
 }
