@@ -45,7 +45,7 @@ public:
     }
 
     Vector &operator[](const int & index){
-    	return get (index);
+    	return array[index];
     }
 
 private:
