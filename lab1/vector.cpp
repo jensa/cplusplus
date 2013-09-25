@@ -44,7 +44,7 @@ public:
         return *this;
     }
 
-    unsigned int &operator[](const int & index) const{
+    const unsigned int &operator[](const int & index) const{
     	return array[index];
     }
 
