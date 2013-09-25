@@ -9,7 +9,8 @@ int main()
     // Några saker som ska fungera:
     Vector a(7);           // initiering med 7 element
     Vector b(a);           // kopieringskonstruktor 
-    Vector c = a;          // kopieringskonstruktor 
+    Vector c = a;          // kopieringskonstruktor
+    Vector z(0); 
 
     std::cout << "Tilldelning" << "\n";
     a = b;                 // tilldelning genom kopiering
@@ -34,7 +35,7 @@ int main()
     Vector x(3);
     x[0] = 1;
     x[1] = 2;
-    x[4] = 3;
+    x[2] = 3;
 
     Vector y(x);
     std::cout << x[0] << "," << x[1] << "," << x[2] << "\n";

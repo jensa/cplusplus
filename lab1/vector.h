@@ -7,6 +7,7 @@ class Vector
 	public:
 		Vector (int size);
 		Vector (const Vector & vec);
+		~Vector ();
 		int getLength() const;
 		unsigned int get (int index) const;
 		Vector & operator=(const Vector & s);

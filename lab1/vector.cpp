@@ -26,6 +26,10 @@ Vector::Vector (const Vector & vec){
 	}
 }
 
+Vector::~Vector () {
+	delete array;
+}
+
 int Vector::getLength() const{
 	return length;
 }
