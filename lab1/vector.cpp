@@ -56,3 +56,7 @@ private:
 		}
 	}
 };
+
+int main (){
+	
+}
