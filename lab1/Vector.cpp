@@ -4,7 +4,7 @@
 class Vector
 {
 public:
-	unsigned array[];
+	unsigned int array[];
 	size_t length;
 
 	Vector (size_t size){
@@ -16,7 +16,17 @@ public:
 		}
 	}
 
-	Vector & operator=(const Vector & s) {
+    unsigned length (){
+    	return length;
+    }
+
+    unsigned get (int index){
+    	if (index > length || index < 0)
+    		throw std::out_of_range;
+    	return array[index];
+    }
+
+    Vector & operator=(const Vector & s) {
 		if (s.length () != length){
 			delete[] array;
 			array = new unsigned[s.length ()];
@@ -37,5 +47,4 @@ public:
     		throw std::out_of_range;
     	return array[index];
     }
-
 };
