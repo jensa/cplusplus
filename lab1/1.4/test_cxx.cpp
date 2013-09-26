@@ -140,8 +140,8 @@ public:
 
         Vector b = std::move(a);
 
-        TS_ASSERT_EQUALS(a.length, 0);
-        TS_ASSERT_EQUALS(b.length, 5);
+        TS_ASSERT_EQUALS(a.size(), 0);
+        TS_ASSERT_EQUALS(b.size(), 5);
         TS_ASSERT_EQUALS(b[0], 1);
         TS_ASSERT_EQUALS(b[1], 2);
     }
@@ -156,7 +156,10 @@ public:
 
         a = std::move(b);
 
-        a.print();
-        b.print();
+        TS_ASSERT_EQUALS(b.size(),0);
+        TS_ASSERT_EQUALS(a.size(),5);
+
+        for (int i = 0; i < a.size(); i++)
+            TS_ASSERT_EQUALS(a[i],2);
     }
 };
