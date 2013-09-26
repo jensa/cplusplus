@@ -10,6 +10,8 @@ int main()
     Vector a(7);           // initiering med 7 element
     Vector b(a);           // kopieringskonstruktor 
     Vector c = a;          // kopieringskonstruktor
+    std::initializer_list<int> il{1,2,3,4,5,6,7};
+    a = il;
 
     std::cout << "Tilldelning" << "\n";
     a = b;                 // tilldelning genom kopiering

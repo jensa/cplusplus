@@ -1,3 +1,4 @@
+
 class Vector
 {
 	int length;
@@ -12,6 +13,7 @@ class Vector
 		void print();
 		unsigned int get (int index) const;
 		Vector & operator=(const Vector & s);
+		Vector & operator=(const std::initializer_list<int>& il);
 		unsigned int &operator[](const int & index) const;
 
 	private:

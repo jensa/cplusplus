@@ -49,6 +49,22 @@ Vector & Vector::operator=(const Vector & vec) {
     return *this;
 }
 
+Vector & Vector::operator=(const std::initializer_list<int>& il){
+	Vector vec(il.size());
+	fitArray(vec);
+	length = vec.getLength();
+
+	std::initializer_list<int>::iterator it;
+	int i = 0;
+
+	for (it = il.begin(); it != il.end(); it++, i++){
+		std::cout << "Inserting " << *it << " at index " << i << "\n"; 
+		array[i] = *it;
+	}
+
+	return *this;
+}
+
 unsigned int & Vector::operator[](const int & index) const{
 	if (index > length-1 || index < 0)
 		throw std::out_of_range("Out of range!");
