@@ -1,21 +1,32 @@
+#ifndef VECTOR_H
+#define VECTOR_H
+
+#include <cstdlib>
+#include <stdexcept>
+#include <initializer_list>
 
 class Vector
 {
-	int length;
-	unsigned int *array;
-	bool arrayCreated;
-
 	public:
-		Vector (int size);
+		Vector();
+		explicit Vector (size_t size);
 		Vector (const Vector & vec);
 		~Vector ();
-		int getLength() const;
+
+		size_t size() const;
 		void print();
-		unsigned int get (int index) const;
+		
+		unsigned int & operator[](unsigned int index);
+		const unsigned int & operator[](unsigned int index) const;
+
 		Vector & operator=(const Vector & s);
 		Vector & operator=(const std::initializer_list<int>& il);
-		unsigned int &operator[](const int & index) const;
 
 	private:
+		int length;
+		unsigned int *array;
+		bool arrayCreated;
 		void fitArray (const Vector & vec);
 };
+
+#endif
