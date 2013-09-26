@@ -6,15 +6,6 @@ class MyTestSuite : public CxxTest::TestSuite
 {
 public:
 
-    void test_lol ( void )
-    {
-        Vector a(10);
-        int x = 2;
-        int i = a[7];
-        a[3] = x;
-        Vector* v2 = new Vector(3);
-    }
-
     void test_initialized_as_zero( void )
     {
         Vector a(1);

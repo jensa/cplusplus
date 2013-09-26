@@ -23,7 +23,7 @@ class Vector
 		Vector & operator=(const std::initializer_list<int>& il);
 
 	private:
-		int length;
+		size_t length;
 		unsigned int *array;
 		bool arrayCreated;
 		void fitArray (const Vector & vec);

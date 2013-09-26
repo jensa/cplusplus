@@ -2,10 +2,11 @@
 #include "vector.h"
 
 Vector::Vector(){
-	length = 0;
+	length = (size_t) 0;
 	array = new unsigned int[0];
 	arrayCreated = 1;
 }
+
 Vector::Vector (const size_t size){
 	length = size;
 	array = new unsigned int[length];
@@ -18,13 +19,11 @@ Vector::Vector (const size_t size){
 
 //Copy contructor
 Vector::Vector (const Vector & vec){
-	arrayCreated = 0;
-	fitArray (vec);
 	length = vec.size();
-	for (int i = 0; i < vec.size(); ++i)
-	{ 
-		array[i] = vec[i]; 
-	}
+    array = new unsigned int[length];
+    for (unsigned int i = 0; i < length; ++i) {
+        array[i] = vec[i];
+    }
 }
 
 Vector::~Vector () {
@@ -36,15 +35,13 @@ size_t Vector::size() const{
 }
 
 Vector & Vector::operator=(const Vector & vec) {
-	if (this != &vec) {
-		fitArray (vec);
-		length = vec.size();
-		for (int i = 0; i < vec.size(); ++i)
-		{
-			array[i] = vec[i];
-		}
-		return *this;
-	}	
+	fitArray (vec);
+	length = vec.size();
+	for (int i = 0; i < vec.size(); ++i)
+	{
+		array[i] = vec[i];
+	}
+	return *this;	
 }
 
 Vector & Vector::operator=(const std::initializer_list<int>& il){
@@ -64,13 +61,13 @@ Vector & Vector::operator=(const std::initializer_list<int>& il){
 }
 
 unsigned int & Vector::operator[](unsigned int index){
-	if (index > length-1 || index < 0)
+	if (index >= length || index < 0)
 		throw std::out_of_range("Out of range!");
 	return array[index];
 }
 
 const unsigned int & Vector::operator[](unsigned int index) const {
-	if (index > length-1 || index < 0)
+	if (index >= length || index < 0)
 		throw std::out_of_range("Out of range!");
 	return array[index];
 }
@@ -91,8 +88,4 @@ void Vector::print () {
 			std::cout << ",";
 	}
 	std::cout << "]" << "\n";
-}
-
-int main() {
-	return 0;
 }
