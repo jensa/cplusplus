@@ -132,38 +132,4 @@ public:
             TS_ASSERT_EQUALS(a[i],c[i]);
         }
     }
-
-    void test_assignment()
-    {
-        Vector a(10);
-        a[1] = 2;
-        Vector b = a;
-        a[2] = 3;
-        TS_ASSERT_EQUALS(b[1], 2);
-        TS_ASSERT_EQUALS(b[2], 0);
-        b[3] = 5;
-        a = b;
-        TS_ASSERT_EQUALS(a[3], 5);
-        b[4] = 2;
-        b = b;
-        TS_ASSERT_EQUALS(b[4], 2);
-    }
-    void test_diff_size_assignment()
-    {
-        Vector a(20);
-        Vector b(10);
-        a[5] = 10;
-        a[9] = 123;
-        b = a;
-        TS_ASSERT_EQUALS(b.getLength(), a.getLength());
-        TS_ASSERT_EQUALS(b[5], 10);
-        TS_ASSERT_EQUALS(b[9], 123);
-        b[15] = 15;
-        TS_ASSERT_EQUALS(b[15], 15);
-        b[5] = 20;
-        a = b;
-        TS_ASSERT_EQUALS(a.getLength(), b.getLength());
-        TS_ASSERT_EQUALS(a[5], 20);
-        TS_ASSERT_EQUALS(a[15], 15);
-    }
 };

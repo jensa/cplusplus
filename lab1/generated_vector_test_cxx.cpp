@@ -15,12 +15,12 @@
 int main() {
  return CxxTest::ErrorPrinter().run();
 }
-#include "test_vector.cpp"
+#include "test_cxx.cpp"
 
 static MyTestSuite suite_MyTestSuite;
 
 static CxxTest::List Tests_MyTestSuite = { 0, 0 };
-CxxTest::StaticSuiteDescription suiteDescription_MyTestSuite( "test_vector.cpp", 5, "MyTestSuite", suite_MyTestSuite, Tests_MyTestSuite );
+CxxTest::StaticSuiteDescription suiteDescription_MyTestSuite( "test_cxx.cpp", 5, "MyTestSuite", suite_MyTestSuite, Tests_MyTestSuite );
 
 static class TestDescription_MyTestSuite_test_initialized_as_zero : public CxxTest::RealTestDescription {
 public:
@@ -81,17 +81,5 @@ public:
  TestDescription_MyTestSuite_test_copy_constructor() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 112, "test_copy_constructor" ) {}
  void runTest() { suite_MyTestSuite.test_copy_constructor(); }
 } testDescription_MyTestSuite_test_copy_constructor;
-
-static class TestDescription_MyTestSuite_test_assignment : public CxxTest::RealTestDescription {
-public:
- TestDescription_MyTestSuite_test_assignment() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 136, "test_assignment" ) {}
- void runTest() { suite_MyTestSuite.test_assignment(); }
-} testDescription_MyTestSuite_test_assignment;
-
-static class TestDescription_MyTestSuite_test_diff_size_assignment : public CxxTest::RealTestDescription {
-public:
- TestDescription_MyTestSuite_test_diff_size_assignment() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 151, "test_diff_size_assignment" ) {}
- void runTest() { suite_MyTestSuite.test_diff_size_assignment(); }
-} testDescription_MyTestSuite_test_diff_size_assignment;
 
 #include <cxxtest/Root.cpp>
