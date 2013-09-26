@@ -26,6 +26,16 @@ Vector::Vector (const Vector & vec){
     }
 }
 
+//Move constructor
+Vector::Vector (Vector&& other){
+	array = other.array;
+	length = other.length;
+
+	other.array = NULL;
+	other.length = 0;
+} 
+
+//Destructor
 Vector::~Vector () {
 	delete array;
 }
@@ -44,6 +54,20 @@ Vector & Vector::operator=(const Vector & vec) {
 	return *this;	
 }
 
+Vector & Vector::operator=(Vector && other)
+{
+	if (this != &other)
+	{
+		delete[] array;
+		array = other.array;
+		length = other.length;
+
+		other.array = NULL;
+		other.length = 0;
+	}
+	return *this;
+}
+
 Vector & Vector::operator=(const std::initializer_list<int>& il){
 	Vector vec(il.size());
 	fitArray(vec);
@@ -53,7 +77,6 @@ Vector & Vector::operator=(const std::initializer_list<int>& il){
 	int i = 0;
 
 	for (it = il.begin(); it != il.end(); it++, i++){
-		std::cout << "Inserting " << *it << " at index " << i << "\n"; 
 		array[i] = *it;
 	}
 

@@ -128,4 +128,35 @@ public:
             TS_ASSERT_EQUALS(a[i],c[i]);
         }
     }
+
+    void test_move_constructor (void)
+    {
+        Vector a(5);
+        a[0] = 1;
+        a[1] = 2;
+        a[2] = 3;
+        a[3] = 4;
+        a[4] = 5;
+
+        Vector b = std::move(a);
+
+        TS_ASSERT_EQUALS(a.length, 0);
+        TS_ASSERT_EQUALS(b.length, 5);
+        TS_ASSERT_EQUALS(b[0], 1);
+        TS_ASSERT_EQUALS(b[1], 2);
+    }
+
+    void test_move_assignment_operator (void)
+    {
+        Vector a(5); 
+        a = {1,1,1,1,1};
+
+        Vector b(5); 
+        b = {2,2,2,2,2};
+
+        a = std::move(b);
+
+        a.print();
+        b.print();
+    }
 };

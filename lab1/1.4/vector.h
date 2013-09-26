@@ -8,9 +8,13 @@
 class Vector
 {
 	public:
+		size_t length;
+		unsigned int *array;
+
 		Vector();
 		explicit Vector (size_t size);
 		Vector (const Vector & vec);
+		Vector (Vector&& other);
 		~Vector ();
 
 		size_t size() const;
@@ -20,11 +24,10 @@ class Vector
 		const unsigned int & operator[](unsigned int index) const;
 
 		Vector & operator=(const Vector & s);
+		Vector & operator=(Vector && other);
 		Vector & operator=(const std::initializer_list<int>& il);
 
 	private:
-		size_t length;
-		unsigned int *array;
 		bool arrayCreated;
 		void fitArray (const Vector & vec);
 };
