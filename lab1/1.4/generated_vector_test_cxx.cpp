@@ -94,4 +94,10 @@ public:
  void runTest() { suite_MyTestSuite.test_move_assignment_operator(); }
 } testDescription_MyTestSuite_test_move_assignment_operator;
 
+static class TestDescription_MyTestSuite_test_initializer_list : public CxxTest::RealTestDescription {
+public:
+ TestDescription_MyTestSuite_test_initializer_list() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 166, "test_initializer_list" ) {}
+ void runTest() { suite_MyTestSuite.test_initializer_list(); }
+} testDescription_MyTestSuite_test_initializer_list;
+
 #include <cxxtest/Root.cpp>

@@ -11,22 +11,29 @@ class Vector
 {
 	public:
 		size_t length;
+		size_t alloc_length;
 		T *array;
 
 		// Constructors
 
 		Vector() {
 			length = (size_t) 0;
-			array = new T[0];
+			alloc_length = 2;
+			array = new T[2];
 		}
 
 		explicit Vector (size_t size) {
 			length = size;
-			array = new T[length]();
+			if (size >= 2)
+				alloc_length = size;
+			else
+				alloc_length = 2;
+			array = new T[alloc_length];
 		}
 
 		Vector (const Vector & vec) {
 			length = vec.size();
+			alloc_length = vec.size();
 		    array = new T[length];
 		    for (int i = 0; i < (int) length; ++i) {
 		        array[i] = vec[i];
@@ -36,9 +43,20 @@ class Vector
 		Vector (Vector&& other) {
 			array = other.array;
 			length = other.length;
+			alloc_length = other.alloc_length;
 
 			other.array = NULL;
 			other.length = 0;
+			other.alloc_length = 0;
+		}
+
+		Vector (size_t size, T defaultval) {
+			length = size;
+			alloc_length = size;
+			array = new T[size];
+			for (int i = 0; i < (int) size; i++) {
+				array[i] = defaultval;
+			}
 		}
 
 		// Destructor
@@ -50,7 +68,14 @@ class Vector
 		// Methods
 
 		void push_back(T element) {
-			// TODO
+			if ((int) (alloc_length - length) < 0) {
+				std::cout << "Nåt är jävligt fel \n";
+			} else if ((int) (alloc_length - length) == 0) {
+				inc_alloc_length();
+			}
+
+			array[length] = element;
+			length++;
 		}
 
 		void insert(size_t i, T element) {
@@ -80,6 +105,31 @@ class Vector
 		bool exists(const T & element) {
 			// TODO
 			return false;
+		}
+
+		/**
+		inc_alloc_length
+
+		Dubblar antalet allokerade platser
+		*/
+
+		void inc_alloc_length () {
+
+			if ((alloc_length - length ) > 0 )
+				std::cout << "Finns ju fan plats kvar. Nåt är knas. \n";
+
+			if (length == 0)
+				length = 1;
+
+			T* tmp_array = new T[length*2];
+
+			for (int i = 0; i < (int) length; i++) {
+				tmp_array[i] = array[i];
+			}
+
+			delete[] array;
+			array = tmp_array;
+			alloc_length = 2*length;
 		}
 
 		void print() {
@@ -113,6 +163,7 @@ class Vector
 				delete[] array;
 				array = new T[vec.size()];
 				length = vec.size();
+				alloc_length = vec.size();
 				for (int i = 0; i < (int) vec.size(); ++i) {
 					array[i] = vec[i];
 				}
@@ -126,9 +177,11 @@ class Vector
 					delete[] array;
 					array = other.array;
 					length = other.length;
+					alloc_length = other.alloc_length;
 
 					other.array = NULL;
 					other.length = 0;
+					other.alloc_length = 0;
 				}
 				return *this;
 		}
@@ -137,6 +190,7 @@ class Vector
 			delete[] array;
 			array = new T[il.size()];
 			length = il.size();
+			alloc_length = il.size();
 
 			typename std::initializer_list<T>::iterator it;
 			int i = 0;
