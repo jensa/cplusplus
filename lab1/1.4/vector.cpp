@@ -35,7 +35,7 @@ Vector::Vector (Vector&& other){
 
 //Destructor
 Vector::~Vector () {
-	delete array;
+	delete[] array;
 }
 
 size_t Vector::size() const{
