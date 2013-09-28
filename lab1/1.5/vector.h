@@ -47,8 +47,39 @@ class Vector
 			delete[] array;
 		}
 
+		// Methods
+
+		void push_back(T element) {
+			// TODO
+		}
+
+		void insert(size_t i, T element) {
+			// TODO
+		}
+
+		void erase(size_t i) {
+			// TODO
+		}
+
+		void clear() {
+			// TODO
+		}
+
 		size_t size() const {
 			return length;
+		}
+
+		void sort(bool ascending) {
+			// TODO
+		}
+
+		void unique_sort(bool ascending) {
+			// TODO
+		}
+
+		bool exists(const T & element) {
+			// TODO
+			return false;
 		}
 
 		void print() {

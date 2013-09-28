@@ -31,11 +31,11 @@ int main()
     v.clear();                  // töm hela vektorn
     assert(v.size() == 0);      // tom när alla element är borttagna
     
-    
+ #if 0    
     // kontrollera att följande rader inte går att kompilera
     vc[0] = 3.1415;             // fel: tilldelning av konstant objekt
     Vector<char> c = v;         // fel: tilldelning av olika typer
     vc.sort();                  // fel: ändrar konstant objekt
-
+#endif
     return 0;
 }
