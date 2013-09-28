@@ -4,14 +4,12 @@
 Vector::Vector(){
 	length = (size_t) 0;
 	array = new unsigned int[0];
-	arrayCreated = 1;
 }
 
 Vector::Vector (const size_t size){
 	length = size;
 	array = new unsigned int[length];
-	arrayCreated = 1;
-	for (int i = 0; i < length; ++i)
+	for (int i = 0; i < (int) length; ++i)
 	{
 		array[i] = 0;
 	}
@@ -21,7 +19,7 @@ Vector::Vector (const size_t size){
 Vector::Vector (const Vector & vec){
 	length = vec.size();
     array = new unsigned int[length];
-    for (unsigned int i = 0; i < length; ++i) {
+    for (int i = 0; i < (int) length; ++i) {
         array[i] = vec[i];
     }
 }
@@ -45,11 +43,15 @@ size_t Vector::size() const{
 }
 
 Vector & Vector::operator=(const Vector & vec) {
-	fitArray (vec);
-	length = vec.size();
-	for (int i = 0; i < vec.size(); ++i)
+	if (this != &vec) 
 	{
-		array[i] = vec[i];
+		delete[] array;
+		array = new unsigned int[vec.size()];
+		length = vec.size();
+		for (int i = 0; i < (int) vec.size(); ++i)
+		{
+			array[i] = vec[i];
+		}
 	}
 	return *this;	
 }
@@ -69,14 +71,15 @@ Vector & Vector::operator=(Vector && other)
 }
 
 Vector & Vector::operator=(const std::initializer_list<int>& il){
-	Vector vec(il.size());
-	fitArray(vec);
-	length = vec.size();
+	
+	delete[] array;
+	array = new unsigned int[il.size()];
+	length = il.size();
 
 	std::initializer_list<int>::iterator it;
 	int i = 0;
 
-	for (it = il.begin(); it != il.end(); it++, i++){
+	for (it = il.begin(); it != il.end(); it++, i++) {
 		array[i] = *it;
 	}
 
@@ -95,19 +98,11 @@ const unsigned int & Vector::operator[](unsigned int index) const {
 	return array[index];
 }
 
-void Vector::fitArray (const Vector & vec){
-	if (vec.size() != length){
-		if (arrayCreated)
-			delete[] array;
-		array = new unsigned int[vec.size()];
-	}
-}
-
 void Vector::print () {
 	std::cout << "[";
-	for (int i = 0; i < length; i++){
+	for (int i = 0; i < (int) length; i++){
 		std::cout << array[i];
-		if (i != length-1)
+		if (i != (int) length-1)
 			std::cout << ",";
 	}
 	std::cout << "]" << "\n";

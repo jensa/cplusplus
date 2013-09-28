@@ -26,10 +26,6 @@ class Vector
 		Vector & operator=(const Vector & s);
 		Vector & operator=(Vector && other);
 		Vector & operator=(const std::initializer_list<int>& il);
-
-	private:
-		bool arrayCreated;
-		void fitArray (const Vector & vec);
 };
 
 #endif
