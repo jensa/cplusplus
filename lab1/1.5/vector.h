@@ -94,11 +94,14 @@ class Vector
 		}
 
 		void erase(size_t idx) {
-			// TODO
+			for (int i = (int) idx; i < length; i++) {
+				array[i] = array[i+1];
+			}
+			length--;
 		}
 
 		void clear() {
-			// TODO
+			length = 0;
 		}
 
 		size_t size() const {
