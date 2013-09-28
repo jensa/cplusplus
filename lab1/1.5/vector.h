@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <iostream>
+#include <algorithm>
 #include <initializer_list>
 
 template <class T>
@@ -28,7 +29,7 @@ class Vector
 				alloc_length = size;
 			else
 				alloc_length = 2;
-			array = new T[alloc_length];
+			array = new T[alloc_length]();
 		}
 
 		Vector (const Vector & vec) {
@@ -68,22 +69,20 @@ class Vector
 		// Methods
 
 		void push_back(T element) {
-			if ((int) (alloc_length - length) < 0) {
-				std::cout << "Nåt är jävligt fel \n";
-			} else if ((int) (alloc_length - length) == 0) {
-				inc_alloc_length();
-			}
-
+			allocMoreIfNecessary();
 			array[length] = element;
 			length++;
 		}
 
 		void insert(size_t idx, T element) {
-			if ((int) (alloc_length - length) < 0) {
-				std::cout << "Nåt är jävligt fel \n";
-			} else if ((int) (alloc_length - length) == 0) {
-				inc_alloc_length();
+			if ((int) idx > length || (int) idx < 0) {
+				throw std::out_of_range("Out of range!");
+			} else if ((int) idx == length) {
+				push_back(element);
+				return;
 			}
+
+			allocMoreIfNecessary();
 
 			for (int i = length-1; i >= (int) idx ; i--) {
 				array[i+1] = array[i];
@@ -94,7 +93,10 @@ class Vector
 		}
 
 		void erase(size_t idx) {
-			for (int i = (int) idx; i < length; i++) {
+			if ((int) idx >= length || (int) idx < 0)
+				throw std::out_of_range("Out of range!");
+
+			for (int i = (int) idx; i < (int) length; i++) {
 				array[i] = array[i+1];
 			}
 			length--;
@@ -117,8 +119,8 @@ class Vector
 		}
 
 		bool exists(const T & element) {
-			// TODO
-			return false;
+			int* res = std::find(array, array+length, element);
+			return (res != array+length);
 		}
 
 		/**
@@ -144,6 +146,14 @@ class Vector
 			delete[] array;
 			array = tmp_array;
 			alloc_length = 2*length;
+		}
+
+		void allocMoreIfNecessary() {
+			if ((int) (alloc_length - length) < 0) {
+				std::cout << "Nåt är jävligt fel \n";
+			} else if ((int) (alloc_length - length) == 0) {
+				inc_alloc_length();
+			}
 		}
 
 		void print() {

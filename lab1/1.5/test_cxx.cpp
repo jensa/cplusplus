@@ -162,4 +162,26 @@ public:
         for (int i = 0; i < a.size(); i++)
             TS_ASSERT_EQUALS(a[i],2);
     }
+
+    void test_template_shit (void) 
+    {
+        Vector<int> a(5);
+
+        a[3] = 1;
+
+        TS_ASSERT_EQUALS (a.exists(1), true);
+    }
+
+    void test_template_zeros (void)
+    {
+        Vector<double> a;
+        TS_ASSERT_EQUALS (a.size(), 0);
+
+        Vector<double> b(0);
+        TS_ASSERT_EQUALS (b.size(), 0);
+
+        TS_ASSERT_THROWS(b.erase(0),std::out_of_range);
+        b.insert(0,1);
+        TS_ASSERT_EQUALS(b.size(),1);
+    }
 };

@@ -94,4 +94,16 @@ public:
  void runTest() { suite_MyTestSuite.test_move_assignment_operator(); }
 } testDescription_MyTestSuite_test_move_assignment_operator;
 
+static class TestDescription_MyTestSuite_test_template_shit : public CxxTest::RealTestDescription {
+public:
+ TestDescription_MyTestSuite_test_template_shit() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 166, "test_template_shit" ) {}
+ void runTest() { suite_MyTestSuite.test_template_shit(); }
+} testDescription_MyTestSuite_test_template_shit;
+
+static class TestDescription_MyTestSuite_test_template_zeros : public CxxTest::RealTestDescription {
+public:
+ TestDescription_MyTestSuite_test_template_zeros() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 175, "test_template_zeros" ) {}
+ void runTest() { suite_MyTestSuite.test_template_zeros(); }
+} testDescription_MyTestSuite_test_template_zeros;
+
 #include <cxxtest/Root.cpp>
