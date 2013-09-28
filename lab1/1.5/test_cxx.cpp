@@ -163,7 +163,7 @@ public:
             TS_ASSERT_EQUALS(a[i],2);
     }
 
-    void test_template_shit (void) 
+    void test_exists (void) 
     {
         Vector<int> a(5);
 
@@ -183,5 +183,17 @@ public:
         TS_ASSERT_THROWS(b.erase(0),std::out_of_range);
         b.insert(0,1);
         TS_ASSERT_EQUALS(b.size(),1);
+    }
+
+    void test_sort (void)
+    {
+        Vector<int> a(10);
+        a = {1,7,6,4,9,7,5,6,8,0};
+
+        a.sort(true);
+        a.print();
+
+        a.sort(false);
+        a.print();
     }
 };

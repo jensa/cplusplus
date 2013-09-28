@@ -94,16 +94,22 @@ public:
  void runTest() { suite_MyTestSuite.test_move_assignment_operator(); }
 } testDescription_MyTestSuite_test_move_assignment_operator;
 
-static class TestDescription_MyTestSuite_test_template_shit : public CxxTest::RealTestDescription {
+static class TestDescription_MyTestSuite_test_exists : public CxxTest::RealTestDescription {
 public:
- TestDescription_MyTestSuite_test_template_shit() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 166, "test_template_shit" ) {}
- void runTest() { suite_MyTestSuite.test_template_shit(); }
-} testDescription_MyTestSuite_test_template_shit;
+ TestDescription_MyTestSuite_test_exists() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 166, "test_exists" ) {}
+ void runTest() { suite_MyTestSuite.test_exists(); }
+} testDescription_MyTestSuite_test_exists;
 
 static class TestDescription_MyTestSuite_test_template_zeros : public CxxTest::RealTestDescription {
 public:
  TestDescription_MyTestSuite_test_template_zeros() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 175, "test_template_zeros" ) {}
  void runTest() { suite_MyTestSuite.test_template_zeros(); }
 } testDescription_MyTestSuite_test_template_zeros;
+
+static class TestDescription_MyTestSuite_test_sort : public CxxTest::RealTestDescription {
+public:
+ TestDescription_MyTestSuite_test_sort() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 188, "test_sort" ) {}
+ void runTest() { suite_MyTestSuite.test_sort(); }
+} testDescription_MyTestSuite_test_sort;
 
 #include <cxxtest/Root.cpp>

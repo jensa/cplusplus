@@ -110,8 +110,16 @@ class Vector
 			return length;
 		}
 
+		static bool comp (const T & a, const T & b) {
+			return b < a;
+		}
+
 		void sort(bool ascending) {
-			// TODO
+			if (ascending) {
+				std::sort(array, array+length);
+			} else {
+				std::sort(array, array+length, comp);
+			}
 		}
 
 		void unique_sort(bool ascending) {
