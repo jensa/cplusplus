@@ -78,11 +78,22 @@ class Vector
 			length++;
 		}
 
-		void insert(size_t i, T element) {
-			// TODO
+		void insert(size_t idx, T element) {
+			if ((int) (alloc_length - length) < 0) {
+				std::cout << "Nåt är jävligt fel \n";
+			} else if ((int) (alloc_length - length) == 0) {
+				inc_alloc_length();
+			}
+
+			for (int i = length-1; i >= (int) idx ; i--) {
+				array[i+1] = array[i];
+			}
+
+			array[idx] = element;
+			length++;
 		}
 
-		void erase(size_t i) {
+		void erase(size_t idx) {
 			// TODO
 		}
 
