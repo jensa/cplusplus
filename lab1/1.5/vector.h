@@ -123,7 +123,9 @@ class Vector
 		}
 
 		void unique_sort(bool ascending) {
-			// TODO
+			sort(ascending);
+			T* ptr = std::unique(array, array+length);
+			length = ptr-array;
 		}
 
 		bool exists(const T & element) {

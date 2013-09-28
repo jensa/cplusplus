@@ -195,5 +195,13 @@ public:
 
         a.sort(false);
         a.print();
+
+        a = {1,7,6,4,9,7,5,6,8,0};
+        a.unique_sort(false);
+        a.print();
+
+        a = {1,7,6,4,9,7,5,6,8,0};
+        a.unique_sort(true);
+        a.print();
     }
 };
