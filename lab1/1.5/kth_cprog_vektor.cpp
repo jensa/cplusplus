@@ -18,72 +18,62 @@ class Vector
 		// Constructors
 
 		Vector();
-
-		explicit Vector (size_t size);
-
-		Vector (const Vector & vec);
-
-		Vector (Vector&& other);
-
-		Vector (size_t size, T defaultval);
+		explicit Vector (size_t);
+		Vector (const Vector &);
+		Vector (Vector&&);
+		Vector (size_t, T);
 
 		// Destructor
 
 		~Vector ();
 
-		// Functions
+		// 1.5 functions implementations
 
-		void push_back(T element);
-
-		void insert(size_t idx, T element);
-
-		void erase(size_t idx);
-
+		void push_back(T);
+		void insert(size_t, T);
+		void erase(size_t);
 		void clear();
-
 		size_t size() const;
+		static bool comp (const T &, const T &);
+		void sort(bool);
+		void unique_sort(bool);
+		bool exists(const T &);
 
-		static bool comp (const T & a, const T & b);
-
-		void sort(bool ascending);
-
-		void unique_sort(bool ascending);
-
-		bool exists(const T & element);
-
-		/**
-		inc_alloc_length
-
-		Dubblar antalet allokerade platser
-		*/
-
-		void inc_alloc_length ();
+		// Methods for allocating more space for the vector
 
 		void allocMoreIfNecessary();
+		void increase_alloc_length ();
 
+		// Print method for debugging
 		void print();
 
 		// [] operators
 		
-		T & operator[](unsigned int index);
-
-		const T & operator[](unsigned int index) const;
+		T & operator[](unsigned int);
+		const T & operator[](unsigned int) const;
 
 		// = operators
 
-		Vector & operator=(const Vector & vec);
-
-		Vector & operator=(Vector && other);
-
-		Vector & operator=(const std::initializer_list<T>& il);
+		Vector & operator=(const Vector &);
+		Vector & operator=(Vector &&);
+		Vector & operator=(const std::initializer_list<T>&);
 };
 
+#endif
+
+/**
+Constructors
+*/
+
+// Defaultkonstruktor
 template <class T>
 Vector<T>::Vector() {
 	length = (size_t) 0;
 	alloc_length = 2;
-	array = new T[2];
+	array = new T[alloc_length];
 }
+
+// Konstruktor som skapar en Vector av en given storlek
 template <class T>
 Vector<T>::Vector (size_t size) {
 	length = size;
@@ -93,6 +83,8 @@ Vector<T>::Vector (size_t size) {
 		alloc_length = 2;
 	array = new T[alloc_length]();
 }
+
+// Kopieringskonstruktor
 template <class T>
 Vector<T>::Vector (const Vector & vec) {
 	length = vec.size();
@@ -102,6 +94,8 @@ Vector<T>::Vector (const Vector & vec) {
         array[i] = vec[i];
     }
 }
+
+// Movekonstruktor
 template <class T>
 Vector<T>::Vector (Vector&& other) {
 	array = other.array;
@@ -112,6 +106,8 @@ Vector<T>::Vector (Vector&& other) {
 	other.alloc_length = 0;
 }
 
+// Konstruktor som skapar en Vector av en given storlek och 
+// initierar alla element till ett givet standardvärde
 template <class T>
 Vector<T>::Vector (size_t size, T defaultval) {
 	length = size;
@@ -122,13 +118,20 @@ Vector<T>::Vector (size_t size, T defaultval) {
 	}
 }
 
-// Destructor
+// Destruktor
 template <class T>
 Vector<T>::~Vector () {
 	delete[] array;
 }
 
-// Functions
+// 1.5 functions implementations
+
+/**
+push_back(T)
+
+Lägger till ett element sist i vektorn. Det ska för det mesta
+ske i konstant tid.
+*/
 template <class T>
 void Vector<T>::push_back(T element) {
 	allocMoreIfNecessary();
@@ -136,6 +139,12 @@ void Vector<T>::push_back(T element) {
 	length++;
 }
 
+/**
+insert(size_t, T)
+
+Lägger till ett element före plats i. Om i är lika
+med antal element i vektorn fungerar metoden som push_back.
+*/
 template <class T>
 void Vector<T>::insert(size_t idx, T element) {
 	if ((int) idx > length || (int) idx < 0) {
@@ -152,6 +161,11 @@ void Vector<T>::insert(size_t idx, T element) {
 	length++;
 }
 
+/**
+erase(size_t)
+
+Tar bort ett element på plats i.
+*/
 template <class T>
 void Vector<T>::erase(size_t idx) {
 	if ((int) idx >= length || (int) idx < 0)
@@ -162,21 +176,44 @@ void Vector<T>::erase(size_t idx) {
 	length--;
 }
 
+/**
+clear()
+
+Tar bort alla element.
+*/
 template <class T>
 void Vector<T>::clear() {
 	length = 0;
 }
 
+/**
+size()
+
+Ger antal element i vektorn.
+*/
 template <class T>
 size_t Vector<T>::size() const{
 	return length;
 }
 
+/**
+Comparator a > b
+
+Implementerad som b < a eftersom alla klasser som används implementerar operator<
+men inte nödvändigtvis operator>.
+*/
 template <class T>
 bool Vector<T>::comp (const T & a, const T & b) {
 	return b < a;
 }
 
+/**
+sort(bool) 
+
+Sorterar vektorn i angiven riktning på
+enklast möjliga sätt. Använd std::sort (datatyper som ska jämföras måste
+deﬁniera operator<.)
+*/
 template <class T>
 void Vector<T>::sort(bool ascending) {
 	if (ascending) {
@@ -186,6 +223,13 @@ void Vector<T>::sort(bool ascending) {
 	}
 }
 
+/**
+unique_sort(bool)
+
+Sorterar samt tar bort dubletter
+i vektorn. Använd std::unique. OBS! se till att vektorns storlek ändras om
+element tagits bort.
+*/
 template <class T>
 void Vector<T>::unique_sort(bool ascending) {
 	sort(ascending);
@@ -200,13 +244,12 @@ bool Vector<T>::exists(const T & element) {
 }
 
 /**
-inc_alloc_length
-Dubblar antalet allokerade platser
+increase_alloc_length(T)
+
+Dubblar antalet platser i den interna arrayen.
 */
 template <class T>
-void Vector<T>::inc_alloc_length () {
-	if ((alloc_length - length ) > 0 )
-		std::cout << "Finns ju fan plats kvar. Nåt är knas. \n";
+void Vector<T>::increase_alloc_length () {
 	if (length == 0)
 		length = 1;
 	T* tmp_array = new T[length*2];
@@ -218,14 +261,26 @@ void Vector<T>::inc_alloc_length () {
 	alloc_length = 2*length;
 }
 
+/**
+allocMoreIfNecessary()
+
+Kollar om det finns plats för fler element i den interna arrayen och
+allokerar fler platser om det behövs.
+*/
 template <class T>
 void Vector<T>::allocMoreIfNecessary() {
 	if ((int) (alloc_length - length) < 0) {
 		std::cout << "Nåt är jävligt fel \n";
 	} else if ((int) (alloc_length - length) == 0) {
-		inc_alloc_length();
+		increase_alloc_length();
 	}
 }
+
+/**
+print()
+
+Skriver ut vektorn (används för debugging).
+*/
 template <class T>
 void Vector<T>::print() {
 	std::cout << "[";
@@ -237,7 +292,10 @@ void Vector<T>::print() {
 	std::cout << "]" << "\n";
 }
 
-// [] operators
+/**
+operator[]
+*/
+// Standard operator[]
 template <class T>
 T & Vector<T>::operator[](unsigned int index) {
 	if (index >= length || index < 0)
@@ -245,6 +303,7 @@ T & Vector<T>::operator[](unsigned int index) {
 	return array[index];
 }
 
+// En konstant medlemsfunktion för read only-åtkomster
 template <class T>
 const T & Vector<T>::operator[](unsigned int index) const {
 	if (index >= length || index < 0)
@@ -252,7 +311,10 @@ const T & Vector<T>::operator[](unsigned int index) const {
 	return array[index];
 }
 
-// = operators
+/**
+operator=
+*/
+
 template <class T>
 Vector<T> & Vector<T>::operator=(const Vector & vec) {
 	if (this != &vec) {
@@ -295,5 +357,3 @@ Vector<T> & Vector<T>::operator=(const std::initializer_list<T>& il) {
 	}
 	return *this;
 }
-
-#endif
