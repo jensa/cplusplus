@@ -20,6 +20,7 @@ class Vector
 		Vector();
 		explicit Vector (size_t);
 		Vector (const Vector &);
+		Vector (const std::initializer_list<T>);
 		Vector (Vector&&);
 		Vector (size_t, T);
 
@@ -93,6 +94,19 @@ Vector<T>::Vector (const Vector & vec) {
     for (int i = 0; i < (int) length; ++i) {
         array[i] = vec[i];
     }
+}
+
+// Konstruktor för initializer_list<T>
+template <class T>
+Vector<T>::Vector (const std::initializer_list<T> il) {
+	array = new T[il.size()];
+	length = il.size();
+	alloc_length = il.size();
+	typename std::initializer_list<T>::iterator it;
+	int i = 0;
+	for (it = il.begin(); it != il.end(); it++, i++) {
+		array[i] = *it;
+	}
 }
 
 // Movekonstruktor
@@ -170,7 +184,7 @@ template <class T>
 void Vector<T>::erase(size_t idx) {
 	if ((int) idx >= length || (int) idx < 0)
 		throw std::out_of_range("Out of range!");
-	for (int i = (int) idx; i < (int) length; i++) {
+	for (int i = (int) idx; i < (int) length-1; i++) {
 		array[i] = array[i+1];
 	}
 	length--;
@@ -239,7 +253,7 @@ void Vector<T>::unique_sort(bool ascending) {
 
 template <class T>
 bool Vector<T>::exists(const T & element) {
-	int* res = std::find(array, array+length, element);
+	T* res = std::find(array, array+length, element);
 	return (res != array+length);
 }
 
@@ -315,6 +329,7 @@ const T & Vector<T>::operator[](unsigned int index) const {
 operator=
 */
 
+// Standard tilldelningsoperator
 template <class T>
 Vector<T> & Vector<T>::operator=(const Vector & vec) {
 	if (this != &vec) {
@@ -329,6 +344,7 @@ Vector<T> & Vector<T>::operator=(const Vector & vec) {
 	return *this;	
 }
 
+// Move-operator
 template <class T>
 Vector<T> & Vector<T>::operator=(Vector && other) {
 		if (this != &other)
@@ -344,6 +360,7 @@ Vector<T> & Vector<T>::operator=(Vector && other) {
 		return *this;
 }
 
+// Tilldelningsoperator för initializer_list<T>
 template <class T>
 Vector<T> & Vector<T>::operator=(const std::initializer_list<T>& il) {
 	delete[] array;
