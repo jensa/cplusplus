@@ -58,5 +58,7 @@ int main()
 
     cout << 9 << "\n";
     delete[] aa;       // Vad kommer att hända?
+    A charwat(3);
     return 0;
+
 }
