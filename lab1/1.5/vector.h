@@ -17,121 +17,39 @@ class Vector
 
 		// Constructors
 
-		Vector() {
-			length = (size_t) 0;
-			alloc_length = 2;
-			array = new T[2];
-		}
+		Vector();
 
-		explicit Vector (size_t size) {
-			length = size;
-			if (size >= 2)
-				alloc_length = size;
-			else
-				alloc_length = 2;
-			array = new T[alloc_length]();
-		}
+		explicit Vector (size_t size);
 
-		Vector (const Vector & vec) {
-			length = vec.size();
-			alloc_length = vec.size();
-		    array = new T[length];
-		    for (int i = 0; i < (int) length; ++i) {
-		        array[i] = vec[i];
-		    }
-		}
+		Vector (const Vector & vec);
 
-		Vector (Vector&& other) {
-			array = other.array;
-			length = other.length;
-			alloc_length = other.alloc_length;
+		Vector (Vector&& other);
 
-			other.array = NULL;
-			other.length = 0;
-			other.alloc_length = 0;
-		}
-
-		Vector (size_t size, T defaultval) {
-			length = size;
-			alloc_length = size;
-			array = new T[size];
-			for (int i = 0; i < (int) size; i++) {
-				array[i] = defaultval;
-			}
-		}
+		Vector (size_t size, T defaultval);
 
 		// Destructor
 
-		~Vector () {
-			delete[] array;
-		}
+		~Vector ();
 
-		// Methods
+		// Functions
 
-		void push_back(T element) {
-			allocMoreIfNecessary();
-			array[length] = element;
-			length++;
-		}
+		void push_back(T element);
 
-		void insert(size_t idx, T element) {
-			if ((int) idx > length || (int) idx < 0) {
-				throw std::out_of_range("Out of range!");
-			} else if ((int) idx == length) {
-				push_back(element);
-				return;
-			}
+		void insert(size_t idx, T element);
 
-			allocMoreIfNecessary();
+		void erase(size_t idx);
 
-			for (int i = length-1; i >= (int) idx ; i--) {
-				array[i+1] = array[i];
-			}
+		void clear();
 
-			array[idx] = element;
-			length++;
-		}
+		size_t size() const;
 
-		void erase(size_t idx) {
-			if ((int) idx >= length || (int) idx < 0)
-				throw std::out_of_range("Out of range!");
+		static bool comp (const T & a, const T & b);
 
-			for (int i = (int) idx; i < (int) length; i++) {
-				array[i] = array[i+1];
-			}
-			length--;
-		}
+		void sort(bool ascending);
 
-		void clear() {
-			length = 0;
-		}
+		void unique_sort(bool ascending);
 
-		size_t size() const {
-			return length;
-		}
-
-		static bool comp (const T & a, const T & b) {
-			return b < a;
-		}
-
-		void sort(bool ascending) {
-			if (ascending) {
-				std::sort(array, array+length);
-			} else {
-				std::sort(array, array+length, comp);
-			}
-		}
-
-		void unique_sort(bool ascending) {
-			sort(ascending);
-			T* ptr = std::unique(array, array+length);
-			length = ptr-array;
-		}
-
-		bool exists(const T & element) {
-			int* res = std::find(array, array+length, element);
-			return (res != array+length);
-		}
+		bool exists(const T & element);
 
 		/**
 		inc_alloc_length
@@ -139,102 +57,25 @@ class Vector
 		Dubblar antalet allokerade platser
 		*/
 
-		void inc_alloc_length () {
+		void inc_alloc_length ();
 
-			if ((alloc_length - length ) > 0 )
-				std::cout << "Finns ju fan plats kvar. Nåt är knas. \n";
+		void allocMoreIfNecessary();
 
-			if (length == 0)
-				length = 1;
-
-			T* tmp_array = new T[length*2];
-
-			for (int i = 0; i < (int) length; i++) {
-				tmp_array[i] = array[i];
-			}
-
-			delete[] array;
-			array = tmp_array;
-			alloc_length = 2*length;
-		}
-
-		void allocMoreIfNecessary() {
-			if ((int) (alloc_length - length) < 0) {
-				std::cout << "Nåt är jävligt fel \n";
-			} else if ((int) (alloc_length - length) == 0) {
-				inc_alloc_length();
-			}
-		}
-
-		void print() {
-			std::cout << "[";
-			for (int i = 0; i < (int) length; i++){
-				std::cout << array[i];
-				if (i != (int) length-1)
-					std::cout << ",";
-			}
-			std::cout << "]" << "\n";
-		}
+		void print();
 
 		// [] operators
 		
-		T & operator[](unsigned int index) {
-			if (index >= length || index < 0)
-			throw std::out_of_range("Out of range!");
-			return array[index];
-		}
+		T & operator[](unsigned int index);
 
-		const T & operator[](unsigned int index) const {
-			if (index >= length || index < 0)
-			throw std::out_of_range("Out of range!");
-			return array[index];
-		}
+		const T & operator[](unsigned int index) const;
 
 		// = operators
 
-		Vector & operator=(const Vector & vec) {
-			if (this != &vec) {
-				delete[] array;
-				array = new T[vec.size()];
-				length = vec.size();
-				alloc_length = vec.size();
-				for (int i = 0; i < (int) vec.size(); ++i) {
-					array[i] = vec[i];
-				}
-			}
-			return *this;	
-		}
+		Vector & operator=(const Vector & vec);
 
-		Vector & operator=(Vector && other) {
-				if (this != &other)
-				{
-					delete[] array;
-					array = other.array;
-					length = other.length;
-					alloc_length = other.alloc_length;
+		Vector & operator=(Vector && other);
 
-					other.array = NULL;
-					other.length = 0;
-					other.alloc_length = 0;
-				}
-				return *this;
-		}
-
-		Vector & operator=(const std::initializer_list<T>& il) {
-			delete[] array;
-			array = new T[il.size()];
-			length = il.size();
-			alloc_length = il.size();
-
-			typename std::initializer_list<T>::iterator it;
-			int i = 0;
-
-			for (it = il.begin(); it != il.end(); it++, i++) {
-				array[i] = *it;
-			}
-
-			return *this;
-		}
+		Vector & operator=(const std::initializer_list<T>& il);
 };
-
+#include "vector.cpp"
 #endif
