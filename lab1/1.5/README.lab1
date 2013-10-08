@@ -1,0 +1,286 @@
+/////////////////////////////////////////////////////////////////
+//
+// Personuppgifter (namn, pnr, epost) på dem som gjort labben
+//
+
+Jens Arvidsson 870509-0556 jensarv@kth.se
+Ludvig Jonsson 900202-4413 ludjon@kth.se
+
+
+/////////////////////////////////////////////////////////////////
+//
+// 1.1
+//
+// vad betyder \$* i en makefile? 
+
+Eftersom dollartecknet är escape:at så kommer variabeln $* vara intakt i make:s andra expansion, där variabler med två dollartecken expanderas. Variabeln $* representerar "stammen" i ett target, så att om ett target heter %.c och make anropas på följande sätt:
+
+make helloworld.c
+
+så kommer $* expanderas till "helloworld"
+
+// vad gör -Wall och -g ?
+
+-Wall står för warning all och aktiverar en stor mängd varningsflaggor för saker som kan visa på problem i koden (exempelvis oanvända variabler)
+
+-g producerar debuginformation för debugging med till exempel GDB.
+
+/////////////////////////////////////////////////////////////////
+//
+// 1.2 a)
+// 
+// int powerof(int x, int y) {
+//     int res = 1;
+//     for (int i = 0; i < y; i++); {
+//         res *= x;
+//     }
+//     return res;
+// }
+// 
+// int main() {
+//     int x = 10;
+//     int y = 3;
+// 
+//     int res = powerof(x, y);
+// 
+//     std::cout << x << " upphöjt till " << y << " är " << res << std::endl;
+// 
+//     float z = 0.29;
+//     int w = (int) (z * x * x);
+//     if (z * x * x == 29)
+//         std::cout << z << "*" << x * x << " är 29" << std::endl;
+//     else
+//         std::cout << z << "*" << x * x << " är inte 29" << std::endl;           
+// }
+// 
+// Varför blir värdet på variabeln w inte det man tror (0.29*100)? 
+
+z lagras inte som exakt 0.29, utan istället ett värde som ligger väldigt nära 0.29, ungefär 0.2899999999999999.
+När programmet sedan ska lägga detta resultat i en integer, så trunkerar den talet (istället för att runda uppåt) och resultatet blir 28.
+
+// Hur många varv körs for-loopen i funktionen powerof? 
+
+Ett varv, eftersom for-deklarationen har ett semikolon efter sig.
+
+// 1.2 b)
+//
+// int must_follow_a(char * start, int length, char a, char b) {
+//     int nr = 0;
+//     for (int i = 0; i < length; i++, ++start) {
+//         if (*start == a && *(start + 1) == b) // maintainers note: DANGER!
+//             nr += 1;
+//     }
+//     return nr;
+// }
+// 
+// Dina tre testfall
+
+void test_a_is_second_to_last( void )
+{
+    char vek[] = {'x', 'x', 'a', 'b', 'x'};
+    int result = must_follow_a(vek, 4, 'a', 'b');
+    TS_ASSERT_EQUALS( result, 1);
+}
+void test_two_occurences( void )
+{
+    char vek[] = {'a', 'b', 'a', 'b', 'x'};
+    int result = must_follow_a(vek, 4, 'a', 'b');
+    TS_ASSERT_EQUALS( result, 2);
+}
+void test_b_after_vector( void )
+{
+    char vek[] = {'b','b','b','b'};
+    char* ptr = vek + 4;
+    *ptr = 'a';
+    int result = must_follow_a(vek, 4, 'b', 'a');
+    TS_ASSERT_EQUALS( result, 0 );
+}
+void test_a_is_first( void )
+{
+    char vek[] = {'a','b','x','x','x'};
+    int result = must_follow_a(vek, 1, 'a', 'b');
+    TS_ASSERT_EQUALS( result, 0 );
+}
+
+// Varför är det så viktigt att testa randvillkoren?
+Eftersom randvillkoren dyker upp sällan under normal körning så kan de leda till svårhittade buggar.
+
+/////////////////////////////////////////////////////////////////
+//
+// 1.3 
+// 
+// Bifoga källkoden till din version av A.cpp
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
+class A {
+    
+public:
+    A() 
+        {cout << "The default contructor" << "\n"; }
+    A(const A & ref) 
+        {cout << "The copy contructor" << "\n"; }
+    ~A() 
+        {cout << "The destructor" << "\n"; }
+    A(char * s) 
+        {cout << "Some other constructor " << s << "\n";}
+    A & operator=(const A & s) 
+        {cout << "The assignment operator" << "\n"; 
+         return *this;}
+};
+
+void no_ref(A a) {cout << "a in no_ref: " << &a << "\n";}
+void with_ref(const A & a) {cout << "a in with_ref: " << &a << "\n";}
+
+int main()
+{
+    cout << 1 << "\n";
+    A a("my name is a");
+    cout << "a: " << &a << "\n";
+
+    cout << 2 << "\n";
+    A b = a;         // vad är skillnaden
+    cout << "b: " << &b << "\n";
+
+    cout << 3 << "\n";
+    A c(a);          // mellan dessa
+    cout << "c: " << &c << "\n";
+
+    cout << 4 << "\n";
+    A d;             // tre tekniker?
+    cout << "d: " << &d << "\n";
+
+    cout << 5 << "\n";
+    d = a;
+    cout << "d: " << &d << "\n";
+    cout << "a: " << &a << "\n";
+
+    cout << 6 << "\n";
+    cout << "a: " << &a << "\n";
+    no_ref(a);       // Bildas temporära objekt? Ja, och sedan kallas destruktorn.
+    cout << 7 << "\n";
+    cout << "a: " << &a << "\n";
+    with_ref(a);     // Bildas temporära objekt? Nej.
+
+    cout << 8 << "\n";
+    A *aa = new A[5];
+
+    cout << 9 << "\n";
+    delete[] aa;       // Vad kommer att hända?
+    return 0;
+}
+
+// Vad skriver ditt program ut, var förberedd att förklara varför. 
+Allt som pipas till cout.
+
+// När frigörs objekten?  
+Objekt som skapats inuti en funktion frigörs när funktionen returnerar (funktionens stack töms).
+Objekt som skapats med 'new' frigörs när man kör 'delete' på dem.
+// När skapas temporära objekt?
+När funktioner anropas som inte deklarerar sina argument som referenser (med &) görs en kopia av argumenten som sedan frigörs när metodanropet returnerar (och de är alltså temporära)
+
+//   A b = a;         // vad är skillnaden
+//   A c(a);          // mellan dessa
+//   A d;             // tre tekniker?
+
+1) Här körs copy-konstruktorn med a som argument.
+2) Här körs också copy-konstruktorn (samma som i 1) med a som argument
+3) Här körs default-konstruktorn.
+
+//   no_ref(a);       // Bildas temporära objekt?
+
+Ja.
+
+//   with_ref(a);     // Bildas temporära objekt?
+
+Nej, argumentet passas som referens.
+
+//   delete aa;       // Vad kommer att hända
+
+Segmentation fault, eftersom delete är till för att ta bort ensamma objekt (och aa är en array). För att frigöra arrayer används 'delete[]'
+
+/////////////////////////////////////////////////////////////////
+//
+// struct Data {
+//     int x, y, z;
+// };  
+// 
+// Data ** foo(Data ** v, int x) {
+//     for (int i = 0; i < x; i++)
+//         //if (v[i] != 0)
+//             v[i] = new Data;
+//     return v;
+// }
+// 
+// int main () {
+//     const int size = 5;
+//     Data ** v = new Data * [size];
+//     Data ** p = foo(v, size);
+//     delete [] p;
+// }
+
+// Hur ser valgrinds felmeddelande ut?  
+
+==4691== Memcheck, a memory error detector
+==4691== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+==4691== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+==4691== Command: ./data.o
+==4691== 
+==4691== Conditional jump or move depends on uninitialised value(s)
+==4691==    at 0x4006E0: foo(Data**, int) (in /home/jens/cplusplus/lab1/1.3/data.o)
+==4691==    by 0x400748: main (in /home/jens/cplusplus/lab1/1.3/data.o)
+==4691== 
+==4691== 
+==4691== HEAP SUMMARY:
+==4691==     in use at exit: 40 bytes in 1 blocks
+==4691==   total heap usage: 1 allocs, 0 frees, 40 bytes allocated
+==4691== 
+==4691== 40 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==4691==    at 0x4C2AC27: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4691==    by 0x400733: main (in /home/jens/cplusplus/lab1/1.3/data.o)
+==4691== 
+==4691== LEAK SUMMARY:
+==4691==    definitely lost: 40 bytes in 1 blocks
+==4691==    indirectly lost: 0 bytes in 0 blocks
+==4691==      possibly lost: 0 bytes in 0 blocks
+==4691==    still reachable: 0 bytes in 0 blocks
+==4691==         suppressed: 0 bytes in 0 blocks
+==4691== 
+==4691== For counts of detected and suppressed errors, rerun with: -v
+==4691== Use --track-origins=yes to see where uninitialised values come from
+==4691== ERROR SUMMARY: 6 errors from 2 contexts (suppressed: 2 from 2)
+
+
+// Blir det någon skillnad i hur mycket minne som läcker när man
+// kommenterar if-satsen?
+
+Ja, vi förlorar även 60 bytes indirekt. Detta är datan som pekarvariablerna inuti arrayen pekar på.
+
+// Borde det ha blivit någon skillnad?
+
+Ja, med if-satsen instansieras aldrig Data-objekt som pekarvariablerna pekar på.
+
+// Varför läcker programmet fortfarande minne?
+
+Dataposterna som pekarvariablerna pekar på frigörs aldrig, utan det är bara själva pekarvariablerna som frigörs.
+
+/////////////////////////////////////////////////////////////////
+//
+// 1.4
+//
+// Generellt är det ofta en god idé att låta konstruktorer som
+// tar ett argument deklareras som explicit. Varför? Ange ett
+// exempel där det annars kan bli dumt.
+
+Utan nyckelordet explicit så kan ett argument av fel typ castas om till rätt typ. En konstruktor som tar en char utan att vara explicit kan anropas med en int som parameter, och då kommer int:en tolkas som ett tecken (och vice versa, en konstruktor som ska ta en int och får en char kommer omvandla ett tecken till dess ascii-värde)
+
+// operatorn[] måste vara en konstant medlemsfunktion i vissa
+// fall. När och varför? Hur kopierar man vektorn?
+
+Om själva Vector-objektet är deklarerad som konstant så ska accesser kunna vara garanterat read-only. Ett konstant objekt kommer alltid försöka anropa konstanta medlemsfunktioner i de fall de finns.
+
+Vektorn kopieras med en loop där varje värde kopieras till motsvarande index i en ny array.

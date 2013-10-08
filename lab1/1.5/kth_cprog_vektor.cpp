@@ -44,7 +44,6 @@ class Vector
 
 		void allocMoreIfNecessary();
 		void increase_alloc_length ();
-
 		// Print method for debugging
 		void print();
 
