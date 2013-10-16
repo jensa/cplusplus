@@ -133,8 +133,8 @@ Vector<T>::Vector (size_t size, T defaultval) {
 
 // Destruktor
 template <class T>
-Vector<T>::~Vector () {
-	delete[] array;
+Vector<T>::~Vector () 
+{	delete[] array;
 }
 
 // 1.5 functions implementations
