@@ -11,9 +11,11 @@ class Date {
 	 virtual std::string week_day_name ();
 	 virtual std::string month_name ();
 
-	 Date & Date::operator++(const Date & date) {
+	 Date & operator++(const int i) {
 
-	 	 }
+ 	 }
+
+ 	 
 };
 }
 
