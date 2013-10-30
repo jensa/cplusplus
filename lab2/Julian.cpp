@@ -1,6 +1,5 @@
 #include <iostream>
 #include "European.h"
-#include "kattistime.h"
 
 namespace lab2{
 class Julian : European{
@@ -14,13 +13,13 @@ class Julian : European{
 		}
 
 		Julian (Date & d){
-			calculate_and_set_date(d.mod_julian_day());
+			set_date (d.year(), d.month(), d.day());
 		}
 
 		~Julian(){}
 
 		Julian & operator=(Date &d){
-			calculate_and_set_date(d.mod_julian_day());
+			set_date (d.year(), d.month(), d.day());
 			return *this;
 		}
 
@@ -38,30 +37,30 @@ class Julian : European{
 			set_date (new_year, new_month, day ());
 			return month ();
 		}
+	protected:
 
-		virtual int day () const;
-		virtual int month () const;
-		virtual int year () const; 
+		void set_date_from_mod_julian_day(int mod){
+			mod_julian = mod;
+			// Calculate year, month and day.
+			// Adaptation from 
+			// http://www.tondering.dk/claus/cal/julperiod.php
+			int julian_day = mod + MOD_JULIAN_DAYS;
+			int b = 0;
+			int c = julian_day + 32082;
+			int d = (4*c + 3) / 1461;
+			int e = c - ((1461*d) / 4);
+			int m = ((5*e + 2)/153);
 
-	private:
-
-		void calculate_and_set_date (int mod_julian){
-
+			day_v = e - ((153*m + 2)/5) + 1;
+			month_v = m + 3 - (12*(m/10));
+			year_v = 100*b + d - 4800 + (m/10);
 		}
 
 		void set_date (int year, int month, int day){
-
-		}
-
-		void set_date_today (){
-			int days_since_unix_time = k_time(0) / (24*60*60);
-			int mod_julian_date = days_since_unix_time + MOD_JULIAN_UNIX_DAYS;
-			calculate_and_set_date(mod_julian_date);
-		}
-	protected:
-		void modify_day (int num){
-			int new_day = mod_julian_day() + num;
-			calculate_and_set_date(new_day);
+			day_v = day;
+			month_v = month;
+			year_v = year;
+			mod_julian = calculate_julian_day(year, month, day, true);
 		}
 
 		bool is_leap_year () const{
@@ -71,6 +70,5 @@ class Julian : European{
 		bool is_next_year_leap_year () const{
 			return (year () +1) % 4 == 0;
 		}
-
 };
 }
