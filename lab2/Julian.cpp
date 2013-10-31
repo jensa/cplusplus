@@ -1,29 +1,27 @@
 #include <iostream>
-#include "European.h"
+#include "Julian.h"
 
 namespace lab2{
-class Julian : European{
-	public:
-		Julian(){
+		Julian::Julian(){
 			set_date_today();
 		}
 
-		Julian (int year, int month, int day) {
+		Julian::Julian (int year, int month, int day) {
 			set_date (year, month, day);
 		}
 
-		Julian (Date & d){
+		Julian::Julian (Date & d){
 			set_date (d.year(), d.month(), d.day());
 		}
 
-		~Julian(){}
+		Julian::~Julian(){}
 
-		Julian & operator=(Date &d){
+		Julian & Julian::operator=(Date &d){
 			set_date (d.year(), d.month(), d.day());
 			return *this;
 		}
 
-		int add_month () {
+		int Julian::add_month () {
 			if (day () > days_next_month ()){
 				modify_day(30);
 				return month ();
@@ -37,9 +35,8 @@ class Julian : European{
 			set_date (new_year, new_month, day ());
 			return month ();
 		}
-	protected:
 
-		void set_date_from_mod_julian_day(int mod){
+		void Julian::set_date_from_mod_julian_day(int mod){
 			mod_julian = mod;
 			// Calculate year, month and day.
 			// Adaptation from 
@@ -56,19 +53,18 @@ class Julian : European{
 			year_v = 100*b + d - 4800 + (m/10);
 		}
 
-		void set_date (int year, int month, int day){
+		void Julian::set_date (int year, int month, int day){
 			day_v = day;
 			month_v = month;
 			year_v = year;
 			mod_julian = calculate_julian_day(year, month, day, true);
 		}
 
-		bool is_leap_year () const{
+		bool Julian::is_leap_year () const{
 			return year () % 4 == 0;
 		}
 
-		bool is_next_year_leap_year () const{
+		bool Julian::is_next_year_leap_year () const{
 			return (year () +1) % 4 == 0;
 		}
-};
 }
