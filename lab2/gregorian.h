@@ -1,14 +1,17 @@
-#include <iostream>
-#include "European.h"
+#ifndef GREGORIAN
+#define GREGORIAN
+#include "european.h"
 
 namespace lab2{
-class Gregorian : European{
+class Gregorian : public European{
 	public:
 		Gregorian();
 
 		Gregorian (int year, int month, int day);
 
 		Gregorian (Date & d);
+
+		Gregorian (Date * d);
 
 		~Gregorian();
 
@@ -17,8 +20,9 @@ class Gregorian : European{
 		void set_date_from_mod_julian_day(int mod);
 		void set_date (int year, int month, int day);
 		bool is_leap_year () const;
-		bool is_next_year_leap_year () const;
+		
 	private:
 		bool calculate_leap (int year)const;
 };
 }
+#endif

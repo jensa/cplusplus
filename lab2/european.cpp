@@ -17,7 +17,7 @@ namespace lab2{
 		}
 
 		int European::week_day () const{
-			return (mod_julian % days_per_week())+1;
+			return ((mod_julian+4) % days_per_week());
 		}
 
 		int European::days_this_month () const{
@@ -32,16 +32,19 @@ namespace lab2{
 			if (month () == months_per_year())
 				next = 1;
 			int days = days_in_months[next-1];
-			if (next > 1){
-				if(is_leap_year())
-					return days+1;
-				return days;
-			} else if (next == 1){
-				if(is_next_year_leap_year())
-					return days+1;
-				return days;
-			}
-			return -1;
+			if (next == 2 && is_leap_year())
+				days++;
+			return days;
+		}
+
+		int European::days_previous_month () const{
+			int prev = month () - 1;
+			if (month () == 0)
+				prev = months_per_year();
+			int days = days_in_months[prev-1];
+			if (prev == 2 && is_leap_year())
+				days++;
+			return days;
 		}
 
 		int European::calculate_julian_day (int year, 
@@ -77,6 +80,24 @@ namespace lab2{
 				}
 			}
 			int new_month = month () + 1;
+			int new_year = year ();
+			if (new_month > months_per_year()){
+				new_month = 1;
+				new_year++;
+			}
+			set_date (new_year, new_month, day ());
+			return month ();
+		}
+
+		int European::subtract_month(){
+			if (day () > days_previous_month ()){
+				if (is_leap_year() && day() ==29 && month() == 3){
+				} else{
+					modify_day(30);
+					return month ();
+				}
+			}
+			int new_month = month () - 1;
 			int new_year = year ();
 			if (new_month > months_per_year()){
 				new_month = 1;

@@ -1,22 +1,91 @@
-#include <iostream>
+#include "date.h"
 
 namespace lab2 {
+		Date::Date(){}
+		Date::Date(Date& d){}
+		//returns the current year after the operation
+		int Date::add_year (int n){
+			int year_v = year ();
+			int new_year = year_v + n;
+			set_date (day(), month (), new_year);
+			return year ();
+		}
+		std::string Date::to_string () const{
+			std::stringstream stream;
+			stream << year () << "-" << month () << "-" << day ();
+			return stream.str();
+		}
+		int Date::mod_julian_day () const {
+			return mod_julian;
+		}
 
+		int Date::day () const{
+			return day_v;
+		}
 
-class Date {
+		int Date::month () const{
+			return month_v;
+		}
 
-	public:
-	 virtual int week_day () = 0;
-	 virtual int days_this_month () = 0;
-	 virtual std::string week_day_name ();
-	 virtual std::string month_name ();
+		int Date::year () const{
+			return year_v;
+		}
+	
+		//returns the current month after the operation
+		int Date::add_month (int n) {
+			if (n > 0){
+				for (int i = 0;i<n;i++)
+					add_month();
+			} else{
+				int en = n*-1;
+				for (int i=0;i<en;i++){
+					subtract_month ();
+				}
+			}
+			return month ();
+		}
 
-	 Date & operator++(const int i) {
+		Date & Date::operator++() {
+			modify_day (1);
+			return *this;
+ 		};
+ 		Date & Date::operator--(){
+ 			modify_day(-1);
+ 			return *this;
+ 		}
+ 		Date & Date::operator +=(int num){
+ 			modify_day(num);
+ 			return *this;
+ 		}
+ 		Date & Date::operator -=(int num){
+ 			modify_day(-num);
+ 			return *this;
+ 		}
+ 		bool Date::operator ==(const Date & d) const{
+ 			return mod_julian_day() == d.mod_julian_day();
+ 		}
+ 		bool Date::operator !=(const Date & d) const{
+ 			return mod_julian_day() != d.mod_julian_day();
+ 		}
+ 		bool Date::operator <(const Date & d) const{
+ 			return mod_julian_day() < d.mod_julian_day();
+ 		}
+ 		bool Date::operator <=(const Date & d) const{
+ 			return mod_julian_day() <= d.mod_julian_day();
+ 		}
+ 		bool Date::operator >(const Date & d) const{
+ 			return mod_julian_day() > d.mod_julian_day();
+ 		}
+ 		bool Date::operator >=(const Date & d) const{
+ 			return mod_julian_day() >= d.mod_julian_day();
+ 		}
+ 		int Date::operator -(const Date & d) const{
+ 			return mod_julian_day() - d.mod_julian_day();
+ 		}		
 
- 	 }
-
- 	 
-};
+	std::ostream& operator<<(std::ostream& os, const Date & d){
+		return os << d.to_string ();
+	}
 }
 
 

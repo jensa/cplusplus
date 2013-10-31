@@ -10,6 +10,10 @@ namespace lab2{
 			set_date (year, month, day);
 		}
 
+		Gregorian::Gregorian (Date * d){
+			set_date (d->year(), d->month(), d->day());
+		}
+
 		Gregorian::Gregorian (Date & d){
 			set_date (d.year(), d.month(), d.day());
 		}
@@ -49,11 +53,6 @@ namespace lab2{
 		bool Gregorian::is_leap_year () const{
 			return calculate_leap(year ());
 		}
-
-		bool Gregorian::is_next_year_leap_year () const{
-			return calculate_leap(year () + 1);
-		}
-
 		bool Gregorian::calculate_leap (int y) const{
 			if (y % 400 == 0)
 				return true;

@@ -14,6 +14,10 @@ namespace lab2{
 			set_date (d.year(), d.month(), d.day());
 		}
 
+		Julian::Julian (Date * d){
+			set_date (d->year(), d->month(), d->day());
+		}
+
 		Julian::~Julian(){}
 
 		Julian & Julian::operator=(Date &d){
@@ -47,9 +51,5 @@ namespace lab2{
 
 		bool Julian::is_leap_year () const{
 			return year () % 4 == 0;
-		}
-
-		bool Julian::is_next_year_leap_year () const{
-			return (year () +1) % 4 == 0;
 		}
 }
