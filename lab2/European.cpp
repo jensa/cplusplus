@@ -1,4 +1,4 @@
-#include "European.h"
+#include "european.h"
 
 namespace lab2{
 		int European::days_per_week () const{

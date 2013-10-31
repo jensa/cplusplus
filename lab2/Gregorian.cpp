@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Gregorian.h"
+#include "gregorian.h"
 
 namespace lab2{
 		Gregorian::Gregorian(){

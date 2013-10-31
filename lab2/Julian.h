@@ -1,5 +1,5 @@
 #include <iostream>
-#include "European.h"
+#include "european.h"
 
 namespace lab2{
 class Julian : European{

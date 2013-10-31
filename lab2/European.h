@@ -1,4 +1,4 @@
-#include "Date.h"
+#include "date.h"
 #include "kattistime.h"
 
 namespace lab2{
