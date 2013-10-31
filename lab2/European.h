@@ -27,6 +27,7 @@ class European : public Date{
 		int calculate_julian_day (int year, int month, int day, bool Julian) const;
 		void set_date_today ();
 		void modify_day (int num);
+		int add_month ();
 		virtual void set_date_from_mod_julian_day(int mod);
 };
 }

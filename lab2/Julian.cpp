@@ -21,21 +21,6 @@ namespace lab2{
 			return *this;
 		}
 
-		int Julian::add_month () {
-			if (day () > days_next_month ()){
-				modify_day(30);
-				return month ();
-			}
-			int new_month = month () + 1;
-			int new_year = year ();
-			if (new_month > months_per_year()){
-				new_month = 1;
-				new_year++;
-			}
-			set_date (new_year, new_month, day ());
-			return month ();
-		}
-
 		void Julian::set_date_from_mod_julian_day(int mod){
 			mod_julian = mod;
 			// Calculate year, month and day.

@@ -21,29 +21,15 @@ namespace lab2{
 			return *this;
 		}
 
-		int Gregorian::add_month () {
-			if (day () > days_next_month ()){
-				modify_day(30);
-				return month ();
-			}
-			int new_month = month () + 1;
-			int new_year = year ();
-			if (new_month > months_per_year()){
-				new_month = 1;
-				new_year++;
-			}
-			set_date (new_year, new_month, day ());
-			return month ();
-		}
-
 		void Gregorian::set_date_from_mod_julian_day(int mod){
 			mod_julian = mod;
 			// Calculate year, month and day.
 			// Adaptation from 
 			// http://www.tondering.dk/claus/cal/julperiod.php
 			int julian_day = mod + MOD_JULIAN_DAYS;
-			int b = 0;
-			int c = julian_day + 32082;
+			int a = julian_day + 32044;
+			int b = ((4*a) + 3) / 146097;
+			int c = a - ((146097*b)/4);
 			int d = (4*c + 3) / 1461;
 			int e = c - ((1461*d) / 4);
 			int m = ((5*e + 2)/153);
@@ -61,10 +47,20 @@ namespace lab2{
 		}
 
 		bool Gregorian::is_leap_year () const{
-			return year () % 4 == 0;
+			return calculate_leap(year ());
 		}
 
 		bool Gregorian::is_next_year_leap_year () const{
-			return (year () +1) % 4 == 0;
+			return calculate_leap(year () + 1);
+		}
+
+		bool Gregorian::calculate_leap (int y) const{
+			if (y % 400 == 0)
+				return true;
+			if (y % 100 == 0)
+				return false;
+			if (y % 4 == 0)
+				return true;
+			return false;
 		}
 }

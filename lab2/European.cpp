@@ -68,4 +68,22 @@ namespace lab2{
 			set_date_from_mod_julian_day(new_day);
 		}
 
+		int European::add_month () {
+			if (day () > days_next_month ()){
+				if (is_leap_year() && day() ==29 && month() == 1){
+				} else{
+					modify_day(30);
+					return month ();
+				}
+			}
+			int new_month = month () + 1;
+			int new_year = year ();
+			if (new_month > months_per_year()){
+				new_month = 1;
+				new_year++;
+			}
+			set_date (new_year, new_month, day ());
+			return month ();
+		}
+
 }

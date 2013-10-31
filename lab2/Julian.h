@@ -13,7 +13,6 @@ class Julian : European{
 		~Julian();
 
 		Julian & operator=(Date &d);
-		int add_month ();
 	protected:
 		void set_date_from_mod_julian_day(int mod);
 		void set_date (int year, int month, int day);
