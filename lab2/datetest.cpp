@@ -77,16 +77,11 @@ int main()
     assert(g.week_day() == 4); // rätt veckodag
     g -= 3;                     // dra bort tre dagar
     g.add_month(2);              // lägg till en månad
-    std::cout << g.day() << std::endl;
     g.add_month(-1);            // dra bort en månad  
-    std::cout << g.day() << std::endl;  
     g.add_year(10);             // lägg till tio år.
     int lastday = g.day();
-    std::cout << g.day() << std::endl;
     ++g;
-    std::cout << g.day() << std::endl;
     --g;
-    std::cout << g.day() << std::endl;
     assert(lastday == g.day());
 
     
@@ -134,10 +129,8 @@ int main()
     // testa om skottåren för sekelskiften fungerar som de ska
     for(int y = 1958; y < 2500; y += 100)
         {
-            std::cout << y << std::endl;
             Gregorian temp(y, 2, 28);
             Date &e = temp;
-            std::cout << e.day() << std::endl;
             ++e;                                   // lägg till en dag
             if((y % 400 == 0 && e.day() == 29) ||  // skottdag (obs! ETTindexerad)
                (y % 400 != 0 && e.day() == 1))     // ej skottdag
