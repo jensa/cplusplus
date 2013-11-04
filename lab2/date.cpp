@@ -3,20 +3,14 @@
 namespace lab2 {
 		Date::Date(){}
 		Date::Date(Date& d){}
-		//returns the current year after the operation
-		int Date::add_year (int n){
-			int year_v = year ();
-			int new_year = year_v + n;
-			set_date (day(), month (), new_year);
-			return year ();
-		}
+		
 		std::string Date::to_string () const{
 			std::stringstream stream;
 			stream << year () << "-" << month () << "-" << day ();
 			return stream.str();
 		}
 		int Date::mod_julian_day () const {
-			return mod_julian;
+			return JDN_v - 2400001;
 		}
 
 		int Date::day () const{

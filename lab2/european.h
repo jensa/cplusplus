@@ -55,14 +55,15 @@ class European : public Date{
 		int days_this_month () const;
 		int days_next_month () const;
 		int days_previous_month () const;
+		int add_year(int n);
 		int calculate_julian_day (int year, int month, int day, bool Julian) const;
 		void set_date_today ();
 		void modify_day (int num);
 		int add_month ();
 		int subtract_month ();
-		virtual void set_date (int day, int month, int year)=0;
+		virtual void set_date (int year, int month, int day)=0;
 		virtual bool is_leap_year () const=0;
-		virtual void set_date_from_mod_julian_day(int mod)=0;
+		virtual void set_date_from_JDN(int mod)=0;
 };
 }
 #endif

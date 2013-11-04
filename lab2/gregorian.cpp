@@ -25,19 +25,18 @@ namespace lab2{
 			return *this;
 		}
 
-		void Gregorian::set_date_from_mod_julian_day(int mod){
-			mod_julian = mod;
+		void Gregorian::set_date_from_JDN(int julian_d){
+			int julian_day = julian_d;
+			JDN_v = julian_day;
 			// Calculate year, month and day.
 			// Adaptation from 
 			// http://www.tondering.dk/claus/cal/julperiod.php
-			int julian_day = mod + MOD_JULIAN_DAYS;
 			int a = julian_day + 32044;
 			int b = ((4*a) + 3) / 146097;
 			int c = a - ((146097*b)/4);
 			int d = (4*c + 3) / 1461;
 			int e = c - ((1461*d) / 4);
 			int m = ((5*e + 2)/153);
-
 			day_v = e - ((153*m + 2)/5) + 1;
 			month_v = m + 3 - (12*(m/10));
 			year_v = 100*b + d - 4800 + (m/10);
@@ -47,7 +46,7 @@ namespace lab2{
 			day_v = day;
 			month_v = month;
 			year_v = year;
-			mod_julian = calculate_julian_day(year, month, day, true);
+			JDN_v= calculate_julian_day(year, month, day, false);
 		}
 
 		bool Gregorian::is_leap_year () const{

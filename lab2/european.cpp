@@ -17,7 +17,7 @@ namespace lab2{
 		}
 
 		int European::week_day () const{
-			return ((mod_julian+4) % days_per_week());
+			return ((mod_julian_day()+3) % days_per_week());
 		}
 
 		int European::days_this_month () const{
@@ -47,6 +47,16 @@ namespace lab2{
 			return days;
 		}
 
+		//returns the current year after the operation
+		int European::add_year (int n){
+			int new_day = day ();
+			if (is_leap_year() && day () == 29)
+				new_day = 1;
+			int new_year = year () + n;
+			set_date (new_year, month (), new_day);
+			return year ();
+		}
+
 		int European::calculate_julian_day (int year, 
 			int month, int day, bool julian)const{
 			int a = (14 - month) / 12;
@@ -57,18 +67,18 @@ namespace lab2{
 				JDN = day + ((153*m + 2)/5) + (365*y)+ (y/4) -32083;
 			else
 				JDN = day + ((153*m + 2)/5) + (365*y)+ (y/4) - (y/100) + (y/400) -32045;
-			return JDN - MOD_JULIAN_DAYS;
+			return JDN;
 		}
 
 		void European::set_date_today (){
 			int days_since_unix_time = k_time(0) / (24*60*60);
-			int mod_julian_date = days_since_unix_time + MOD_JULIAN_UNIX_DAYS;
-			set_date_from_mod_julian_day(mod_julian_date);
+			int julian_day = days_since_unix_time + MOD_JULIAN_UNIX_DAYS+ MOD_JULIAN_DAYS;
+			set_date_from_JDN(julian_day);
 		}
 
 		void European::modify_day (int num){
-			int new_day = mod_julian_day() + num;
-			set_date_from_mod_julian_day(new_day);
+			int new_day = JDN () + num;
+			set_date_from_JDN(new_day);
 		}
 
 		int European::add_month () {

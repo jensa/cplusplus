@@ -7,4 +7,4 @@ european:
 date:
 	c++ -std=c++0x -c date.cpp -o date.o
 test: julian gregorian european date
-	c++ -std=c++0x  datetest.cpp julian.o gregorian.o date.o european.o kattistime.cpp kattistime.h
+	c++ -std=c++0x  -o test.o datetest.cpp julian.o gregorian.o date.o european.o kattistime.cpp kattistime.h

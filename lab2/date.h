@@ -16,12 +16,12 @@ class Date {
 		Date();
 		Date(Date & d);
 		//returns the current year after the operation
-		int add_year (int n);
 		std::string to_string () const;
 		int mod_julian_day () const;
 		int day () const;
 		int month () const;
 		int year () const;
+		virtual int add_year (int n)=0;
 		virtual int days_per_week () const=0;
 		virtual int months_per_year () const=0;
 		virtual int add_month ()=0;
@@ -46,10 +46,13 @@ class Date {
  		friend std::ostream & operator<<(std::ostream &os, const Date& d);
 
 	protected:
-		virtual void set_date (int day, int month, int year)=0;
+		virtual void set_date (int year, int month, int day)=0;
 		virtual void modify_day (int num)=0;
 		virtual bool is_leap_year () const=0;
-		int mod_julian;
+		int JDN () const{
+			return JDN_v;
+		}
+		int JDN_v;
 		int day_v;
 		int month_v;
 		int year_v;

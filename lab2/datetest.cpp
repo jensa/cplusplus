@@ -76,16 +76,17 @@ int main()
     g += 2;                                 // lägg till två dagar
     assert(g.week_day() == 4); // rätt veckodag
     g -= 3;                     // dra bort tre dagar
-    int lastmonth = g.month();
-    std::cout << lastmonth << std::endl;
     g.add_month(2);              // lägg till en månad
-    g.add_month(-1);            // dra bort en månad    
+    std::cout << g.day() << std::endl;
+    g.add_month(-1);            // dra bort en månad  
+    std::cout << g.day() << std::endl;  
     g.add_year(10);             // lägg till tio år.
-    std::cout << g.month() << std::endl;
-    assert(lastmonth == g.month());
     int lastday = g.day();
+    std::cout << g.day() << std::endl;
     ++g;
+    std::cout << g.day() << std::endl;
     --g;
+    std::cout << g.day() << std::endl;
     assert(lastday == g.day());
 
     
