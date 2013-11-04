@@ -13,14 +13,16 @@ namespace lab2 {
 class Date {
 
 	public:
-		Date();
-		Date(Date & d);
 		//returns the current year after the operation
 		std::string to_string () const;
 		int mod_julian_day () const;
 		int day () const;
 		int month () const;
 		int year () const;
+		int add_year (){
+			add_year(1);
+			return year ();
+		}
 		virtual int add_year (int n)=0;
 		virtual int days_per_week () const=0;
 		virtual int months_per_year () const=0;
@@ -48,11 +50,11 @@ class Date {
 	protected:
 		virtual void set_date (int year, int month, int day)=0;
 		virtual void modify_day (int num)=0;
-		virtual bool is_leap_year () const=0;
-		int JDN () const{
+		virtual bool is_leap_year (int year) const=0;
+		long JDN () const{
 			return JDN_v;
 		}
-		int JDN_v;
+		long JDN_v;
 		int day_v;
 		int month_v;
 		int year_v;

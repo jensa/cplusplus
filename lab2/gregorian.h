@@ -9,17 +9,17 @@ class Gregorian : public European{
 
 		Gregorian (int year, int month, int day);
 
-		Gregorian (Date & d);
+		Gregorian (const Date & d);
 
-		Gregorian (Date * d);
+		Gregorian (const Date * d);
 
 		~Gregorian();
 
 		Gregorian & operator=(Date &d);
 	protected:
-		void set_date_from_JDN(int julian_day);
+		void set_date_from_JDN(long julian_day);
 		void set_date (int year, int month, int day);
-		bool is_leap_year () const;
+		bool is_leap_year (int year) const;
 		
 	private:
 		bool calculate_leap (int year)const;

@@ -22,7 +22,7 @@ namespace lab2{
 
 		int European::days_this_month () const{
 			int days = days_in_months[month()-1];
-			if (is_leap_year())
+			if (is_leap_year(year()))
 				return days+1;
 			return days;
 		}
@@ -32,7 +32,7 @@ namespace lab2{
 			if (month () == months_per_year())
 				next = 1;
 			int days = days_in_months[next-1];
-			if (next == 2 && is_leap_year())
+			if (next == 2 && is_leap_year(year()))
 				days++;
 			return days;
 		}
@@ -42,7 +42,7 @@ namespace lab2{
 			if (month () == 0)
 				prev = months_per_year();
 			int days = days_in_months[prev-1];
-			if (prev == 2 && is_leap_year())
+			if (prev == 2 && is_leap_year(year()))
 				days++;
 			return days;
 		}
@@ -50,19 +50,19 @@ namespace lab2{
 		//returns the current year after the operation
 		int European::add_year (int n){
 			int new_day = day ();
-			if (is_leap_year() && day () == 29)
+			if (is_leap_year(year()) && day () == 29)
 				new_day = 1;
 			int new_year = year () + n;
 			set_date (new_year, month (), new_day);
 			return year ();
 		}
 
-		int European::calculate_julian_day (int year, 
+		long European::calculate_julian_day (int year, 
 			int month, int day, bool julian)const{
-			int a = (14 - month) / 12;
-			int y = year + 4800 - a;
-			int m = month + (12*a) - 3;
-			int JDN;
+			long a = (14 - month) / 12;
+			long y = year + 4800 - a;
+			long m = month + (12*a) - 3;
+			long JDN;
 			if (julian)
 				JDN = day + ((153*m + 2)/5) + (365*y)+ (y/4) -32083;
 			else
@@ -71,19 +71,19 @@ namespace lab2{
 		}
 
 		void European::set_date_today (){
-			int days_since_unix_time = k_time(0) / (24*60*60);
-			int julian_day = days_since_unix_time + MOD_JULIAN_UNIX_DAYS+ MOD_JULIAN_DAYS;
+			long days_since_unix_time = k_time(0) / (24*60*60);
+			long julian_day = days_since_unix_time + MOD_JULIAN_UNIX_DAYS+ MOD_JULIAN_DAYS;
 			set_date_from_JDN(julian_day);
 		}
 
 		void European::modify_day (int num){
-			int new_day = JDN () + num;
+			long new_day = JDN () + num;
 			set_date_from_JDN(new_day);
 		}
 
 		int European::add_month () {
 			if (day () > days_next_month ()){
-				if (is_leap_year() && day() ==29 && month() == 1){
+				if (is_leap_year(year()) && day() ==29 && month() == 1){
 				} else{
 					modify_day(30);
 					return month ();
@@ -101,7 +101,7 @@ namespace lab2{
 
 		int European::subtract_month(){
 			if (day () > days_previous_month ()){
-				if (is_leap_year() && day() ==29 && month() == 3){
+				if (is_leap_year(year()) && day() ==29 && month() == 3){
 				} else{
 					modify_day(30);
 					return month ();
@@ -115,6 +115,15 @@ namespace lab2{
 			}
 			set_date (new_year, new_month, day ());
 			return month ();
+		}
+
+		void European::check_range (int year, int month, int day){
+			if(month > months_per_year())
+				std::__throw_out_of_range("Out of range!");
+			if(day != 29 && day > days_this_month())
+				std::__throw_out_of_range("Out of range!");
+			else if (day == 29 && month == 2 && !is_leap_year(year))
+				std::__throw_out_of_range("Out of range!");
 		}
 
 }

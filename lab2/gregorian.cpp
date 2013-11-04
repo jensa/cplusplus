@@ -7,14 +7,15 @@ namespace lab2{
 		}
 
 		Gregorian::Gregorian (int year, int month, int day) {
+			check_range(year, month, day);
 			set_date (year, month, day);
 		}
 
-		Gregorian::Gregorian (Date * d){
+		Gregorian::Gregorian (const Date * d){
 			set_date (d->year(), d->month(), d->day());
 		}
 
-		Gregorian::Gregorian (Date & d){
+		Gregorian::Gregorian (const Date & d){
 			set_date (d.year(), d.month(), d.day());
 		}
 
@@ -25,18 +26,18 @@ namespace lab2{
 			return *this;
 		}
 
-		void Gregorian::set_date_from_JDN(int julian_d){
-			int julian_day = julian_d;
+		void Gregorian::set_date_from_JDN(long julian_d){
+			long julian_day = julian_d;
 			JDN_v = julian_day;
 			// Calculate year, month and day.
 			// Adaptation from 
 			// http://www.tondering.dk/claus/cal/julperiod.php
-			int a = julian_day + 32044;
-			int b = ((4*a) + 3) / 146097;
-			int c = a - ((146097*b)/4);
-			int d = (4*c + 3) / 1461;
-			int e = c - ((1461*d) / 4);
-			int m = ((5*e + 2)/153);
+			long a = julian_day + 32044;
+			long b = ((4*a) + 3) / 146097;
+			long c = a - ((146097*b)/4);
+			long d = (4*c + 3) / 1461;
+			long e = c - ((1461*d) / 4);
+			long m = ((5*e + 2)/153);
 			day_v = e - ((153*m + 2)/5) + 1;
 			month_v = m + 3 - (12*(m/10));
 			year_v = 100*b + d - 4800 + (m/10);
@@ -49,8 +50,8 @@ namespace lab2{
 			JDN_v= calculate_julian_day(year, month, day, false);
 		}
 
-		bool Gregorian::is_leap_year () const{
-			return calculate_leap(year ());
+		bool Gregorian::is_leap_year (int year) const{
+			return calculate_leap(year);
 		}
 		bool Gregorian::calculate_leap (int y) const{
 			if (y % 400 == 0)

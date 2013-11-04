@@ -1,8 +1,6 @@
 #include "date.h"
 
 namespace lab2 {
-		Date::Date(){}
-		Date::Date(Date& d){}
 		
 		std::string Date::to_string () const{
 			std::stringstream stream;

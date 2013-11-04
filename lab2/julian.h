@@ -9,17 +9,17 @@ class Julian : public European{
 
 		Julian (int year, int month, int day);
 
-		Julian (Date & d);
+		Julian (const Date & d);
 
-		Julian (Date * d);
+		Julian (const Date * d);
 
 		~Julian();
 
 		Julian & operator=(Date &d);
 	protected:
-		void set_date_from_JDN(int julian_day);
+		void set_date_from_JDN(long julian_day);
 		void set_date (int year, int month, int day);
-		bool is_leap_year () const;
+		bool is_leap_year (int year) const;
 };
 }
 #endif
