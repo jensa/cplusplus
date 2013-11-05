@@ -1,6 +1,7 @@
 #ifndef EUROPE
 #define EUROPE
 #include <vector>
+#include <stdexcept>
 #include "date.h"
 #include "kattistime.h"
 

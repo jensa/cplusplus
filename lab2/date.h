@@ -32,6 +32,7 @@ class Date {
 		virtual int days_this_month () const=0;
 		virtual std::string week_day_name () const=0;
 		virtual std::string month_name () const=0;
+		virtual void set_date (int year, int month, int day)=0;
 		//returns the current month after the operation
 		int add_month (int n);
 		Date & operator++();
@@ -48,7 +49,6 @@ class Date {
  		friend std::ostream & operator<<(std::ostream &os, const Date& d);
 
 	protected:
-		virtual void set_date (int year, int month, int day)=0;
 		virtual void modify_day (int num)=0;
 		virtual bool is_leap_year (int year) const=0;
 		long JDN () const{

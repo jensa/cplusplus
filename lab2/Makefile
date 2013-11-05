@@ -6,7 +6,11 @@ european:
 	c++ -std=c++0x -c european.cpp -o european.o
 date:
 	c++ -std=c++0x -c date.cpp -o date.o
-test: julian gregorian european date
-	c++ -std=c++0x -o test.o datetest.cpp julian.o gregorian.o date.o european.o kattistime.cpp kattistime.h
-kattistest: julian gregorian european date
-		c++ -std=c++0x -o kattistest.o cprog09lab22c.cpp julian.o gregorian.o date.o european.o kattistime.cpp kattistime.h
+kattistime:
+	c++ -std=c++0x -c kattistime.cpp -o kattistime.o
+test: julian gregorian european date kattistime
+	c++ -std=c++0x -o test.o datetest.cpp julian.o gregorian.o date.o european.o kattistime.o
+kattistest: julian gregorian european date kattistime
+		c++ -std=c++0x -o kattistest.o cprog09lab22c.cpp julian.o gregorian.o date.o european.o kattistime.o
+calendar: julian gregorian european date kattistime
+	c++ -std=c++0x -o calendar.o calendar.cpp julian.o gregorian.o date.o european.o kattistime.o
