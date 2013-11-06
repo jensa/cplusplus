@@ -22,6 +22,7 @@ namespace lab2{
 		bool add_event(std::string, int year, int month);
 		bool add_event(std::string, int year, int month, int day);
 		std::string to_string() const;
-		friend std::ostream & operator<<(std::ostream &os, const Calendar<T>& cal);
+		template<class D>
+		friend std::ostream & operator<<(std::ostream &os, const Calendar<D>& cal);
 	};
 }
