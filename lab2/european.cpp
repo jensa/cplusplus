@@ -54,8 +54,8 @@ namespace lab2{
 		//returns the current year after the operation
 		int European::add_year (int n){
 			int new_day = day ();
-			if (is_leap_year(year()) && !is_leap_year(year()+n) && day () == 29)
-				new_day = 1;
+			if (!is_leap_year(year()+n) && day () == 29 && month() == 2)
+				new_day = 28;
 			int new_year = year () + n;
 			set_date (new_year, month (), new_day);
 			return year ();

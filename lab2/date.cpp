@@ -5,15 +5,15 @@ namespace lab2 {
 		Date::Date(){}
 		
 		Date::Date(const Date & d) {
-		  set_date_from_JDN(d.JDN());
+		  JDN_v = d.JDN();
 		}
 		
 		Date::Date(Date * d) {
-		   set_date_from_JDN(d->JDN());
+		   JDN_v = d->JDN ();
 		}
 		
 		Date & Date::operator=(const Date & d) {
-		   set_date_from_JDN(d.JDN());
+		   JDN_v = d.JDN();
 		   return *this;
 		}
 		
@@ -31,19 +31,7 @@ namespace lab2 {
 		int Date::mod_julian_day () const {
 			return JDN_v - 2400001;
 		}
-
-		int Date::day () const{
-			return day_v;
-		}
-
-		int Date::month () const{
-			return month_v;
-		}
-
-		int Date::year () const{
-			return year_v;
-		}
-	
+		
 		//returns the current month after the operation
 		int Date::add_month (int n) {
 			if (n > 0){

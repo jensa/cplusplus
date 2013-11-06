@@ -24,9 +24,9 @@ class Date {
 		//returns the current year after the operation
 		std::string to_string () const;
 		int mod_julian_day () const;
-		int day () const;
-		int month () const;
-		int year () const;
+		virtual int day () const=0;
+		virtual int month () const=0;
+		virtual int year () const=0;
 		int add_year (){
 			add_year(1);
 			return year ();
@@ -67,9 +67,6 @@ class Date {
 		virtual bool is_leap_year (int year) const=0;
 
 		long JDN_v;
-		int day_v;
-		int month_v;
-		int year_v;
 };
 }
 

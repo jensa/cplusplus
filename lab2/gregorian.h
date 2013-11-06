@@ -13,6 +13,10 @@ class Gregorian : public European{
 
 		Gregorian (const Date * d);
 
+		int day() const;
+		int month()const;
+		int year() const;
+
 		//~Gregorian();
 
 		Gregorian & operator=(const Date &d);
@@ -20,6 +24,7 @@ class Gregorian : public European{
 		void set_date_from_JDN(long julian_day);
 		void set_date (int year, int month, int day);
 		bool is_leap_year (int year) const;
+		void get_dates (long JDN, int & year, int & month, int & day)const;
 		
 	private:
 		bool calculate_leap (int year)const;

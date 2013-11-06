@@ -32,26 +32,47 @@ namespace lab2{
 			return *this;
 		}
 
+		int Julian::day()const{
+			int year, month, day;
+			get_dates(JDN(), year, month, day);
+			return day;
+		}
+
+
+		int Julian::month()const{
+			int year, month, day;
+			get_dates(JDN(), year, month, day);
+			return month;
+		}
+
+
+		int Julian::year()const{
+			int year, month, day;
+			get_dates(JDN(), year, month, day);
+			return year;
+		}
+
 		void Julian::set_date_from_JDN(long julian_d){
-			long julian_day = julian_d;
-			JDN_v = julian_day;
+			JDN_v = julian_d;
+			
+		}
+
+		void Julian::get_dates (long JDN, int & year, int & month, int & day) const{
+			
 			// Calculate year, month and day.
 			// Adaptation from 
 			// http://www.tondering.dk/claus/cal/julperiod.php
 			long b = 0;
-			long c = julian_day + 32082;
+			long c = JDN + 32082;
 			long d = (4*c + 3) / 1461;
 			long e = c - ((1461*d) / 4);
 			long m = ((5*e + 2)/153);
-			day_v = e - ((153*m + 2)/5) + 1;
-			month_v = m + 3 - (12*(m/10));
-			year_v = 100*b + d - 4800 + (m/10);
+			day = e - ((153*m + 2)/5) + 1;
+			month = m + 3 - (12*(m/10));
+			year = 100*b + d - 4800 + (m/10);
 		}
 
 		void Julian::set_date (int year, int month, int day){
-			day_v = day;
-			month_v = month;
-			year_v = year;
 			JDN_v = calculate_julian_day(year, month, day, true);
 		}
 
