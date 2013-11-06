@@ -146,7 +146,14 @@ int main()
                 }
         }
     
-    std::cout << std::endl << "All tests were successful." << std::endl;
+    std::cout << std::endl << "All tests were successful.maybe..." << std::endl;
+    Julian jdate = new Gregorian (2004, 2, 16);
+    Date *date = &jdate;
+    std::cout << *date << std::endl;
+    /*Gregorian gdate = new Julian(*const_cast<const Date*>(date));
+    std::cout << *date << std::endl;
+    date = &gdate;
+    std::cout << *date << std::endl;*/
 
     // följande ska inte gå att kompilera
 #if 0

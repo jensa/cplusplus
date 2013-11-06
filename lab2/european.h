@@ -53,6 +53,7 @@ class European : public Date{
 		std::string week_day_name () const;
 		std::string month_name () const;
 		int week_day () const;
+		int days_in_month (int month, int year) const;
 		int days_this_month () const;
 		int days_next_month () const;
 		int days_previous_month () const;
@@ -62,7 +63,7 @@ class European : public Date{
 		void modify_day (int num);
 		int add_month ();
 		int subtract_month ();
-		void check_range (int year, int month, int day);
+		void check_range (int year, int month, int day)const;
 		virtual void set_date (int year, int month, int day)=0;
 		virtual bool is_leap_year (int year) const=0;
 		virtual void set_date_from_JDN(long julian_day)=0;

@@ -23,12 +23,16 @@ class Date {
 			add_year(1);
 			return year ();
 		}
+		long JDN () const{
+			return JDN_v;
+		}
 		virtual int add_year (int n)=0;
 		virtual int days_per_week () const=0;
 		virtual int months_per_year () const=0;
 		virtual int add_month ()=0;
 		virtual int subtract_month ()=0;
 		virtual int week_day () const=0;
+		virtual int days_in_month (int month, int year) const=0;
 		virtual int days_this_month () const=0;
 		virtual std::string week_day_name () const=0;
 		virtual std::string month_name () const=0;
@@ -51,9 +55,7 @@ class Date {
 	protected:
 		virtual void modify_day (int num)=0;
 		virtual bool is_leap_year (int year) const=0;
-		long JDN () const{
-			return JDN_v;
-		}
+		
 		long JDN_v;
 		int day_v;
 		int month_v;

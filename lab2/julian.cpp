@@ -12,17 +12,23 @@ namespace lab2{
 		}
 
 		Julian::Julian (const Date & d){
-			set_date (d.year(), d.month(), d.day());
+			if (this == &d) {
+    			return;
+  			}
+			set_date_from_JDN(d.JDN());
 		}
-
+		
 		Julian::Julian (const Date * d){
-			set_date (d->year(), d->month(), d->day());
+			set_date_from_JDN(d->JDN());
 		}
 
-		Julian::~Julian(){}
+		//Julian::~Julian(){}
 
-		Julian & Julian::operator=(Date &d){
-			set_date (d.year(), d.month(), d.day());
+		Julian & Julian::operator=(const Date &d){
+			if (this == &d) {
+    			return *this;
+  			}
+			set_date_from_JDN(d.JDN());
 			return *this;
 		}
 

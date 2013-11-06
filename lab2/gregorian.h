@@ -13,9 +13,9 @@ class Gregorian : public European{
 
 		Gregorian (const Date * d);
 
-		~Gregorian();
+		//~Gregorian();
 
-		Gregorian & operator=(Date &d);
+		Gregorian & operator=(const Date &d);
 	protected:
 		void set_date_from_JDN(long julian_day);
 		void set_date (int year, int month, int day);

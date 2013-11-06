@@ -12,5 +12,7 @@ test: julian gregorian european date kattistime
 	c++ -std=c++0x -o test.o datetest.cpp julian.o gregorian.o date.o european.o kattistime.o
 kattistest: julian gregorian european date kattistime
 		c++ -std=c++0x -o kattistest.o cprog09lab22c.cpp julian.o gregorian.o date.o european.o kattistime.o
+		cat lab22c.in | ./kattistest.o > testut.txt
+		diff -y lab22c.out testut.txt | grep '|' | more
 calendar: julian gregorian european date kattistime
 	c++ -std=c++0x -o calendar.o calendar.cpp julian.o gregorian.o date.o european.o kattistime.o
