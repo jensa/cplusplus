@@ -39,8 +39,14 @@ namespace lab2{
 	}
 
 	template<class T>
-	std::string Calendar<T>::to_string() {
+	std::string Calendar<T>::to_string() const{
 		return "lolfi golfi";
+	}
+
+	template<class T>
+	std::ostream& operator<<(std::ostream &os, const Calendar<T> & cal){
+		os << cal.to_string();
+		return os;
 	}
 }
 
