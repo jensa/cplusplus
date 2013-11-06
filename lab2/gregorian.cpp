@@ -12,17 +12,20 @@ namespace lab2{
 		}
 
 		Gregorian::Gregorian (const Date * d){
-			set_date (d->year(), d->month(), d->day());
+			set_date_from_JDN(d->JDN());
 		}
 
 		Gregorian::Gregorian (const Date & d){
-			set_date (d.year(), d.month(), d.day());
+			set_date_from_JDN(d.JDN());
 		}
 
-		Gregorian::~Gregorian(){}
+		//Gregorian::~Gregorian(){}
 
-		Gregorian & Gregorian::operator=(Date &d){
-			set_date (d.year(), d.month(), d.day());
+		Gregorian & Gregorian::operator=(const Date &d){
+			if (this == &d) {
+    			return *this;
+  			}
+			set_date_from_JDN(d.JDN());
 			return *this;
 		}
 

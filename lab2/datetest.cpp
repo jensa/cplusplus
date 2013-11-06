@@ -146,7 +146,14 @@ int main()
                 }
         }
     
-    std::cout << std::endl << "All tests were successful." << std::endl;
+    std::cout << std::endl << "All tests were successful.maybe..." << std::endl;
+    Julian jdate = new Julian (2110, 7, 17);
+    Date &date = jdate;
+    std::cout << date << std::endl;
+    date += 14;
+    date.add_month(-5);
+    date.add_year(-3);
+    std::cout << date << std::endl;
 
     // följande ska inte gå att kompilera
 #if 0

@@ -13,9 +13,9 @@ class Julian : public European{
 
 		Julian (const Date * d);
 
-		~Julian();
+		//~Julian();
 
-		Julian & operator=(Date &d);
+		Julian & operator=(const Date &d);
 	protected:
 		void set_date_from_JDN(long julian_day);
 		void set_date (int year, int month, int day);

@@ -4,7 +4,13 @@ namespace lab2 {
 		
 		std::string Date::to_string () const{
 			std::stringstream stream;
-			stream << year () << "-" << month () << "-" << day ();
+			stream << year () << "-";
+			if(month() < 10)
+				stream << "0";
+			stream << month () << "-";
+			if (day () < 10)
+				stream << "0";
+			stream << day ();
 			return stream.str();
 		}
 		int Date::mod_julian_day () const {
@@ -72,7 +78,10 @@ namespace lab2 {
  			return mod_julian_day() >= d.mod_julian_day();
  		}
  		int Date::operator -(const Date & d) const{
- 			return mod_julian_day() - d.mod_julian_day();
+ 			int diff = mod_julian_day() - d.mod_julian_day();
+ 			/*if (diff < 0)
+ 				return diff * -1;*/
+ 			return diff;
  		}		
 
 	std::ostream& operator<<(std::ostream& os, const Date & d){

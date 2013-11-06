@@ -53,6 +53,7 @@ class European : public Date{
 		std::string week_day_name () const;
 		std::string month_name () const;
 		int week_day () const;
+		int days_in_month (int month, int year) const;
 		int days_this_month () const;
 		int days_next_month () const;
 		int days_previous_month () const;

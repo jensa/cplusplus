@@ -41,7 +41,6 @@ namespace {
 		if(scanf("%zu", &ret) != 1) {
 			assert(!"Tried to read idx but failed");
 		}
-		std::cout << "ret: " << ret <<", dates.size():" << dates.size() << std::endl;
 		assert(ret < dates.size());
 		return ret;
 	}
