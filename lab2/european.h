@@ -63,7 +63,7 @@ class European : public Date{
 		void modify_day (int num);
 		int add_month ();
 		int subtract_month ();
-		void check_range (int year, int month, int day);
+		void check_range (int year, int month, int day)const;
 		virtual void set_date (int year, int month, int day)=0;
 		virtual bool is_leap_year (int year) const=0;
 		virtual void set_date_from_JDN(long julian_day)=0;

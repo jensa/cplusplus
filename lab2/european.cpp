@@ -68,12 +68,12 @@ namespace lab2{
 			long a = (14 - month) / 12;
 			long y = year + 4800 - a;
 			long m = month + (12*a) - 3;
-			long JDN;
+			long jul_day;
 			if (julian)
-				JDN = day + ((153*m + 2)/5) + (365*y)+ (y/4) -32083;
+				jul_day = day + ((153*m + 2)/5) + (365*y)+ (y/4) -32083;
 			else
-				JDN = day + ((153*m + 2)/5) + (365*y)+ (y/4) - (y/100) + (y/400) -32045;
-			return JDN;
+				jul_day = day + ((153*m + 2)/5) + (365*y)+ (y/4) - (y/100) + (y/400) -32045;
+			return jul_day;
 		}
 
 		void European::set_date_today (){
@@ -115,7 +115,7 @@ namespace lab2{
 			return month ();
 		}
 
-		void European::check_range (int year, int month, int day){
+		void European::check_range (int year, int month, int day)const {
 			if (year < 1 || month < 1 || day < 1)
 				throw std::out_of_range("Out of range!");
 			if(month > months_per_year())

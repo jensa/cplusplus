@@ -12,9 +12,12 @@ namespace lab2{
 		}
 
 		Julian::Julian (const Date & d){
+			if (this == &d) {
+    			return;
+  			}
 			set_date_from_JDN(d.JDN());
 		}
-
+		
 		Julian::Julian (const Date * d){
 			set_date_from_JDN(d->JDN());
 		}

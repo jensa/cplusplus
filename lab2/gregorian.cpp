@@ -10,12 +10,15 @@ namespace lab2{
 			check_range(year, month, day);
 			set_date (year, month, day);
 		}
-
+		
 		Gregorian::Gregorian (const Date * d){
 			set_date_from_JDN(d->JDN());
 		}
 
 		Gregorian::Gregorian (const Date & d){
+			if (this == &d) {
+    			return;
+  			}
 			set_date_from_JDN(d.JDN());
 		}
 
@@ -46,11 +49,13 @@ namespace lab2{
 			year_v = 100*b + d - 4800 + (m/10);
 		}
 
-		void Gregorian::set_date (int year, int month, int day){
-			day_v = day;
-			month_v = month;
-			year_v = year;
-			JDN_v= calculate_julian_day(year, month, day, false);
+		void Gregorian::set_date (int y, int m, int d){
+			std::cout << "setting date: " << y << m << d << std::endl;
+			day_v = d;
+			month_v = m;
+			year_v = y;
+			JDN_v= calculate_julian_day(y, m, d, false);
+			std::cout << "set date: " << year() << month() << day() << std::endl;
 		}
 
 		bool Gregorian::is_leap_year (int year) const{

@@ -10,6 +10,7 @@ namespace lab2 {
 			stream << month () << "-";
 			if (day () < 10)
 				stream << "0";
+			std::cout << "DAY IN TOSTRING: " <<day () << std::endl;
 			stream << day ();
 			return stream.str();
 		}
