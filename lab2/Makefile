@@ -18,5 +18,7 @@ greptest: julian gregorian european date kattistime
 		c++ -std=c++0x -o kattistest.o cprog09lab22c.cpp julian.o gregorian.o date.o european.o kattistime.o
 		cat lab22c.in | ./kattistest.o > testut.txt
 		diff -y lab22c.out testut.txt
-calendar: julian gregorian european date kattistime
-	c++ -std=c++0x -o calendar.o calendar.cpp julian.o gregorian.o date.o european.o kattistime.o
+calendar: 
+	c++ -std=c++0x -c calendar.cpp -o calendar.o
+calendartest: julian gregorian european date calendar kattistime
+		c++ -std=c++0x -o calendartest.o cprog09lab23.cpp julian.o gregorian.o date.o european.o kattistime.o calendar.o
