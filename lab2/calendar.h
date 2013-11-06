@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <stdarg.h>
 #include <map>
 #include "date.h"
@@ -11,6 +12,7 @@ namespace lab2{
 
 	private:
 		Date* calendar;
+		std::map<std::string, T> events;
 
 	public:
 		Calendar();
@@ -19,6 +21,13 @@ namespace lab2{
 		bool add_event(std::string, int year);
 		bool add_event(std::string, int year, int month);
 		bool add_event(std::string, int year, int month, int day);
+		std::string to_string();
+		friend std::ostream & operator<<(std::ostream &os, const Calendar<T>& cal);
 	};
-}
 
+	template<class T>
+	std::ostream& operator<<(std::ostream &os, const Calendar<T> & cal){
+		os << cal.to_string();
+		return os;
+	}
+}

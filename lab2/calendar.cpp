@@ -4,7 +4,7 @@ namespace lab2{
 
 	template<class T>
 	Calendar<T>::Calendar(){
-		//Kompilerar bara om T tillhör basklassen Date
+		//Kompilerar bara om T ärver från basklassen Date
 		calendar = new T();
 	}
 
@@ -37,6 +37,11 @@ namespace lab2{
 		}
 		return false;
 	}
+
+	template<class T>
+	std::string Calendar<T>::to_string() {
+		return "lolfi golfi";
+	}
 }
 
 int main(){
@@ -45,6 +50,8 @@ int main(){
     set_k_time(mytime);
 	lab2::Calendar<lab2::Julian> julian_cal;
 	julian_cal.set_date(2013, 12, 24);
+	julian_cal.add_event("Julafton");
+	std::cout << julian_cal;
 	return 0;
 }
 
