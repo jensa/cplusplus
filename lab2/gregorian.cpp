@@ -50,12 +50,10 @@ namespace lab2{
 		}
 
 		void Gregorian::set_date (int y, int m, int d){
-			std::cout << "setting date: " << y << m << d << std::endl;
 			day_v = d;
 			month_v = m;
 			year_v = y;
 			JDN_v= calculate_julian_day(y, m, d, false);
-			std::cout << "set date: " << year() << month() << day() << std::endl;
 		}
 
 		bool Gregorian::is_leap_year (int year) const{

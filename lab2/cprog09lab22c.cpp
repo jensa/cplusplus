@@ -84,7 +84,6 @@ int main(int argc, char **argv) {
 	while(scanf("%100s", buf) == 1) {
         linenr++;
 		std::string command(buf);
-
 		if(command == "julian") {
 			new_date<Julian>();
 		} else if(command == "juliancopy") {

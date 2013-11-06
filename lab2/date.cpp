@@ -1,6 +1,21 @@
 #include "date.h"
 
 namespace lab2 {
+
+		Date::Date(){}
+		
+		Date::Date(const Date & d) {
+		  set_date_from_JDN(d.JDN());
+		}
+		
+		Date::Date(Date * d) {
+		   set_date_from_JDN(d->JDN());
+		}
+		
+		Date & Date::operator=(const Date & d) {
+		   set_date_from_JDN(d.JDN());
+		   return *this;
+		}
 		
 		std::string Date::to_string () const{
 			std::stringstream stream;
@@ -10,7 +25,6 @@ namespace lab2 {
 			stream << month () << "-";
 			if (day () < 10)
 				stream << "0";
-			std::cout << "DAY IN TOSTRING: " <<day () << std::endl;
 			stream << day ();
 			return stream.str();
 		}
