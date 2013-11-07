@@ -73,6 +73,7 @@ namespace lab2{
 
 		void Gregorian::set_date (int y, int m, int d){
 			JDN_v= calculate_julian_day(y, m, d, false);
+			check_range(y, m, d);
 		}
 
 		bool Gregorian::is_leap_year (int year) const{

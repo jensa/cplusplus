@@ -117,13 +117,13 @@ namespace lab2{
 
 		void European::check_range (int year, int month, int day)const {
 			if (year < 1 || month < 1 || day < 1)
-				throw std::out_of_range("Out of range!");
+				throw std::out_of_range("Out of range! < 1");
 			if(month > months_per_year())
-				throw std::out_of_range("Out of range!");
+				throw std::out_of_range("Out of range! > months_per_year");
 			if(day != 29 && day > days_in_month(month, year))
-				throw std::out_of_range("Out of range!");
+				throw std::out_of_range("Out of range! > days_in_month");
 			else if (day == 29 && month == 2 && !is_leap_year(year))
-				throw std::out_of_range("Out of range!");
+				throw std::out_of_range("Out of range! lolfi");
 		}
 
 }

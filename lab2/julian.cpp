@@ -73,6 +73,7 @@ namespace lab2{
 		}
 
 		void Julian::set_date (int year, int month, int day){
+			check_range(year, month, day);
 			JDN_v = calculate_julian_day(year, month, day, true);
 		}
 

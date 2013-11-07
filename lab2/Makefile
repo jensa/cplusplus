@@ -22,3 +22,5 @@ calendar:
 	c++ -std=c++0x -c calendar.cpp -o calendar.o
 calendartest: julian gregorian european date calendar kattistime
 		c++ -std=c++0x -o calendartest.o cprog09lab23.cpp julian.o gregorian.o date.o european.o kattistime.o calendar.o
+		cat lab23.in | ./calendartest.o > testut
+		diff -y lab23 testut | more
