@@ -14,13 +14,13 @@ namespace lab2{
 	class Calendar {
 
 	private:
-		Date* calendar;
+		T calendar;
 		std::multimap<T, std::string> events;
 
 	public:
 	Calendar(){
 		//Kompilerar bara om T ärver från basklassen Date
-		calendar = new T();
+		calendar = T();
 	}
 
 	template<class S>
@@ -36,7 +36,7 @@ namespace lab2{
 
 	bool set_date(int year, int month, int day){
 		try {
-			calendar -> set_date(year, month, day);
+			calendar = T(year, month, day);
 		} catch (std::out_of_range) {
 			return false;
 		}
@@ -57,13 +57,13 @@ namespace lab2{
 
 	bool add_event(std::string name, int day, int month, int year){
 		if (year == -1){
-			year = calendar -> year();
+			year = calendar.year();
 		}
 		if (month == -1){
-			month = calendar -> month();
+			month = calendar.month();
 		}
 		if (day == -1){
-			day = calendar -> day();
+			day = calendar.day();
 		}
 		try {
 			T d = new T(year, month, day);
@@ -101,13 +101,13 @@ namespace lab2{
 
 	bool remove_event(std::string name, int day, int month, int year){
 		if (year == -1){
-			year = calendar -> year();
+			year = calendar.year();
 		}
 		if (month == -1){
-			month = calendar -> month();
+			month = calendar.month();
 		}
 		if (day == -1){
-			day = calendar -> day();
+			day = calendar.day();
 		}
 
 		try {
@@ -137,7 +137,7 @@ namespace lab2{
 		typename std::multimap<T, std::string>::const_iterator it;
 
 		for (it = events.begin(); it != events.end(); ++it){
-			if ((*it).first > *calendar)
+			if ((*it).first > calendar)
 				stream << (*it).first.to_string() << " : " << (*it).second << std::endl;
 		}
 		return stream.str();
@@ -148,7 +148,7 @@ namespace lab2{
 		return os;
 	}
 
-	Date* getCurrentDate() const {
+	T getCurrentDate() const {
 		return calendar;
 	}
 
