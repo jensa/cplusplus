@@ -9,15 +9,17 @@ namespace lab3 {
 
 	class Container : public Item {
 		public:
+			Container();
 			Container(std::string, int);
 			int getHoldWeight ();
-			std::vector<Item> getItems ();
-			void add (Item);
-			void remove (Item);
+			int getCurrentWeight ();
+			std::vector<Item> getItems();
+			bool add (Item);
+			bool remove (Item);
 
 		private:
 			int holdWeight;
-			int holdVolume;
+			int currentWeight;
 			std::vector<Item> items;
 	};
 }

@@ -6,6 +6,7 @@ namespace lab3 {
 
 	class Item {
 		public:
+			Item();
 			Item(std::string, int);
 			int getWeight ();
 			std::string getName ();

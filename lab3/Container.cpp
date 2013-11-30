@@ -2,6 +2,10 @@
 
 namespace lab3 {
 
+	Container::Container() {
+
+	}
+
 	Container::Container(std::string name, int holdWeight) : Item(name,0) {
 		this -> holdWeight = holdWeight;
 	}
@@ -10,20 +14,31 @@ namespace lab3 {
 		return holdWeight;
 	}
 
+	int Container::getCurrentWeight () {
+		return currentWeight;
+	}
+
 	std::vector<Item> Container::getItems () {
 		return items;
 	}
 
-	void Container::add (Item i) {
-		items.push_back(i);
+	bool Container::add (Item i) {
+		if (currentWeight + i.getWeight() <= holdWeight) {
+			items.push_back(i);
+			currentWeight += i.getWeight();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	void Container::remove (Item i) {
+	bool Container::remove (Item i) {
 		for(std::vector<Item>::iterator it = items.begin(); it != items.end(); ++it) {
   			if ((*it).getName() == i.getName()) {
   				items.erase(it);
-  				break;
+  				return true;
   			}
 		}
+		return false;
 	}
 }
