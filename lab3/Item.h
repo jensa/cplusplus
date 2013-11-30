@@ -1,12 +1,14 @@
+#ifndef ITEM
+#define ITEM
 #include <iostream>
 
 namespace lab3 {
 
 	class Item {
 		public:
+			Item(std::string, int);
 			int getWeight ();
-			int getVolume ();
-			int getPrice ();
+			std::string getName ();
 
 		private:
 			std::string name;
@@ -15,3 +17,5 @@ namespace lab3 {
 			int price;
 	};
 }
+
+#endif
