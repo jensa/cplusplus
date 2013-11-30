@@ -13,21 +13,28 @@ int main () {
 
 	assert(c.add(item1) == true);
 	assert(c.getCurrentWeight() == 2);
+
 	assert(c.add(item2) == true);
 	assert(c.getCurrentWeight() == 4);
+
 	assert(c.add(item3) == true);
 	assert(c.getCurrentWeight() == 7);
+
 	assert(c.add(item4) == true);
 	assert(c.getCurrentWeight() == 10);
+
 	assert(c.add(item5) == false);
 	assert(c.getCurrentWeight() == 10);
 
 	assert(c.getItems().size() == 4);
 	
 	assert(c.remove(item4) == true);
-
+	assert(c.getCurrentWeight() == 7);
 	assert(c.getItems().size() == 3);
 	assert(c.remove(item4) == false);
+
+	assert(c.add(item5) == true);
+	assert(c.getCurrentWeight() == 9);
 
 	return 0;
 }	

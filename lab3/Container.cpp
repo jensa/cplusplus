@@ -35,6 +35,7 @@ namespace lab3 {
 	bool Container::remove (Item i) {
 		for(std::vector<Item>::iterator it = items.begin(); it != items.end(); ++it) {
   			if ((*it).getName() == i.getName()) {
+  				currentWeight -= (*it).getWeight();
   				items.erase(it);
   				return true;
   			}
