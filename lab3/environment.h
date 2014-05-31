@@ -2,16 +2,18 @@
 #include <vector>
 #include <string>
 #include <map>
-
-class Character;
-class Object;
+#include "object.h"
+#include "character.h"
+#include "object.h"
 
 namespace lab3{
 
 	class Environment {
 		std::map<std::string, Environment> neighbor_map;
-		std::vector<std::string> neighbors;
 		std::string description_string;
+		std::vector<Character> characters;
+		std::vector<Object> items;
+
 	public:
 		Environment();
 		Environment(std::string description);
@@ -20,6 +22,7 @@ namespace lab3{
 		std::string description() const;
 		void enter(Character &);
 		void leave(Character &);
+		Character* getCharacter(std::string);
 		void pick_up(Object &);
 		void drop(Object &);
 	};

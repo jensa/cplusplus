@@ -1,26 +1,23 @@
 #include "environment.h"
 
 namespace lab3 {
-	//std::vector<Item> items;
-	
-
 	Environment::Environment(std::string desc){
 		description_string = desc;
-		//items = new std::vector<Item>();
+		//neighbor_map = new std::map<std::string, Environment>();
+		//items = new std::vector<Object>();
+		//characters = new std::vector<Character>();
 	}
 
 	std::string Environment::directions(){
-		std::string toReturn = "possible directions are: ";
-		for (std::vector<std::string>::iterator i = neighbors.begin(); i != neighbors.end(); ++i)
-		{
-			toReturn += *i;
+		std::string toReturn = "";
+		for(std::map<std::string, Environment>::iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
+			toReturn += iter->first;
 		}
 		return toReturn;
 	}
 
 	Environment Environment::neighbor(std::string direction){
-		//return neighbor_map[""];
-		return Environment(std::string(""));
+		return neighbor_map[direction];
 	}
 	
 	std::string Environment::description() const{
@@ -28,19 +25,36 @@ namespace lab3 {
 	}
 	
 	void Environment::enter(Character & c){
-
+		characters.push_back(c);
 	}
 
 	void Environment::leave(Character & c){
-
+		//for (std::vector<Character>::iterator it=characters.begin();it!=characters.end();){
+		//   if(c.get_name() == *it.get_name()) 
+		//      it = characters.erase(it);
+		//  else 
+		//      ++it;
+		//}
 	}
 
 	void Environment::pick_up(Object & o){
+		//for (std::vector<Object>::iterator it=items.begin();it!=items.end();){
+		//   if(o == *it) 
+		//      it = items.erase(it);
+		//  else 
+		//      ++it;
+		//}
+	}
 
+	Character* Environment::getCharacter(std::string name){
+		//for (std::vector<Character>::iterator it=characters.begin();it!=characters.end();){
+		//   if(name == *it.getName()) 
+		//      return *it;
+		//}
 	}
 
 	void Environment::drop(Object & o){
-
+		items.push_back(o);
 	}
 
 }

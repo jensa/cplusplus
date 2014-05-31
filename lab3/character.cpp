@@ -14,7 +14,7 @@ namespace lab3 {
 		set_current_location(current_location.neighbor(direction));
 	}
 
-	void Character::set_current_location(Environment env) {
+	void Character::set_current_location(Environment *env) {
 		current_location = env;
 	}
 
