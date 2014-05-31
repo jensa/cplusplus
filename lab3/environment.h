@@ -22,7 +22,7 @@ namespace lab3{
 		std::string description() const;
 		void enter(Character &);
 		void leave(Character &);
-		Character* getCharacter(std::string);
+		Character getCharacter(std::string);
 		void pick_up(Object &);
 		void drop(Object &);
 	};
