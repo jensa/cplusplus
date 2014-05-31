@@ -1,5 +1,3 @@
-#ifndef TROLL
-#define TROLL
 #include "npc.h"
 
 namespace lab3 {
@@ -11,4 +9,3 @@ namespace lab3 {
 			void talk_to(Character&);
 	};
 }
-#endif

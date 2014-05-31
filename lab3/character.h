@@ -1,6 +1,3 @@
-#ifndef CHARACTER
-#define CHARACTER
-
 #include <iostream>
 #include <vector>
 #include "environment.h"
@@ -25,5 +22,3 @@ namespace lab3 {
 		Environment current_location;
 	};
 }
-
-#endif

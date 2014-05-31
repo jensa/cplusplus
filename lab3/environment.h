@@ -13,6 +13,7 @@ namespace lab3{
 		std::vector<std::string> neighbors;
 		std::string description_string;
 	public:
+		Environment();
 		Environment(std::string description);
 		std::string directions();
 		Environment neighbor(std::string direction);
@@ -22,5 +23,4 @@ namespace lab3{
 		void pick_up(Object &);
 		void drop(Object &);
 	};
-
 }

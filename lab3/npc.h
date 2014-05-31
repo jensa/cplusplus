@@ -1,5 +1,3 @@
-#ifndef NPCDEF
-#define NPCDEF
 #include "character.h"
 #include <iostream>
 
@@ -11,4 +9,3 @@ namespace lab3 {
 			virtual void talk_to(Character&) = 0;
 	};
 }
-#endif
