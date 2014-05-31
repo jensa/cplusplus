@@ -15,6 +15,10 @@ namespace lab3 {
 		}
 		return toReturn;
 	}
+	
+	void Environment::set_neighbor(std::string direction, Environment neighbor){
+		neighbor_map.insert(std::pair<std::string,Environment>(direction,neighbor));
+	}
 
 	Environment Environment::neighbor(std::string direction){
 		return neighbor_map[direction];

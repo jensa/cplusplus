@@ -19,6 +19,7 @@ namespace lab3{
 		Environment(std::string description);
 		std::string directions();
 		Environment neighbor(std::string direction);
+		void set_neighbor(std::string direction, Environment neighbor);
 		std::string description() const;
 		void enter(Character &);
 		void leave(Character &);
