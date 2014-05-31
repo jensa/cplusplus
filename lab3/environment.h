@@ -5,14 +5,19 @@ namespace lab3{
 
 	class Environment {
 	public:
-		Environment();
+		Environment(std::string description);
 		std::string directions();
 		Environment neighbor(std::string direction);
 		std::string description() const;
-		//enter(Character c)
-		//leave(character)
-		//void pick_up(Object);
-		//void drop(Object);
+		void enter(Character &);
+		void leave(Character &);
+		void pick_up(Object &);
+		void drop(Object &);
 	};
 
+}
+
+int main(){
+
+	std::cout << "HI!";
 }
