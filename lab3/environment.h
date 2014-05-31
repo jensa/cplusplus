@@ -1,9 +1,17 @@
-#include <vector>
 #include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+
+class Character;
+class Object;
 
 namespace lab3{
 
 	class Environment {
+		std::map<std::string, Environment> neighbor_map;
+		std::vector<std::string> neighbors;
+		std::string description_string;
 	public:
 		Environment(std::string description);
 		std::string directions();
@@ -15,9 +23,4 @@ namespace lab3{
 		void drop(Object &);
 	};
 
-}
-
-int main(){
-
-	std::cout << "HI!";
 }

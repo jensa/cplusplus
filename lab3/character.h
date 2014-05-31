@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <vector>
-#include "object.h"
+#include "environment.h"
+
 
 namespace lab3 {
 	class Character {
