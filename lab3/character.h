@@ -1,25 +1,29 @@
 #include <iostream>
 #include <vector>
 #include "object.h"
+#include "environment.h"
 
 namespace lab3 {
-	class Environment;
 
 	class Character {
 	public:
-		std::string get_type() const;
-		std::string get_name() const;
-		void pick_up(Object);
-		void drop(Object);
-		void set_current_location(Environment*);
-		void go(std::string);
+		std::string get_type();
+		std::string get_name();
 
+		void pick_up(Object &);
+		void drop(Object &);
+		void talk_to(Character &);
+		void go(Environment &, std::string);
+		
+		virtual void action(Environment &) = 0;
+		virtual void fight(Character &) = 0;
+	
 	protected:
 		std::string type;
 		std::string name;
 		int hit_points;
-		int mana_points;
-		std::vector<Object> items;
-		Environment* current_location;
+		int magic_points;
+		std::vector<Object *> items;
+		Environment current_location;
 	};
 }

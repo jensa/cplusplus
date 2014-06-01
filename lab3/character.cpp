@@ -2,33 +2,31 @@
 
 namespace lab3 {
 
-	std::string Character::get_type() const {
+	std::string Character::get_type() {
 		return type;
 	}
 
-	std::string Character::get_name() const {
+	std::string Character::get_name() {
 		return name;
 	}
 
-	void Character::go(std::string direction) {
-		set_current_location(current_location.neighbor(direction));
+	void Character::pick_up(Object & o) {
+		items.push_back(&o);
 	}
 
-	void Character::set_current_location(Environment *env) {
-		current_location = env;
-	}
-
-	void Character::pick_up(Object o) {
-		current_location.pick_up(o);
-		items.push_back(o);
-	}
-
-	void Character::drop(Object o) {
-		current_location.drop(o);
+	void Character::drop(Object & o) {
 		for (int i = 0; i < items.size(); i++) {
-			if (&items[i] == &o) {
+			if (&o == items[i]) {
 				items.erase(items.begin()+i);
 			}
 		}
+	}
+
+	void Character::go(Environment& env, std::string direction) {
+		
+	}
+
+	void Character::talk_to(Character &) {
+
 	}
 }
