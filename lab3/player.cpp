@@ -30,6 +30,10 @@ namespace lab3 {
 
 			std::cin.getline(command, 256);
 
+			if (std::strcmp(command, "") == 0) {
+				continue;
+			}
+
 			std::string command_string = std::string(command);
 
 			std::stringstream ss(command_string);
@@ -48,6 +52,8 @@ namespace lab3 {
 	    		executed_command = pickup_command(tokens, env);
     		} else if (tokens[0] == "drop"){
     			executed_command = drop_command(tokens, env);
+			} else if (tokens[0] == "use"){
+				executed_command = use_command(tokens, env);
 		    } else {
 		    	std::cout << "Command not recognized." << std::endl;
 		    }
@@ -106,6 +112,19 @@ namespace lab3 {
 			if ((*items[i]).get_name() == name){
 				env.drop(*items[i]);
 				items.erase(items.begin()+i);
+				return true;
+			}
+		}
+		std::cout << "No object named " << name << " in inventory!" << std::endl;
+		return false;
+	}
+
+	bool Player::use_command(std::vector<std::string> tokens, Environment & env){
+		std::string name = tokens[1];
+
+		for (int i = 0; i < items.size(); i++){
+			if ((*items[i]).get_name() == name){
+				(*items[i]).use(env);
 				return true;
 			}
 		}
