@@ -26,7 +26,7 @@ namespace lab3 {
 
 	void Character::go(Environment& env, std::string direction) {
 		env.leave(*this);
-		Environment neighbor = env.neighbor(direction);
+		Environment& neighbor = env.neighbor(direction);
 		neighbor.enter(*this);
 	}
 

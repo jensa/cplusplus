@@ -14,17 +14,17 @@ namespace lab3 {
 
 	std::string Environment::directions(){
 		std::string toReturn = "";
-		for(std::map<std::string, Environment>::iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
+		for(std::map<std::string, Environment &>::iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
 			toReturn += iter->first;
 		}
 		return toReturn;
 	}
 	
-	void Environment::set_neighbor(std::string direction, Environment neighbor){
-		neighbor_map.insert(std::pair<std::string,Environment>(direction,neighbor));
+	void Environment::set_neighbor(std::string direction, Environment& neighbor){
+		neighbor_map.insert(std::pair<std::string,Environment&>(direction,neighbor));
 	}
 
-	Environment Environment::neighbor(std::string direction){
+	Environment& Environment::neighbor(std::string direction){
 		return neighbor_map[direction];
 	}
 	
@@ -38,10 +38,10 @@ namespace lab3 {
 
 	void Environment::leave(Character & c){
 		for (std::vector<Character *>::iterator it=characters.begin();it!=characters.end();){
-		   if(c.get_name() == (*(*it)).get_name()) 
-		      it = characters.erase(it);
-		  else 
-		      ++it;
+		    if(c.get_name() == (*(*it)).get_name()) 
+		    	it = characters.erase(it);
+			else 
+		    	++it;
 		}
 	}
 
