@@ -24,15 +24,13 @@ namespace lab3 {
 		}
 	}
 
-	void Character::go(Environment& env, std::string direction) {
+	Environment* Character::go(Environment& env, std::string direction) {
 		Environment& neighbor = env.neighbor(direction);
-		if (!(&neighbor)) {
-			std::cout << "You can't go " << direction << " from here." << std::endl;
-			return;
+		if (&neighbor != NULL) {
+			env.leave(*this);
+			neighbor.enter(*this);
 		}
-
-		env.leave(*this);
-		neighbor.enter(*this);
+		return &neighbor;
 	}
 
 	void Character::talk_to(Character &) {

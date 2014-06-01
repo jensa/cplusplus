@@ -17,7 +17,7 @@ namespace lab3 {
 		void pick_up(Object &);
 		void drop(Object &);
 		void talk_to(Character &);
-		void go(Environment &, std::string);
+		Environment* go(Environment &, std::string);
 		
 		virtual void action(Environment &) = 0;
 		virtual void fight(Character &) = 0;
