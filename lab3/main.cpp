@@ -34,17 +34,17 @@ std::vector<Environment *> initialize(Player& player){
 	Environment* lower_right = new Environment("Lower right");
 	Environment* lower_left = new Environment("Lower left");
 
-	(*upper_right).set_neighbor("west", (*upper_left));
-	(*upper_right).set_neighbor("south", (*lower_right));
+	(*upper_right).set_neighbor("west", upper_left);
+	(*upper_right).set_neighbor("south", lower_right);
 
-	(*upper_left).set_neighbor("east", (*upper_right));
-	(*upper_left).set_neighbor("south", (*lower_left));
+	(*upper_left).set_neighbor("east", upper_right);
+	(*upper_left).set_neighbor("south", lower_left);
 
-	(*lower_right).set_neighbor("west", (*lower_left));
-	(*lower_right).set_neighbor("north", (*upper_right));
+	(*lower_right).set_neighbor("west", lower_left);
+	(*lower_right).set_neighbor("north", upper_right);
 
-	(*lower_left).set_neighbor("east", (*lower_right));
-	(*lower_left).set_neighbor("north", (*upper_left));
+	(*lower_left).set_neighbor("east", lower_right);
+	(*lower_left).set_neighbor("north", upper_left);
 
 	(*lower_right).enter(player);
 

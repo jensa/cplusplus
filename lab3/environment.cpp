@@ -14,17 +14,17 @@ namespace lab3 {
 
 	std::string Environment::directions(){
 		std::string toReturn = "";
-		for(std::map<std::string, Environment &>::iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
+		for(std::map<std::string, Environment *>::iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
 			toReturn += iter->first;
 		}
 		return toReturn;
 	}
 	
-	void Environment::set_neighbor(std::string direction, Environment& neighbor){
-		neighbor_map.insert(std::pair<std::string,Environment&>(direction,neighbor));
+	void Environment::set_neighbor(std::string direction, Environment* neighbor){
+		neighbor_map.insert(std::pair<std::string,Environment*>(direction,neighbor));
 	}
 
-	Environment& Environment::neighbor(std::string direction){
+	Environment* Environment::neighbor(std::string direction){
 		return neighbor_map[direction];
 	}
 	
@@ -32,6 +32,15 @@ namespace lab3 {
 		std::string description = "-------------------------------------------\n";
 		description += ("Location: " + description_string + "\n");
 		
+		if (characters.size() > 0) {
+			description += "Characters: ";
+
+			for (int i = 0; i < characters.size(); i++){
+				description += (*characters[i]).get_name();
+			}
+			description += "\n";
+		}
+
 		if (items.size() > 0) {
 			description += "Objects: ";
 
