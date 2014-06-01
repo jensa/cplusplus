@@ -18,13 +18,11 @@ namespace lab3 {
 
 	void Player::action(Environment & env){
 
-		std::cout << env.description() << std::endl;
-
 		bool executed_command = false;
 
 		while (!executed_command){
 		
-			std::cout << ">";
+			std::cout << "\n>";
 
 			char command[256];
 
@@ -54,6 +52,10 @@ namespace lab3 {
     			executed_command = drop_command(tokens, env);
 			} else if (tokens[0] == "use"){
 				executed_command = use_command(tokens, env);
+			} else if (tokens[0] == "look"){
+				executed_command = look_command(env);
+			} else if (tokens[0] == "quit"){
+				exit(0);
 		    } else {
 		    	std::cout << "Command not recognized." << std::endl;
 		    }
@@ -72,6 +74,7 @@ namespace lab3 {
     		new_location = go(env, "west");
 
     	if (new_location != NULL) {
+    		std::cout << "You are now in " << (*new_location).description() << std::endl;
     		return true;
     	} else {
     		std::cout << "You can't go " << tokens[1] << " from here." << std::endl;
@@ -98,6 +101,7 @@ namespace lab3 {
 		if (object != NULL){
 			pick_up(object);
 			env.pick_up(*object);
+			std::cout << "You picked up " << name << std::endl;
 			return true;
 		} else {
 			std::cout << "No object named " << name << std::endl;
@@ -112,6 +116,7 @@ namespace lab3 {
 			if ((*items[i]).get_name() == name){
 				env.drop(*items[i]);
 				items.erase(items.begin()+i);
+				std::cout << "You dropped " << name << std::endl;
 				return true;
 			}
 		}
@@ -130,6 +135,26 @@ namespace lab3 {
 		}
 		std::cout << "No object named " << name << " in inventory!" << std::endl;
 		return false;
+	}
+
+	bool Player::look_command(Environment & env){
+		std::vector<Character *> characters = env.getCharacters();
+		std::vector<Object *> objects = env.getObjects();
+
+		if (characters.size() > 0){
+			std::cout << "Characters in this room: ";
+			for (int i = 0; i < characters.size(); i++){
+				std::cout << (*characters[i]).get_name() << " (" << (*characters[i]).get_type() << ")" << std::endl;
+			}
+		}
+
+		if (objects.size() > 0){
+			std::cout << "Objects in this room: ";
+			for (int i = 0; i < objects.size(); i++){
+				std::cout << (*objects[i]).get_name() << std::endl;
+			}
+		}
+		return true;
 	}
 	
 	bool Player::fight_command(std::vector<std::string> tokens, Environment & env){

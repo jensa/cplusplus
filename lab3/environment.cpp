@@ -29,30 +29,7 @@ namespace lab3 {
 	}
 	
 	std::string Environment::description() const{
-		std::string description = "-------------------------------------------\n";
-		description += ("Location: " + description_string + "\n");
-		
-		if (characters.size() > 0) {
-			description += "Characters: ";
-
-			for (int i = 0; i < characters.size(); i++){
-				description += (*characters[i]).get_name();
-			}
-			description += "\n";
-		}
-
-		if (items.size() > 0) {
-			description += "Objects: ";
-
-			for (int i = 0; i < items.size(); i++){
-				description += (*items[i]).get_name();
-			}
-			description += "\n";
-		}
-
-		description += "-------------------------------------------";
-
-		return description;
+		return description_string;
 	}
 	
 	void Environment::enter(Character & c){
@@ -85,6 +62,10 @@ namespace lab3 {
 		return NULL;
 	}
 
+	std::vector<Character *> Environment::getCharacters(){
+		return characters;
+	}
+
 	Object* Environment::getObject(std::string name){
 		for (std::vector<Object *>::iterator it=items.begin();it!=items.end(); it++){
 		   	if(name == (*(*it)).get_name()) {
@@ -94,8 +75,8 @@ namespace lab3 {
 		return NULL;
 	}
 
-	std::vector<Character *> Environment::getCharacters(){
-		return characters;
+	std::vector<Object *> Environment::getObjects(){
+		return items;
 	}
 
 	void Environment::drop(Object & o){

@@ -24,8 +24,9 @@ namespace lab3{
 		void enter(Character &);
 		void leave(Character &);
 		Character* getCharacter(std::string);
-		Object* getObject(std::string);
 		std::vector<Character *> getCharacters();
+		Object* getObject(std::string);
+		std::vector<Object *> getObjects();
 		void pick_up(Object &);
 		void drop(Object &);
 	};

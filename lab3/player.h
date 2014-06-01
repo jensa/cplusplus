@@ -12,6 +12,7 @@ namespace lab3 {
 			bool pickup_command(std::vector<std::string>, Environment &);
 			bool drop_command(std::vector<std::string>, Environment &);
 			bool use_command(std::vector<std::string> tokens, Environment & env);
+			bool look_command(Environment & env);
 			bool fight_command(std::vector<std::string>, Environment &);
 	};
 }
