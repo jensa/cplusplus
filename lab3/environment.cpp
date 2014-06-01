@@ -29,12 +29,12 @@ namespace lab3 {
 	}
 	
 	void Environment::enter(Character & c){
-		characters.push_back(c);
+		characters.push_back(&c);
 	}
 
 	void Environment::leave(Character & c){
-		for (std::vector<Character>::iterator it=characters.begin();it!=characters.end();){
-		   if(c.get_name() == (*it).get_name()) 
+		for (std::vector<Character *>::iterator it=characters.begin();it!=characters.end();){
+		   if(c.get_name() == (*(*it)).get_name()) 
 		      it = characters.erase(it);
 		  else 
 		      ++it;
@@ -42,23 +42,23 @@ namespace lab3 {
 	}
 
 	void Environment::pick_up(Object & o){
-		for (std::vector<Object>::iterator it=items.begin();it!=items.end();){
-		   if(&o == &(*it)) 
+		for (std::vector<Object *>::iterator it=items.begin();it!=items.end();){
+		   if(&o == (*it)) 
 		      it = items.erase(it);
 		  else 
 		      ++it;
 		}
 	}
 
-	Character Environment::getCharacter(std::string name){
-		for (std::vector<Character>::iterator it=characters.begin();it!=characters.end();){
-		   if(name == (*it).get_name()) 
-		      return *it;
+	Character& Environment::getCharacter(std::string name){
+		for (std::vector<Character *>::iterator it=characters.begin();it!=characters.end();){
+		   if(name == (*(*it)).get_name()) 
+		      return (*(*it));
 		}
 	}
 
 	void Environment::drop(Object & o){
-		items.push_back(o);
+		items.push_back(&o);
 	}
 
 }

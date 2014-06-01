@@ -1,4 +1,5 @@
 #include "character.h"
+#include "environment.h"
 
 namespace lab3 {
 
@@ -15,15 +16,18 @@ namespace lab3 {
 	}
 
 	void Character::drop(Object & o) {
-		for (int i = 0; i < items.size(); i++) {
-			if (&o == items[i]) {
-				items.erase(items.begin()+i);
-			}
+		for (std::vector<Object *>::iterator it=items.begin();it!=items.end();){
+		   if(&o == (*it)) 
+		      it = items.erase(it);
+		  else 
+		      ++it;
 		}
 	}
 
 	void Character::go(Environment& env, std::string direction) {
-		
+		env.leave(*this);
+		Environment neighbor = env.neighbor(direction);
+		neighbor.enter(*this);
 	}
 
 	void Character::talk_to(Character &) {

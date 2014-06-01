@@ -11,8 +11,8 @@ namespace lab3{
 	class Environment {
 		std::map<std::string, Environment> neighbor_map;
 		std::string description_string;
-		std::vector<Character> characters;
-		std::vector<Object> items;
+		std::vector<Character *> characters;
+		std::vector<Object *> items;
 
 	public:
 		Environment();
@@ -23,7 +23,7 @@ namespace lab3{
 		std::string description() const;
 		void enter(Character &);
 		void leave(Character &);
-		Character getCharacter(std::string);
+		Character& getCharacter(std::string);
 		void pick_up(Object &);
 		void drop(Object &);
 	};
