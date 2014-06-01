@@ -29,7 +29,21 @@ namespace lab3 {
 	}
 	
 	std::string Environment::description() const{
-		return description_string;
+		std::string description = "-------------------------------------------\n";
+		description += ("Location: " + description_string + "\n");
+		
+		if (items.size() > 0) {
+			description += "Objects: ";
+
+			for (int i = 0; i < items.size(); i++){
+				description += (*items[i]).get_name();
+			}
+			description += "\n";
+		}
+
+		description += "-------------------------------------------";
+
+		return description;
 	}
 	
 	void Environment::enter(Character & c){
@@ -46,19 +60,29 @@ namespace lab3 {
 	}
 
 	void Environment::pick_up(Object & o){
-		for (std::vector<Object *>::iterator it=items.begin();it!=items.end();){
-		   if(&o == (*it)) 
-		      it = items.erase(it);
-		  else 
-		      ++it;
+		for (std::vector<Object *>::iterator it=items.begin();it!=items.end(); it++){
+		   	if(&o == (*it)) {
+		   		items.erase(it);
+		   		return;
+		   	}
 		}
 	}
 
-	Character& Environment::getCharacter(std::string name){
-		for (std::vector<Character *>::iterator it=characters.begin();it!=characters.end();){
+	Character* Environment::getCharacter(std::string name){
+		for (std::vector<Character *>::iterator it=characters.begin();it!=characters.end(); it++){
 		   if(name == (*(*it)).get_name()) 
-		      return (*(*it));
+		      return *it;
 		}
+		return NULL;
+	}
+
+	Object* Environment::getObject(std::string name){
+		for (std::vector<Object *>::iterator it=items.begin();it!=items.end(); it++){
+		   	if(name == (*(*it)).get_name()) {
+		  		return *it;
+		  	} 
+		}
+		return NULL;
 	}
 
 	std::vector<Character *> Environment::getCharacters(){

@@ -5,6 +5,8 @@
 
 namespace lab3 {
 
+	class Environment;
+
 	class Object {
 	public:
 		std::string get_name();
@@ -12,7 +14,9 @@ namespace lab3 {
 		int get_volume();
 		int get_price();
 
-	private:
+		virtual void use(Environment &) = 0;
+
+	protected:
 		std::string name;
 		int weight;
 		int volume;

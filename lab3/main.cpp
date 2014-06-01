@@ -1,19 +1,20 @@
 #include <vector>
 #include "player.h"
+#include "ring.h"
 #include "environment.h"
 
 using namespace lab3;
 
 std::vector<Environment *> initialize(Player& player);
 
-int main() {
+int main(){
 
 	Player player = Player("Player", 100, 100);
 
 	std::vector<Environment *> environments = initialize(player);
 
-	while (true) {
-		for (int i = 0; i < environments.size(); i++) {
+	while (true){
+		for (int i = 0; i < environments.size(); i++){
 			Environment& env = *environments[i];
 			std::vector<Character *> characters = env.getCharacters();
 			
@@ -25,7 +26,7 @@ int main() {
 	}
 }
 
-std::vector<Environment *> initialize(Player& player) {
+std::vector<Environment *> initialize(Player& player){
 	std::vector<Environment *> environments;
 
 	Environment* upper_right = new Environment("Upper right");
@@ -46,6 +47,9 @@ std::vector<Environment *> initialize(Player& player) {
 	(*lower_left).set_neighbor("north", (*upper_left));
 
 	(*lower_right).enter(player);
+
+	Ring* ring = new Ring("ring");
+	(*upper_left).drop(*ring);
 
 	environments.push_back(upper_right);
 	environments.push_back(upper_left);

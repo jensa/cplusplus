@@ -14,7 +14,7 @@ namespace lab3 {
 		std::string get_type();
 		std::string get_name();
 
-		void pick_up(Object &);
+		void pick_up(Object *);
 		void drop(Object &);
 		void talk_to(Character &);
 		Environment* go(Environment &, std::string);
@@ -27,7 +27,7 @@ namespace lab3 {
 		std::string name;
 		int hit_points;
 		int magic_points;
-		std::vector<Object *> items;
+		std::vector<Object*> items;
 	};
 }
 #endif
