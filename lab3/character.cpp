@@ -25,8 +25,13 @@ namespace lab3 {
 	}
 
 	void Character::go(Environment& env, std::string direction) {
-		env.leave(*this);
 		Environment& neighbor = env.neighbor(direction);
+		if (!(&neighbor)) {
+			std::cout << "You can't go " << direction << " from here." << std::endl;
+			return;
+		}
+
+		env.leave(*this);
 		neighbor.enter(*this);
 	}
 
