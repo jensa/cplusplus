@@ -8,6 +8,10 @@ namespace lab3 {
 		//characters = new std::vector<Character>();
 	}
 
+	Environment::Environment(){
+		description_string = "";
+	}
+
 	std::string Environment::directions(){
 		std::string toReturn = "";
 		for(std::map<std::string, Environment>::iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
@@ -55,6 +59,10 @@ namespace lab3 {
 		   if(name == (*(*it)).get_name()) 
 		      return (*(*it));
 		}
+	}
+
+	std::vector<Character *> Environment::getCharacters(){
+		return characters;
 	}
 
 	void Environment::drop(Object & o){

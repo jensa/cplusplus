@@ -4,7 +4,7 @@
 
 namespace lab3 {
 
-	void NPC::action() {
+	void NPC::action(Environment& env) {
 
 		float r = ((float) rand() / (RAND_MAX));
 

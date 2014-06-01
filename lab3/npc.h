@@ -3,7 +3,7 @@
 namespace lab3 {
 	class NPC : public Character {
 		public:
-			void action();
+			void action(Environment &);
 			virtual void fight(Character &) = 0;
 	};
 }

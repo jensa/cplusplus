@@ -7,7 +7,7 @@ namespace lab3 {
 
 	class Object {
 	public:
-		int get_name();
+		std::string get_name();
 		int get_weight();
 		int get_volume();
 		int get_price();
