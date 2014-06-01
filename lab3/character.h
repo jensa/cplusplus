@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
 #include "object.h"
-#include "environment.h"
 
 namespace lab3 {
+
+	class Environment;
 
 	class Character {
 	public:
@@ -24,6 +25,5 @@ namespace lab3 {
 		int hit_points;
 		int magic_points;
 		std::vector<Object *> items;
-		Environment current_location;
 	};
 }

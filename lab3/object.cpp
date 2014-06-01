@@ -1,3 +1,0 @@
-namespace lab3 {
-	
-}
