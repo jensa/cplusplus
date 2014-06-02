@@ -1,6 +1,6 @@
 #include "player.h"
-
 #include "environment.h"
+#include "pocket.h"
 
 #include <iostream>
 #include <sstream>
@@ -14,6 +14,7 @@ namespace lab3 {
 		name = name_;
 		hit_points = hp;
 		magic_points = mp;
+		container = new Pocket();
 	}
 
 	void Player::action(Environment & env){
@@ -83,10 +84,15 @@ namespace lab3 {
 	}
 
 	bool Player::inventory_command(){
-		if (items.size() > 0){
-	    	std::cout << "Inventory:" << std::endl;
-	    	for (int i = 0; i < items.size(); i++){
-	    		std::cout << (*items[i]).get_name() << std::endl;
+		std::vector<Object *>& inventory = (*container).get_objects();
+
+		if (inventory.size() > 0){
+			int current_weight = (*container).get_current_weight();
+			int hold_weight = (*container).get_hold_weight();
+
+	    	std::cout << "Inventory (" << current_weight << "/" << hold_weight << " kg):" << std::endl;
+	    	for (int i = 0; i < inventory.size(); i++){
+	    		std::cout << (*inventory[i]).get_name() << " (" << (*inventory[i]).get_weight() << " kg)" << std::endl;
 	    	}
     	} else {
     		std::cout << "Inventory is empty!" << std::endl;
@@ -111,11 +117,12 @@ namespace lab3 {
 
 	bool Player::drop_command(std::vector<std::string> tokens, Environment & env){
 		std::string name = tokens[1];
+		std::vector<Object *>& inventory = (*container).get_objects();
 
-		for (int i = 0; i < items.size(); i++){
-			if ((*items[i]).get_name() == name){
-				env.drop(*items[i]);
-				items.erase(items.begin()+i);
+		for (int i = 0; i < inventory.size(); i++){
+			if ((*inventory[i]).get_name() == name){
+				env.drop(*inventory[i]);
+				inventory.erase(inventory.begin()+i);
 				std::cout << "You dropped " << name << std::endl;
 				return true;
 			}
@@ -126,10 +133,10 @@ namespace lab3 {
 
 	bool Player::use_command(std::vector<std::string> tokens, Environment & env){
 		std::string name = tokens[1];
-
-		for (int i = 0; i < items.size(); i++){
-			if ((*items[i]).get_name() == name){
-				(*items[i]).use(env);
+		std::vector<Object *>& inventory = (*container).get_objects();
+		for (int i = 0; i < inventory.size(); i++){
+			if ((*inventory[i]).get_name() == name){
+				(*inventory[i]).use((*this), env);
 				return true;
 			}
 		}

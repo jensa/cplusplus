@@ -4,7 +4,7 @@ namespace lab3 {
 	Environment::Environment(std::string desc){
 		description_string = desc;
 		//neighbor_map = new std::map<std::string, Environment>();
-		//items = new std::vector<Object>();
+		//objects = new std::vector<Object>();
 		//characters = new std::vector<Character>();
 	}
 
@@ -46,9 +46,9 @@ namespace lab3 {
 	}
 
 	void Environment::pick_up(Object & o){
-		for (std::vector<Object *>::iterator it=items.begin();it!=items.end(); it++){
+		for (std::vector<Object *>::iterator it=objects.begin();it!=objects.end(); it++){
 		   	if(&o == (*it)) {
-		   		items.erase(it);
+		   		objects.erase(it);
 		   		return;
 		   	}
 		}
@@ -67,7 +67,7 @@ namespace lab3 {
 	}
 
 	Object* Environment::getObject(std::string name){
-		for (std::vector<Object *>::iterator it=items.begin();it!=items.end(); it++){
+		for (std::vector<Object *>::iterator it=objects.begin();it!=objects.end(); it++){
 		   	if(name == (*(*it)).get_name()) {
 		  		return *it;
 		  	} 
@@ -76,11 +76,11 @@ namespace lab3 {
 	}
 
 	std::vector<Object *> Environment::getObjects(){
-		return items;
+		return objects;
 	}
 
 	void Environment::drop(Object & o){
-		items.push_back(&o);
+		objects.push_back(&o);
 	}
 
 }

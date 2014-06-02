@@ -12,7 +12,7 @@ namespace lab3{
 		std::map<std::string, Environment*> neighbor_map;
 		std::string description_string;
 		std::vector<Character *> characters;
-		std::vector<Object *> items;
+		std::vector<Object *> objects;
 
 	public:
 		Environment();

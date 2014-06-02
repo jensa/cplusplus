@@ -8,6 +8,7 @@
 namespace lab3 {
 
 	class Environment;
+	class Container;
 
 	class Character {
 	public:
@@ -15,9 +16,11 @@ namespace lab3 {
 		std::string get_name();
 
 		void pick_up(Object *);
-		void drop(Object &);
+		void drop(Object *);
 		void talk_to(Character &);
 		Environment* go(Environment &, std::string);
+		Container& get_container();
+		void set_container(Container *);
 		
 		virtual void action(Environment &) = 0;
 		virtual void fight(Character &) = 0;
@@ -27,7 +30,7 @@ namespace lab3 {
 		std::string name;
 		int hit_points;
 		int magic_points;
-		std::vector<Object*> items;
+		Container* container;
 	};
 }
 #endif

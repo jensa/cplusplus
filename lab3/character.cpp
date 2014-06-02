@@ -1,5 +1,6 @@
 #include "character.h"
 #include "environment.h"
+#include "container.h"
 
 namespace lab3 {
 
@@ -12,16 +13,11 @@ namespace lab3 {
 	}
 
 	void Character::pick_up(Object* o){
-		items.push_back(o);
+		(*container).add(o);
 	}
 
-	void Character::drop(Object & o){
-		for (std::vector<Object *>::iterator it=items.begin();it!=items.end();){
-		   if(&o == (*it)) 
-		      it = items.erase(it);
-		  else 
-		      ++it;
-		}
+	void Character::drop(Object* o){
+		(*container).remove(o);
 	}
 
 	Environment* Character::go(Environment& env, std::string direction){
@@ -31,6 +27,19 @@ namespace lab3 {
 			(*neighbor).enter(*this);
 		}
 		return neighbor;
+	}
+
+	Container& Character::get_container(){
+		return *container;
+	}
+
+	void Character::set_container(Container * new_container){
+		
+		std::vector<Object *>& inventory = (*container).get_objects();
+		for (int i = 0; i < inventory.size(); i++){
+			(*new_container).add(inventory[i]);
+		}
+		container = new_container;
 	}
 
 	void Character::talk_to(Character &){

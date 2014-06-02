@@ -2,6 +2,7 @@
 #include "player.h"
 #include "ring.h"
 #include "environment.h"
+#include "bag.h"
 
 using namespace lab3;
 
@@ -48,8 +49,11 @@ std::vector<Environment *> initialize(Player& player){
 
 	(*lower_right).enter(player);
 
-	Ring* ring = new Ring("ring");
+	Ring* ring = new Ring();
 	(*upper_left).drop(*ring);
+
+	Bag* bag = new Bag();
+	(*upper_right).drop(*bag);
 
 	environments.push_back(upper_right);
 	environments.push_back(upper_left);
