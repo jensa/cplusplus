@@ -8,17 +8,22 @@ namespace lab3 {
 	void NPC::action(Environment& env){
 
 		float r = ((float) rand() / (RAND_MAX));
-
-		if (r < 0.50){
+		if (r < go_prob){
 			//GO
 			std::vector<std::string> directions = env.directions();
 			int random_index = rand() % directions.size();
 			std::string direction = directions[random_index];
 			go(env, direction);
 
-		} else if (r < 0.60){
+		}
+
+		r = ((float) rand() / (RAND_MAX));
+		if (r < fight_prob){
 			//FIGHT
-		} else if (r < 0.70){
+		}
+
+		r = ((float) rand() / (RAND_MAX));
+		if (r < pickup_prob){
 			//PICK UP
 			if (env.get_object_names().size() > 0){
 				std::vector<std::string> object_names = env.get_object_names();
@@ -28,7 +33,11 @@ namespace lab3 {
 				env.pick_up(object);
 				pick_up(object);
 			}
-		} else if (r < 0.80){
+		}
+
+		r = ((float) rand() / (RAND_MAX));
+		if (r < drop_prob){
+			//DROP
 			std::vector<Object *> inventory = (*container).get_objects();
 			if (inventory.size() > 0){
 				int random_index = rand() % inventory.size();
@@ -36,8 +45,6 @@ namespace lab3 {
 				env.drop(object);
 				drop(object);
 			}
-		} else {
-			//TALK TO
 		}
 	}
 }

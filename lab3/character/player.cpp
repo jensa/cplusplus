@@ -68,6 +68,10 @@ namespace lab3 {
 	}
 
 	bool Player::go_command(std::vector<std::string> tokens, Environment& env){
+		if (tokens.size() == 1){
+			std::cout << "You have to specify where to go." << std::endl;
+			return false;
+		}
 
 		std::vector<std::string> directions = env.directions();
 		std::string direction = tokens[1];
@@ -101,6 +105,11 @@ namespace lab3 {
 	}
 	
 	bool Player::pickup_command(std::vector<std::string> tokens, Environment & env){
+		if (tokens.size() == 1){
+			std::cout << "You have to specify what object to pick up." << std::endl;
+			return false;
+		}
+
 		std::string name = tokens[1];
 		Object& object = env.get_object(name);
 
@@ -116,6 +125,10 @@ namespace lab3 {
 	}
 
 	bool Player::drop_command(std::vector<std::string> tokens, Environment & env){
+		if (tokens.size() == 1){
+			std::cout << "You have to specify what object to drop." << std::endl;
+			return false;
+		}
 		std::string name = tokens[1];
 		std::vector<Object *>& inventory = (*container).get_objects();
 
@@ -132,6 +145,10 @@ namespace lab3 {
 	}
 
 	bool Player::use_command(std::vector<std::string> tokens, Environment & env){
+		if (tokens.size() == 1){
+			std::cout << "You have to specify what object to use." << std::endl;
+			return false;
+		}
 		std::string name = tokens[1];
 		std::vector<Object *>& inventory = (*container).get_objects();
 		for (int i = 0; i < inventory.size(); i++){
@@ -145,6 +162,10 @@ namespace lab3 {
 	}
 
 	void Player::examine_command(std::vector<std::string> tokens, Environment & env){
+		if (tokens.size() == 1){
+			std::cout << "You have to specify what object examine." << std::endl;
+			return;
+		}
 		std::string name = tokens[1];
 		std::vector<Object *>& inventory = (*container).get_objects();
 		for (int i = 0; i < inventory.size(); i++){
