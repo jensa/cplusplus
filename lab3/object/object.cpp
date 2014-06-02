@@ -6,6 +6,10 @@ namespace lab3 {
 		return name;
 	}
 
+	std::string Object::get_description(){
+		return description;
+	}
+
 	int Object::get_weight(){
 		return weight;
 	}

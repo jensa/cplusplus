@@ -18,7 +18,7 @@ namespace lab3 {
 		void pick_up(Object *);
 		void drop(Object *);
 		void talk_to(Character &);
-		Environment* go(Environment &, std::string);
+		Environment& go(Environment &, std::string);
 		Container& get_container();
 		void set_container(Container *);
 		

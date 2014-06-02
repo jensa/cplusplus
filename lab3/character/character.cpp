@@ -20,12 +20,11 @@ namespace lab3 {
 		(*container).remove(o);
 	}
 
-	Environment* Character::go(Environment& env, std::string direction){
-		Environment* neighbor = env.neighbor(direction);
-		if (neighbor != NULL){
-			env.leave(*this);
-			(*neighbor).enter(*this);
-		}
+	Environment& Character::go(Environment& env, std::string direction){
+		Environment& neighbor = *env.neighbor(direction);
+		env.leave(*this);
+		neighbor.enter(*this);
+		
 		return neighbor;
 	}
 

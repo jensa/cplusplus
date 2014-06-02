@@ -46,15 +46,19 @@ namespace lab3 {
 		    if (tokens[0] == "go"){
 		   		executed_command = go_command(tokens, env);
 		    } else if (tokens[0] == "inventory"){
-		    	executed_command = inventory_command();
+		    	inventory_command();
 	    	} else if (tokens[0] == "pickup"){
 	    		executed_command = pickup_command(tokens, env);
     		} else if (tokens[0] == "drop"){
     			executed_command = drop_command(tokens, env);
 			} else if (tokens[0] == "use"){
 				executed_command = use_command(tokens, env);
+			} else if (tokens[0] == "examine"){
+				examine_command(tokens, env);
 			} else if (tokens[0] == "look"){
-				executed_command = look_command(env);
+				look_command(env);
+			} else if (tokens[0] == "directions"){
+				directions_command(env);
 			} else if (tokens[0] == "quit"){
 				exit(0);
 		    } else {
@@ -64,26 +68,23 @@ namespace lab3 {
 	}
 
 	bool Player::go_command(std::vector<std::string> tokens, Environment& env){
-		Environment* new_location;
-    	if (tokens[1] == "north")
-    		new_location = go(env, "north");
-    	else if (tokens[1] == "south")
-    		new_location = go(env, "south");
-    	else if (tokens[1] == "east")
-    		new_location = go(env, "east");
-    	else if (tokens[1] == "west")
-    		new_location = go(env, "west");
 
-    	if (new_location != NULL) {
-    		std::cout << "You are now in " << (*new_location).description() << std::endl;
-    		return true;
-    	} else {
-    		std::cout << "You can't go " << tokens[1] << " from here." << std::endl;
-    		return false;
-    	}
+		std::vector<std::string> directions = env.directions();
+		std::string direction = tokens[1];
+
+		for (int i = 0; i < directions.size(); i++){
+			if(directions[i] == direction){
+				Environment new_location = go(env, direction);
+				std::cout << "You are now in " << new_location.description() << std::endl;
+    			return true;
+			}
+		}
+
+		std::cout << "You can't go to " << direction << " from here." << std::endl;
+		return false;
 	}
 
-	bool Player::inventory_command(){
+	void Player::inventory_command(){
 		std::vector<Object *>& inventory = (*container).get_objects();
 
 		if (inventory.size() > 0){
@@ -97,7 +98,6 @@ namespace lab3 {
     	} else {
     		std::cout << "Inventory is empty!" << std::endl;
     	}
-    	return true;
 	}
 	
 	bool Player::pickup_command(std::vector<std::string> tokens, Environment & env){
@@ -144,24 +144,48 @@ namespace lab3 {
 		return false;
 	}
 
-	bool Player::look_command(Environment & env){
+	void Player::examine_command(std::vector<std::string> tokens, Environment & env){
+		std::string name = tokens[1];
+		std::vector<Object *>& inventory = (*container).get_objects();
+		for (int i = 0; i < inventory.size(); i++){
+			if ((*inventory[i]).get_name() == name){
+				std::cout << (*inventory[i]).get_description() << std::endl;
+				return;
+			}
+		}
+		std::cout << "No object named " << name << " in inventory!" << std::endl;
+	}
+
+	void Player::look_command(Environment & env){
 		std::vector<Character *> characters = env.getCharacters();
 		std::vector<Object *> objects = env.getObjects();
 
 		if (characters.size() > 0){
-			std::cout << "Characters in this room: ";
+			std::cout << "Characters in this room: " << std::endl;
 			for (int i = 0; i < characters.size(); i++){
 				std::cout << (*characters[i]).get_name() << " (" << (*characters[i]).get_type() << ")" << std::endl;
 			}
 		}
 
 		if (objects.size() > 0){
-			std::cout << "Objects in this room: ";
+			std::cout << "\nObjects in this room: " << std::endl;
 			for (int i = 0; i < objects.size(); i++){
 				std::cout << (*objects[i]).get_name() << std::endl;
 			}
 		}
-		return true;
+	}
+
+	void Player::directions_command(Environment & env){
+		std::vector<std::string> directions = env.directions();
+		std::cout << "From " << env.description() << " you can go to: ";
+		
+		for (int i = 0; i < directions.size(); i++){
+			std::cout << directions[i];
+			if (i < directions.size()-1)
+				std::cout << ", ";
+			else 
+				std::cout << std::endl;
+		}
 	}
 	
 	bool Player::fight_command(std::vector<std::string> tokens, Environment & env){

@@ -4,6 +4,7 @@
 namespace lab3{
 	Bag::Bag(){
 		name = "bag";
+		description = "A bag that can hold a total weight of 20 kg.";
 		weight = 1;
 		hold_weight = 20;
 		current_weight = 0;

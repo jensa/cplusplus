@@ -1,5 +1,6 @@
 #include <vector>
 #include "character/player.h"
+#include "character/troll.h"
 #include "object/ring.h"
 #include "environment/environment.h"
 #include "object/bag.h"
@@ -10,7 +11,7 @@ std::vector<Environment *> initialize(Player& player);
 
 int main(){
 
-	Player player = Player("Player", 100, 100);
+	Player player = Player("player", 100, 100);
 
 	std::vector<Environment *> environments = initialize(player);
 
@@ -48,6 +49,16 @@ std::vector<Environment *> initialize(Player& player){
 	(*lower_left).set_neighbor("north", upper_left);
 
 	(*lower_right).enter(player);
+
+	Troll* troll1 = new Troll("troll1", 10, 10);
+	Troll* troll2 = new Troll("troll2", 10, 10);
+	Troll* troll3 = new Troll("troll3", 10, 10);
+	Troll* troll4 = new Troll("troll4", 10, 10);
+
+	(*lower_right).enter(*troll1);
+	(*lower_left).enter(*troll2);
+	(*upper_right).enter(*troll3);
+	(*upper_left).enter(*troll4);
 
 	Ring* ring = new Ring();
 	(*upper_left).drop(*ring);

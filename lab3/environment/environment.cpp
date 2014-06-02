@@ -12,12 +12,12 @@ namespace lab3 {
 		description_string = "";
 	}
 
-	std::string Environment::directions(){
-		std::string toReturn = "";
+	std::vector<std::string> Environment::directions(){
+		std::vector<std::string> directions;
 		for(std::map<std::string, Environment *>::iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
-			toReturn += iter->first;
+			directions.push_back(iter->first);
 		}
-		return toReturn;
+		return directions;
 	}
 	
 	void Environment::set_neighbor(std::string direction, Environment* neighbor){

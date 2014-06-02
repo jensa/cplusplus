@@ -4,6 +4,7 @@
 namespace lab3{
 	Pocket::Pocket(){
 		name = "pocket";
+		description = "A pocket that can hold a total weight of 5 kg.";
 		weight = 1;
 		hold_weight = 5;
 		current_weight = 0;
