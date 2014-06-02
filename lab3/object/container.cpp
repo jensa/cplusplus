@@ -10,10 +10,10 @@ namespace lab3 {
 		return current_weight;
 	}
 
-	bool Container::add(Object * o){
-		int object_weight = (*o).get_weight();
+	bool Container::add(Object& o){
+		int object_weight = o.get_weight();
 		if ((current_weight+object_weight) <= hold_weight){
-			objects.push_back(o);
+			objects.push_back(&o);
 			current_weight += object_weight;
 			return true;
 		} else {
@@ -21,10 +21,10 @@ namespace lab3 {
 		}
 	}
 
-	bool Container::remove(Object* o){
-		int object_weight = (*o).get_weight();
+	bool Container::remove(Object& o){
+		int object_weight = o.get_weight();
 		for (std::vector<Object *>::iterator it=objects.begin();it!=objects.end(); it++){
-		   	if(o == (*it)){
+		   	if(&o == (*it)){
 		   		objects.erase(it);
 		   		current_weight -= object_weight;
 		   		return true;

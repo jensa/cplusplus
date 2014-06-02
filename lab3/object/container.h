@@ -8,8 +8,8 @@ namespace lab3 {
 			virtual void use(Character &, Environment &) = 0;
 			int get_hold_weight();
 			int get_current_weight();
-			bool add(Object *);
-			bool remove(Object *);
+			bool add(Object &);
+			bool remove(Object &);
 			std::vector<Object *>& get_objects();
 		
 		protected:

@@ -102,10 +102,10 @@ namespace lab3 {
 	
 	bool Player::pickup_command(std::vector<std::string> tokens, Environment & env){
 		std::string name = tokens[1];
-		Object& object = env.getObject(name);
+		Object& object = env.get_object(name);
 
 		if (&object != NULL){
-			pick_up(&object);
+			pick_up(object);
 			env.pick_up(object);
 			std::cout << "You picked up " << name << std::endl;
 			return true;
@@ -157,13 +157,13 @@ namespace lab3 {
 	}
 
 	void Player::look_command(Environment & env){
-		std::vector<std::string> character_names = env.getCharacterNames();
-		std::vector<std::string> object_names = env.getObjectNames();
+		std::vector<std::string> character_names = env.get_character_names();
+		std::vector<std::string> object_names = env.get_object_names();
 
 		if (character_names.size() > 0){
 			std::cout << "Characters in this room: " << std::endl;
 			for (int i = 0; i < character_names.size(); i++){
-				Character& tmp_char = env.getCharacter(character_names[i]);
+				Character& tmp_char = env.get_character(character_names[i]);
 				std::cout << tmp_char.get_name() << " (" << tmp_char.get_type() << ")" << std::endl;
 			}
 		}

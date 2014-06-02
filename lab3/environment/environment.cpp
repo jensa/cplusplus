@@ -54,7 +54,7 @@ namespace lab3 {
 		}
 	}
 
-	Character& Environment::getCharacter(std::string name){
+	Character& Environment::get_character(std::string name){
 		std::vector<Character *>::iterator it=characters.begin();
 		for (;it!=characters.end(); it++){
 		   if(name == (*(*it)).get_name()) 
@@ -63,7 +63,7 @@ namespace lab3 {
 		return *(*it);
 	}
 
-	std::vector<std::string> Environment::getCharacterNames(){
+	std::vector<std::string> Environment::get_character_names(){
 		std::vector<std::string> character_names;
 		for (int i = 0; i < characters.size(); i++){
 			character_names.push_back((*characters[i]).get_name());
@@ -71,7 +71,7 @@ namespace lab3 {
 		return character_names;
 	}
 
-	Object& Environment::getObject(std::string name){
+	Object& Environment::get_object(std::string name){
 		std::vector<Object *>::iterator it = objects.begin();
 		for (;it!=objects.end(); it++){
 		   	if(name == (*(*it)).get_name()) {
@@ -81,7 +81,7 @@ namespace lab3 {
 		return *(*it);
 	}
 
-	std::vector<std::string> Environment::getObjectNames(){
+	std::vector<std::string> Environment::get_object_names(){
 		std::vector<std::string> object_names;
 		for (int i = 0; i < objects.size(); i++){
 			object_names.push_back((*objects[i]).get_name());

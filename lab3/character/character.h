@@ -15,8 +15,8 @@ namespace lab3 {
 		std::string get_type();
 		std::string get_name();
 
-		void pick_up(Object *);
-		void drop(Object *);
+		void pick_up(Object &);
+		void drop(Object &);
 		void talk_to(Character &);
 		Environment& go(Environment &, std::string);
 		Container& get_container();

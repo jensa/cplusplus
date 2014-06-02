@@ -12,11 +12,11 @@ namespace lab3 {
 		return name;
 	}
 
-	void Character::pick_up(Object* o){
+	void Character::pick_up(Object& o){
 		(*container).add(o);
 	}
 
-	void Character::drop(Object* o){
+	void Character::drop(Object& o){
 		(*container).remove(o);
 	}
 
@@ -36,7 +36,7 @@ namespace lab3 {
 		
 		std::vector<Object *>& inventory = (*container).get_objects();
 		for (int i = 0; i < inventory.size(); i++){
-			(*new_container).add(inventory[i]);
+			(*new_container).add(*inventory[i]);
 		}
 		container = new_container;
 	}
