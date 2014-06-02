@@ -54,16 +54,21 @@ namespace lab3 {
 		}
 	}
 
-	Character* Environment::getCharacter(std::string name){
-		for (std::vector<Character *>::iterator it=characters.begin();it!=characters.end(); it++){
+	Character& Environment::getCharacter(std::string name){
+		std::vector<Character *>::iterator it=characters.begin();
+		for (;it!=characters.end(); it++){
 		   if(name == (*(*it)).get_name()) 
-		      return *it;
+		      break;
 		}
-		return NULL;
+		return *(*it);
 	}
 
-	std::vector<Character *> Environment::getCharacters(){
-		return characters;
+	std::vector<std::string> Environment::getCharacterNames(){
+		std::vector<std::string> character_names;
+		for (int i = 0; i < characters.size(); i++){
+			character_names.push_back((*characters[i]).get_name());
+		}
+		return character_names;
 	}
 
 	Object& Environment::getObject(std::string name){
@@ -76,8 +81,12 @@ namespace lab3 {
 		return *(*it);
 	}
 
-	std::vector<Object *> Environment::getObjects(){
-		return objects;
+	std::vector<std::string> Environment::getObjectNames(){
+		std::vector<std::string> object_names;
+		for (int i = 0; i < objects.size(); i++){
+			object_names.push_back((*objects[i]).get_name());
+		}
+		return object_names;
 	}
 
 	void Environment::drop(Object & o){

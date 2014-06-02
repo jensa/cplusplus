@@ -18,10 +18,10 @@ int main(){
 	while (true){
 		for (int i = 0; i < environments.size(); i++){
 			Environment& env = *environments[i];
-			std::vector<Character *> characters = env.getCharacters();
+			std::vector<std::string> character_names = env.getCharacterNames();
 			
-			for (int i = 0; i < characters.size(); i++){
-				Character& character = *characters[i];
+			for (int i = 0; i < character_names.size(); i++){
+				Character& character = env.getCharacter(character_names[i]);
 		  		character.action(env);
 			}
 		}

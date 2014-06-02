@@ -23,10 +23,10 @@ namespace lab3{
 		std::string description() const;
 		void enter(Character &);
 		void leave(Character &);
-		Character* getCharacter(std::string);
-		std::vector<Character *> getCharacters();
+		Character& getCharacter(std::string);
+		std::vector<std::string> getCharacterNames();
 		Object& getObject(std::string);
-		std::vector<Object *> getObjects();
+		std::vector<std::string> getObjectNames();
 		void pick_up(Object &);
 		void drop(Object &);
 	};

@@ -157,20 +157,21 @@ namespace lab3 {
 	}
 
 	void Player::look_command(Environment & env){
-		std::vector<Character *> characters = env.getCharacters();
-		std::vector<Object *> objects = env.getObjects();
+		std::vector<std::string> character_names = env.getCharacterNames();
+		std::vector<std::string> object_names = env.getObjectNames();
 
-		if (characters.size() > 0){
+		if (character_names.size() > 0){
 			std::cout << "Characters in this room: " << std::endl;
-			for (int i = 0; i < characters.size(); i++){
-				std::cout << (*characters[i]).get_name() << " (" << (*characters[i]).get_type() << ")" << std::endl;
+			for (int i = 0; i < character_names.size(); i++){
+				Character& tmp_char = env.getCharacter(character_names[i]);
+				std::cout << tmp_char.get_name() << " (" << tmp_char.get_type() << ")" << std::endl;
 			}
 		}
 
-		if (objects.size() > 0){
+		if (object_names.size() > 0){
 			std::cout << "\nObjects in this room: " << std::endl;
-			for (int i = 0; i < objects.size(); i++){
-				std::cout << (*objects[i]).get_name() << std::endl;
+			for (int i = 0; i < object_names.size(); i++){
+				std::cout << object_names[i] << std::endl;
 			}
 		}
 	}
