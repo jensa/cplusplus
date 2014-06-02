@@ -1,22 +1,24 @@
-character:
-	c++ -std=c++0x -c character.cpp -o character.o
+char:
+	c++ -std=c++0x -c character/character.cpp -o bin/character.o
 player:
-	c++ -std=c++0x -c player.cpp -o player.o
+	c++ -std=c++0x -c character/player.cpp -o bin/player.o
 npc:
-	c++ -std=c++0x -c npc.cpp -o npc.o
-object:
-	c++ -std=c++0x -c object.cpp -o object.o
+	c++ -std=c++0x -c character/npc.cpp -o bin/npc.o
+obj:
+	c++ -std=c++0x -c object/object.cpp -o bin/object.o
 ring:
-	c++ -std=c++0x -c ring.cpp -o ring.o
+	c++ -std=c++0x -c object/ring.cpp -o bin/ring.o
 container:
-	c++ -std=c++0x -c container.cpp -o container.o
+	c++ -std=c++0x -c object/container.cpp -o bin/container.o
 pocket:
-	c++ -std=c++0x -c pocket.cpp -o pocket.o
+	c++ -std=c++0x -c object/pocket.cpp -o bin/pocket.o
 bag:
-	c++ -std=c++0x -c bag.cpp -o bag.o
-environment:
-	c++ -std=c++0x -c environment.cpp -o environment.o
+	c++ -std=c++0x -c object/bag.cpp -o bin/bag.o
+env:
+	c++ -std=c++0x -c environment/environment.cpp -o bin/environment.o
 
-main: character player npc object ring container pocket bag environment
-	c++ -std=c++0x -o main.o main.cpp character.o player.o npc.o object.o ring.o container.o pocket.o bag.o environment.o
+main: char player npc obj ring container pocket bag env
+	c++ -std=c++0x -o main.o main.cpp bin/character.o bin/player.o bin/npc.o bin/object.o bin/ring.o bin/container.o bin/pocket.o bin/bag.o bin/environment.o
 
+clean:
+	rm -r *.o

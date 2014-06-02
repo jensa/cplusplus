@@ -1,8 +1,8 @@
 #include <vector>
-#include "player.h"
-#include "ring.h"
-#include "environment.h"
-#include "bag.h"
+#include "character/player.h"
+#include "object/ring.h"
+#include "environment/environment.h"
+#include "object/bag.h"
 
 using namespace lab3;
 
