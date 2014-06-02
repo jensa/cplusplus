@@ -1,5 +1,6 @@
 #include "npc.h"
 #include "../environment/environment.h"
+#include "../object/container.h"
 #include <iostream>
 
 namespace lab3 {
@@ -28,7 +29,13 @@ namespace lab3 {
 				pick_up(object);
 			}
 		} else if (r < 0.80){
-			//DROP
+			std::vector<Object *> inventory = (*container).get_objects();
+			if (inventory.size() > 0){
+				int random_index = rand() % inventory.size();
+				Object& object = *inventory[random_index];
+				env.drop(object);
+				drop(object);
+			}
 		} else {
 			//TALK TO
 		}
