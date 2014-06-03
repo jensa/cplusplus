@@ -1,3 +1,5 @@
+#ifndef ENVIRONMENT
+#define ENVIRONMENT
 #include <iostream>
 #include <vector>
 #include <string>
@@ -9,6 +11,8 @@
 namespace lab3{
 
 	class Environment {
+
+	protected:
 		std::map<std::string, Environment*> neighbor_map;
 		std::string description_string;
 		std::vector<Character *> characters;
@@ -21,6 +25,7 @@ namespace lab3{
 		Environment* neighbor(std::string direction);
 		void set_neighbor(std::string direction, Environment* neighbor);
 		std::string description() const;
+		void set_description(std::string);
 		void enter(Character &);
 		void leave(Character &);
 		Character& get_character(std::string);
@@ -32,3 +37,5 @@ namespace lab3{
 		virtual void interact(Object &);
 	};
 }
+
+#endif // !ENVIRONMENT
