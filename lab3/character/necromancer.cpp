@@ -4,7 +4,7 @@
 
 namespace lab3 {
 	
-	Necromancer::Necromancer(std::string name_, int hp, int dmg){
+	Necromancer::Necromancer(std::string name_, int hp){
 		type = "Necromancer";
 		name = name_;
 		hit_points = hp;
