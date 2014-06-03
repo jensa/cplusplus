@@ -120,16 +120,15 @@ std::vector<Environment *> initialize(Player& player){
 	(*G_E).set_neighbor("west", F_E);
 
 	(*C_B).enter(player);
-	std::cout << "wut" << std::endl;
 	Weapon * spear = new Weapon(10, 5, "spear", "a shiny spear");
 	Weapon* troll_sword = new Weapon(100, 15, "Trollsword", "a disgusting sword");
 	Weapon* sword = new Weapon(20, 8, "sword", "a shiny sword");
 	Weapon* axe = new Weapon(15, 7, "axe", "a shiny axe");
 	
-	Troll* troll1 = new Troll("Ugly troll", 10, spear);
-	Troll* troll2 = new Troll("Fancy troll", 10, axe);
-	Troll* troll3 = new Troll("Stupid troll", 10, sword);
-	Troll* troll4 = new Troll("GORGOG", 10, troll_sword);
+	Troll* troll1 = new Troll("Blobab", 10, spear);
+	Troll* troll2 = new Troll("Moggrog", 10, axe);
+	Troll* troll3 = new Troll("Flerp", 10, sword);
+	Troll* troll4 = new Troll("Gorgog", 10, troll_sword);
 	troll4->set_weapon(troll_sword, *troll4, *D_E);
 
 	C_C->enter(*troll1);

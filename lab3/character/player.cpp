@@ -16,6 +16,7 @@ namespace lab3 {
 		hit_points = hp;
 		container = new Pocket();
 		weapon = new Weapon(5, 1, "fists", "these are your fists");
+		damage = weapon->get_damage();
 	}
 
 	void Player::action(Environment & env){
