@@ -119,8 +119,13 @@ namespace lab3 {
 		Character* character = env.get_character(name);
 
 		if (character != NULL){
-			fight(*character, env);
-			return true;
+			if (character->get_alive()){
+				fight(*character, env);
+				return true;
+			} else {
+				std::cout << character->get_name() << " is already dead. Stupid." << std::endl;
+			}
+			
 		} else {
 			std::cout << "No character named " << name << " in this environment." << std::endl;
 			return false;
@@ -300,6 +305,7 @@ namespace lab3 {
 					Object& dropped_object = *character_inventory[i];
 					std::cout << dropped_object.get_name();
 					env.drop(dropped_object);
+					c.drop(dropped_object);
 				}
 				std::cout << std::endl;
 			}

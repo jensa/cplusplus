@@ -7,9 +7,7 @@
 namespace lab3 {
 	
 	Lampmaker::~Lampmaker(){
-		if (alive){
-			delete weapon;
-		}
+		delete weapon;
 		delete container;
 	}
 
@@ -28,8 +26,12 @@ namespace lab3 {
 
 	const std::string Lampmaker::talk_to(Character & character, Environment& env){
 		Lamp* lamp = new Lamp();
-		env.drop(*lamp);
-		env.leave(*this);
-		return "Hello. I am the lampmaker. I am of course dying. I see that you are original enough to take this lamp. Take it. just take it please. Urghhh...";
+		if (alive) {
+			env.drop(*lamp);
+			alive = false;
+			return "Hello. I am the lampmaker. I am of course dying. I see that you are original enough to take this lamp. Take it. just take it please. Urghhh...";
+		} else {
+ 			return "...";
+		}
 	}
 }

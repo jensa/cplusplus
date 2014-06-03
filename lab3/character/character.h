@@ -28,6 +28,7 @@ namespace lab3 {
 		void set_container(Container *);
 		void set_weapon(Weapon *, Character &, Environment &);
 		void set_alive(bool alive);
+		const bool get_alive();
 
 		const int get_damage() const;
 		Weapon* get_weapon();
