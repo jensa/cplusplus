@@ -105,5 +105,9 @@ namespace lab3 {
 		std::cout << "Nothing happens. literally nothing." << std::endl;
 	}
 
+	void Environment::set_description(std::string new_desc){
+		description_string = new_desc;
+	}
+
 }
 

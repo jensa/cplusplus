@@ -4,7 +4,7 @@ class Darkroom :
 	public Environment
 {
 public:
-	Darkroom(void);
+	Darkroom(std::string);
 	~Darkroom(void);
 	void interact(Object &);
 private:
