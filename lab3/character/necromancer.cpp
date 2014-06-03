@@ -5,8 +5,10 @@
 namespace lab3 {
 	
 	Necromancer::~Necromancer(){
+		if(alive){
+			delete weapon;
+		}
 		delete container;
-		delete weapon;
 	}
 
 	Necromancer::Necromancer(std::string name_, int hp, Weapon * weapon_){
@@ -20,6 +22,7 @@ namespace lab3 {
 		drop_prob = 0.0;
 		weapon = weapon_;
 		damage = weapon->get_damage();
+		alive = true;
 	}
 
 	const std::string Necromancer::talk_to(Character &, Environment &){

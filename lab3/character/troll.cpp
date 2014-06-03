@@ -5,8 +5,10 @@
 namespace lab3 {
 
 	Troll::~Troll(){
+		if(alive){
+			delete weapon;
+		}
 		delete container;
-		delete weapon;
 	}
 	
 	Troll::Troll(std::string name_, int hp, Weapon* wep){
@@ -20,6 +22,7 @@ namespace lab3 {
 		drop_prob = 0.1;
 		weapon = wep;
 		damage = wep->get_damage();
+		alive = true;
 	}
 
 	const std::string Troll::talk_to(Character &, Environment &){

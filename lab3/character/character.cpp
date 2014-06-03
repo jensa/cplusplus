@@ -75,4 +75,8 @@ namespace lab3 {
 	Weapon* Character::get_weapon(){
 		return weapon;
 	}
+
+	void Character::set_alive(bool alive_){
+		alive = alive_;
+	}
 }

@@ -7,8 +7,10 @@
 namespace lab3 {
 	
 	Lampmaker::~Lampmaker(){
+		if (alive){
+			delete weapon;
+		}
 		delete container;
-		delete weapon;
 	}
 
 	Lampmaker::Lampmaker(std::string name_, int hp, Weapon* weapon_){
@@ -21,6 +23,7 @@ namespace lab3 {
 		pickup_prob = 0;
 		drop_prob = 0;
 		weapon = weapon_;
+		alive = true;
 	}
 
 	const std::string Lampmaker::talk_to(Character & character, Environment& env){

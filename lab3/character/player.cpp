@@ -23,6 +23,7 @@ namespace lab3 {
 		container = new Pocket();
 		weapon = new Weapon(5, 1, "fists", "these are your fists");
 		damage = weapon->get_damage();
+		alive = true;
 	}
 
 	bool Player::action(Environment & env){
@@ -305,7 +306,9 @@ namespace lab3 {
 			Weapon* dropped_weapon = c.get_weapon();
 			env.drop(*dropped_weapon);
 			std::cout << dropped_weapon->get_name() << std::endl;
+			c.set_alive(false);
 			env.leave(c);
+			delete &c;
 		}
 	}
 

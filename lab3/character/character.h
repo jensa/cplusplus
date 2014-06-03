@@ -26,8 +26,8 @@ namespace lab3 {
 		Environment& go(Environment &, const std::string);
 		Container& get_container() const;
 		void set_container(Container *);
-
 		void set_weapon(Weapon *, Character &, Environment &);
+		void set_alive(bool alive);
 
 		const int get_damage() const;
 		Weapon* get_weapon();
@@ -42,6 +42,7 @@ namespace lab3 {
 		int damage;
 		Container* container;
 		Weapon* weapon;
+		bool alive;
 	};
 }
 #endif
