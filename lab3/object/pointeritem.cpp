@@ -14,14 +14,16 @@ Pointeritem::~Pointeritem(void)
 {
 }
 
-void Pointeritem::use(Character & character , Environment & env){
+bool Pointeritem::use(Character & character , Environment & env){
 	if(name == "voidpointer"){
 		std::cout << "You cast the void pointer to a function pointer" << std::endl;
 		name = "functionpointer";
+		return true;
 	} else if(name == "functionpointer"){
 		std::cout << "The function pointer points to exit()! Goodbye, hero!" << std::endl;
-		exit(0);
+		return false;
 	}
+	return true;
 }
 
 }

@@ -13,7 +13,7 @@ namespace lab3 {
 			void inventory_command() const;
 			bool pickup_command(const std::vector<std::string>, Environment &);
 			bool drop_command(const std::vector<std::string>, Environment &);
-			bool use_command(const std::vector<std::string> tokens, Environment & env);
+			int use_command(const std::vector<std::string> tokens, Environment & env);
 			void examine_command(const std::vector<std::string> tokens) const;
 			void look_command(const Environment & env) const;
 			void directions_command(const Environment & env) const;

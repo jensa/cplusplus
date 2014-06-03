@@ -6,6 +6,6 @@ namespace lab3 {
 		public:
 			Pocket();
 			~Pocket();
-			void use(Character &, Environment &);
+			bool use(Character &, Environment &);
 	};
 }

@@ -16,8 +16,9 @@ namespace lab3{
 		}
 	}
 
-	void Pocket::use(Character & character, Environment & env){
+	bool Pocket::use(Character & character, Environment & env){
 		character.set_container(this);
 		std::cout << "Player inventory can now hold a total weight of " << get_hold_weight() << "." << std::endl;
+		return true;
 	}
 }

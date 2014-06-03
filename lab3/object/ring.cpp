@@ -7,7 +7,8 @@ namespace lab3{
 		weight = 1;
 	}
 
-	void Ring::use(Character &, Environment &){
+	bool Ring::use(Character &, Environment &){
 		std::cout << "You try to use the ring. Nothing happens." << std::endl;
+		return true;
 	}
 }

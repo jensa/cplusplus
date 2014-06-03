@@ -17,8 +17,9 @@ int Weapon::get_damage(){
 	return damage;
 }
 
-void Weapon::use(Character & character, Environment & env){
+bool Weapon::use(Character & character, Environment & env){
 	character.set_weapon(this, character, env);
+	return true;
 }
 
 

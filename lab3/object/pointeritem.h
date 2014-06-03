@@ -7,6 +7,6 @@ public:
 	Pointeritem(void);
 	~Pointeritem(void);
 
-	void use(Character &, Environment &);
+	bool use(Character &, Environment &);
 };
 }

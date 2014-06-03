@@ -16,7 +16,7 @@ namespace lab3 {
 		const std::string get_description() const;
 		const int get_weight() const;
 
-		virtual void use(Character &, Environment &) = 0;
+		virtual bool use(Character &, Environment &) = 0;
 
 	protected:
 		std::string name;

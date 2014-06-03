@@ -7,6 +7,6 @@ class Key : public Object
 public:
 	Key(void);
 	~Key(void);
-	void use(Character &, Environment &);
+	bool use(Character &, Environment &);
 };
 }

@@ -15,8 +15,9 @@ Key::~Key(void)
 {
 }
 
-void Key::use(Character & character , Environment & env){
+bool Key::use(Character & character , Environment & env){
 	env.interact(*this);
+	return true;
 }
 
 }

@@ -10,7 +10,7 @@ public:
 	Weapon(void);
 	Weapon(int damage, int weight, std::string, std::string);
 	int get_damage();
-	void use(Character &, Environment &);
+	bool use(Character &, Environment &);
 
 private:
 	int damage;

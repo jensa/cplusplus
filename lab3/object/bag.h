@@ -6,6 +6,6 @@ namespace lab3 {
 		public:
 			Bag();
 			~Bag();
-			void use(Character &, Environment &);
+			bool use(Character &, Environment &);
 	};
 }

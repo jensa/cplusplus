@@ -64,7 +64,13 @@ namespace lab3 {
     		} else if (tokens[0] == "drop"){
     			executed_command = drop_command(tokens, env);
 			} else if (tokens[0] == "use"){
-				executed_command = use_command(tokens, env);
+				int use_result = use_command(tokens, env);
+				if(use_result == -1)
+					return false;
+				if(use_result == 0)
+					executed_command = false;
+				else
+					executed_command = true;
 			} else if (tokens[0] == "examine"){
 				examine_command(tokens);
 			} else if (tokens[0] == "look"){
@@ -164,8 +170,6 @@ namespace lab3 {
 		Object* object = env.get_object(name);
 
 		if (object != NULL){
-			std::cout << get_container().get_current_weight() << std::endl;
-			std::cout << (*object).get_weight() << std::endl;
 			if (get_container().get_current_weight() + (*object).get_weight() > get_container().get_hold_weight()){
 				std::cout << "You don't have enough room in your inventory for " << name << "." << std::endl;
 				return false;
@@ -200,7 +204,7 @@ namespace lab3 {
 		return false;
 	}
 
-	bool Player::use_command(std::vector<std::string> tokens, Environment & env){
+	int Player::use_command(std::vector<std::string> tokens, Environment & env){
 		if (tokens.size() == 1){
 			std::cout << "You have to specify what object to use." << std::endl;
 			return false;
@@ -209,12 +213,15 @@ namespace lab3 {
 		std::vector<Object *>& inventory = (*container).get_objects();
 		for (int i = 0; i < inventory.size(); i++){
 			if ((*inventory[i]).get_name() == name){
-				(*inventory[i]).use((*this), env);
-				return true;
+				if ((*inventory[i]).use((*this), env)){
+					return 1;
+				}else{
+					return -1;
+				}
 			}
 		}
 		std::cout << "No object named " << name << " in inventory!" << std::endl;
-		return false;
+		return 0;
 	}
 
 	void Player::examine_command(const std::vector<std::string> tokens) const{

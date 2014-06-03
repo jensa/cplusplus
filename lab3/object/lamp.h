@@ -7,7 +7,7 @@ class Lamp :public Object
 public:
 	Lamp(void);
 	~Lamp(void);
-	void use(Character &, Environment &);
+	bool use(Character &, Environment &);
 };
 }
 
