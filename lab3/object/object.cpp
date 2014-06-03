@@ -2,15 +2,15 @@
 
 namespace lab3 {
 
-	std::string Object::get_name(){
+	const std::string Object::get_name() const{
 		return name;
 	}
 
-	std::string Object::get_description(){
+	const std::string Object::get_description() const{
 		return description;
 	}
 
-	int Object::get_weight(){
+	const int Object::get_weight() const{
 		return weight;
 	}
 }
