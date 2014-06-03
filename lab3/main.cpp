@@ -19,13 +19,14 @@ using namespace lab3;
 std::vector<Environment *> initialize(Player& player);
 std::string get_castle_view(std::string);
 std::string get_file_contents (std::ifstream&);
+std::string welcome();
 
 int main(){
 
+	
+	std::string name = welcome();
 	Player player = Player("player", 100);
-
 	std::vector<Environment *> environments = initialize(player);
-
 	while (true){
 		for (int i = 0; i < environments.size(); i++){
 			Environment& env = *environments[i];
@@ -44,7 +45,7 @@ int main(){
 std::vector<Environment *> initialize(Player& player){
 	std::vector<Environment *> environments;
 
-	Environment* A_D = new Environment("You see a giant pit. There's a pile of fruit stuff on the ground");
+	Environment* A_D = new Environment("You see a giant pit. Is this some sort of grave?");
 	Environment* B_B = new Environment("You're standing in a deserted garden. All you see are dead plants");
 	Environment* B_C = new Environment("You're in the west guard tower.");
 	Environment* B_D = new Environment("You're inside the ritual chamber. There's a portal to hell here, and a suspicious door that seems to lead to certain death.");
@@ -124,7 +125,7 @@ std::vector<Environment *> initialize(Player& player){
 
 	(*C_B).enter(player);
 	Weapon * spear = new Weapon(10, 5, "spear", "a shiny spear");
-	Weapon* troll_sword = new Weapon(100, 15, "Trollsword", "a disgusting sword");
+	Weapon* troll_sword = new Weapon(25, 15, "Trollsword", "a disgusting sword");
 	Weapon* sword = new Weapon(20, 8, "sword", "a shiny sword");
 	Weapon* axe = new Weapon(15, 7, "axe", "a shiny axe");
 	
@@ -136,7 +137,7 @@ std::vector<Environment *> initialize(Player& player){
 	C_C->enter(*troll1);
 	D_C->enter(*troll2);
 	B_C->enter(*troll3);
-	(*D_E).enter(*troll4);
+	B_E->enter(*troll4);
 
 	Lampmaker* maker = new Lampmaker("Simon", 10);
 	(*F_C).enter(*maker);
@@ -204,4 +205,16 @@ std::string get_file_contents (std::ifstream& file)
     } else {
 		return "";
     }
+}
+
+std::string welcome(){
+	std::cout << get_castle_view("intro.txt") << std::endl;
+	std::cout << "Welcome to a not so exciting adventure! what is your name?" << std::endl;
+	std::cout << "> ";
+	std::string name;
+	std::cin >> name;
+	std::cout << name << "! Our medieval castle has been defiled by traditional fantasy creatures! For whatever reason, you must go alone and extract vengeance, even though you only have your weak fists to help you. Now go!" << std::endl;
+	std::cout << std::endl << std::endl;
+	std::cout << "you are left alone in front of the huge, super cliché castle. Good luck!" << std::endl;
+	return name;
 }

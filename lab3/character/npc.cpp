@@ -11,9 +11,11 @@ namespace lab3 {
 		if (r < go_prob){
 			//GO
 			std::vector<std::string> directions = env.directions();
-			int random_index = rand() % directions.size();
-			std::string direction = directions[random_index];
-			go(env, direction);
+			if (directions.size() > 0){
+				int random_index = rand() % directions.size();
+				std::string direction = directions[random_index];
+				go(env, direction);
+			}
 
 		}
 

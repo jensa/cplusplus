@@ -64,6 +64,7 @@ namespace lab3 {
 		}
 		weapon = weap;
 		damage = (*weap).get_damage();
+		drop(*weap);
 		std::cout << "You equipped the " << weapon->get_name() << ". it has a damage value of " << weapon->get_damage() << "." << std::endl;
 	}
 
