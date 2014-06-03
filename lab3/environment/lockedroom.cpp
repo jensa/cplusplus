@@ -14,6 +14,12 @@ Lockedroom::Lockedroom(std::string locked_desc, std::string open_desc, Environme
 
 
 Lockedroom::~Lockedroom(void){
+	for (int i = 0; i < objects.size(); i++){
+		delete objects[i];
+	}
+	for (int i = 0; i < characters.size(); i++){
+		delete characters[i];
+	}
 }
 
 	void Lockedroom::interact(const Object & o){

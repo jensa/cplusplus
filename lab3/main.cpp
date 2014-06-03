@@ -1,7 +1,3 @@
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-
 #include <vector>
 #include <fstream>
 #include "character/player.h"
@@ -52,10 +48,9 @@ int main(){
 		}
 	}
 
-	/*for (int i = 0; i < environments.size(); i++){
+	for (int i = 0; i < environments.size(); i++){
 		delete environments[i];
-	}*/
-	_CrtDumpMemoryLeaks();
+	}
 	std::cout << "Game ended." << std::endl;
 }
 
@@ -208,7 +203,6 @@ std::vector<Environment *> initialize(Player& player){
 }
 
 std::string get_castle_view(std::string filepath){
-	return "";
 	std::ifstream reader (filepath);
     std::string contents =  get_file_contents (reader);
 	reader.close ();

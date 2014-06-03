@@ -10,6 +10,12 @@ namespace lab3{
 		current_weight = 0;
 	}
 
+	Bag::~Bag(){
+		for (int i = 0; i < objects.size(); i++){
+			delete objects[i];
+		}
+	}
+
 	void Bag::use(Character & character, Environment & env){
 		character.set_container(this);
 		character.get_container().remove(*this);

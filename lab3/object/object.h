@@ -11,6 +11,7 @@ namespace lab3 {
 
 	class Object {
 	public:
+		virtual ~Object() {};
 		const std::string get_name() const;
 		const std::string get_description() const;
 		const int get_weight() const;

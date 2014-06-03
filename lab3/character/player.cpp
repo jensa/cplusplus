@@ -11,6 +11,11 @@
 
 namespace lab3 {
 
+	Player::~Player(){
+		delete container;
+		delete weapon;
+	}
+
 	Player::Player(std::string name_, int hp){
 		type = "Player";
 		name = name_;

@@ -3,6 +3,11 @@
 #include "../object/bag.h"
 
 namespace lab3 {
+
+	Troll::~Troll(){
+		delete container;
+		delete weapon;
+	}
 	
 	Troll::Troll(std::string name_, int hp, Weapon* wep){
 		type = "Troll";

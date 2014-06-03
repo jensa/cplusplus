@@ -6,7 +6,7 @@ class Dragon : public NPC
 {
 public:
 	Dragon(void);
-	~Dragon(void);
+	~Dragon();
 	Dragon(std::string, int, Weapon*);
 	const std::string talk_to(Character &, Environment &);
 };

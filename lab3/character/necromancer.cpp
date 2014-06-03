@@ -4,6 +4,11 @@
 
 namespace lab3 {
 	
+	Necromancer::~Necromancer(){
+		delete container;
+		delete weapon;
+	}
+
 	Necromancer::Necromancer(std::string name_, int hp, Weapon * weapon_){
 		type = "Necromancer";
 		name = name_;

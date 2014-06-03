@@ -14,7 +14,8 @@ namespace lab3 {
 
 	class Character {
 	public:
-		~Character();
+		virtual ~Character() {};
+
 		const std::string get_type() const;
 		const std::string get_name() const;
 		const int get_hit_points() const;

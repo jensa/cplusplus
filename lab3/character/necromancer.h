@@ -3,6 +3,7 @@
 namespace lab3 {
 	class Necromancer : public NPC {
 		public:
+			~Necromancer();
 			Necromancer(std::string name, int hp, Weapon *);
 			const std::string talk_to(Character &, Environment &);
 	};

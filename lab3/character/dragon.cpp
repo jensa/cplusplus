@@ -6,9 +6,10 @@ Dragon::Dragon(void)
 {
 }
 
-
-Dragon::~Dragon(void)
+Dragon::~Dragon()
 {
+	delete container;
+	delete weapon;
 }
 
 Dragon::Dragon(std::string char_name, int hit_points, Weapon* weap){

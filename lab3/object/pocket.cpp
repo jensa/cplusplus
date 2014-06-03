@@ -10,6 +10,12 @@ namespace lab3{
 		current_weight = 0;
 	}
 
+	Pocket::~Pocket(){
+		for (int i = 0; i < objects.size(); i++){
+			delete objects[i];
+		}
+	}
+
 	void Pocket::use(Character & character, Environment & env){
 		character.set_container(this);
 		std::cout << "Player inventory can now hold a total weight of " << get_hold_weight() << "." << std::endl;

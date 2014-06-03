@@ -6,6 +6,11 @@
 
 namespace lab3 {
 	
+	Lampmaker::~Lampmaker(){
+		delete container;
+		delete weapon;
+	}
+
 	Lampmaker::Lampmaker(std::string name_, int hp, Weapon* weapon_){
 		type = "Lamp Maker";
 		name = name_;
