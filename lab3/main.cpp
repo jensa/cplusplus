@@ -27,8 +27,8 @@ int main(){
 
 	
 	std::string name = welcome();
-	Player player = Player(name, 20000);
-	std::vector<Environment *> environments = initialize(player);
+	Player* player = new Player(name, 20000);
+	std::vector<Environment *> environments = initialize(*player);
 	bool game_running = true;
 	while (game_running){
 		for (int i = 0; i < environments.size(); i++){
