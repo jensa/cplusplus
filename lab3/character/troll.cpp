@@ -14,4 +14,8 @@ namespace lab3 {
 		pickup_prob = 0.1;
 		drop_prob = 0.1;
 	}
+
+	const std::string Troll::talk_to(Character &){
+		return "\033[1;31mlolfi rodolfi\033[0m";
+	}
 }

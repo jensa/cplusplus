@@ -16,11 +16,9 @@ namespace lab3 {
 		const std::string get_type() const;
 		const std::string get_name() const;
 		const int get_hit_points() const;
-		const int get_damage() const;
 
 		void pick_up(Object &);
 		void drop(Object &);
-		const std::string talk_to(const Character &) const;
 		void hit(const int); 
 		Environment& go(Environment &, const std::string);
 		Container& get_container() const;
@@ -28,11 +26,11 @@ namespace lab3 {
 
 		void set_weapon(Weapon *);
 
-		int get_damage();
-		
+		const int get_damage() const;
 		virtual void action(Environment &) = 0;
 		virtual void fight(Character &, Environment &) = 0;
-	
+		virtual const std::string talk_to(const Character &) const = 0;
+
 	protected:
 		std::string type;
 		std::string name;

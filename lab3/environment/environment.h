@@ -29,7 +29,7 @@ namespace lab3{
 		void set_description(const std::string);
 		void enter(Character &);
 		void leave(Character &);
-		Character& get_character(const std::string) const;
+		Character* get_character(const std::string) const;
 		Character* get_player() const;
 		const std::vector<std::string> get_character_names() const;
 		Object* get_object(const std::string) const;

@@ -16,10 +16,6 @@ namespace lab3 {
 		return hit_points;
 	}
 
-	const int Character::get_damage() const{
-		return damage;
-	}
-
 	void Character::pick_up(Object& o){
 		(*container).add(o);
 	}
@@ -64,7 +60,7 @@ namespace lab3 {
 		weapon = weap;
 	}
 
-	int Character::get_damage(){
-		return (*weapon).get_damage;
+	const int Character::get_damage() const{
+		return (*weapon).get_damage();
 	}
 }
