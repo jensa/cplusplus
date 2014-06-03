@@ -230,7 +230,7 @@ namespace lab3 {
 		std::vector<std::string> object_names = env.get_object_names();
 
 		if (character_names.size() > 0){
-			std::cout << "\nCharacters in this room: " << std::endl;
+			std::cout << "\nCharacters in this environment: " << std::endl;
 			for (int i = 0; i < character_names.size(); i++){
 				Character& tmp_char = (*env.get_character(character_names[i]));
 				std::cout << tmp_char.get_name() << " (" << tmp_char.get_type() << ")" << std::endl;
@@ -238,7 +238,7 @@ namespace lab3 {
 		}
 
 		if (object_names.size() > 0){
-			std::cout << "\nObjects in this room: " << std::endl;
+			std::cout << "\nObjects in this environment: " << std::endl;
 			for (int i = 0; i < object_names.size(); i++){
 				std::cout << object_names[i] << std::endl;
 			}

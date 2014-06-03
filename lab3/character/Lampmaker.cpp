@@ -1,7 +1,7 @@
 #include "lampmaker.h"
 
 #include "../object/pocket.h"
-#include "../object/key.h"
+#include "../object/lamp.h"
 #include "../environment/environment.h"
 
 namespace lab3 {
@@ -18,8 +18,8 @@ namespace lab3 {
 	}
 
 	const std::string Lampmaker::talk_to(Character & character, Environment& env){
-		Key* key = new Key();
-		env.drop(*key);
+		Lamp* lamp = new Lamp();
+		env.drop(*lamp);
 		env.leave(*this);
 		return "Hello. I am the lampmaker. I am of course dying. I see that you are original enough to take this lamp. Take it. just take it please. Urghhh...";
 	}
