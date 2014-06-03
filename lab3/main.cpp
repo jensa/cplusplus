@@ -137,28 +137,30 @@ std::vector<Environment *> initialize(Player& player){
 	C_C->enter(*troll1);
 	D_C->enter(*troll2);
 	B_C->enter(*troll3);
-	(*D_E).enter(*troll4);
+	D_E->enter(*troll4);
 
-	Lampmaker* maker = new Lampmaker("Simon", 10);
+	Weapon* dagger = new Weapon(10, 5, "dagger", "a shitty dagger");
+	Lampmaker* maker = new Lampmaker("Simon", 10, dagger);
 	(*F_C).enter(*maker);
 
-	Necromancer* necro = new Necromancer("Rorgot", 20);
-
-	Ring* ring = new Ring();
-	(*B_E).drop(*ring);
-
-	Bag* bag = new Bag();
-	(*D_D).drop(*bag);
+	Weapon* mace = new Weapon(50, 10, "necromace", "a freaky looking mace");
+	Necromancer* necro = new Necromancer("Rorgot", 20, mace);
 
 	Key* key = new Key();
-	(*C_C).drop(*key);
+	necro->pick_up(*key);
+	B_D->enter(*necro);
 
+	Ring* ring = new Ring();
+	B_E->drop(*ring);
+
+	Bag* bag = new Bag();
+	D_D->drop(*bag);
 
 	Lamp* lamp = new Lamp();
-	(*C_C).drop(*lamp);
+	C_C->drop(*lamp);
 
 	Weapon* stone_sword = new Weapon(100, 15, "Dragon-killing-sword", "This sword could probably kill a dragon");
-	(*F_F).drop(*stone_sword);
+	F_F->drop(*stone_sword);
 
 	environments.push_back(A_D);
 	environments.push_back(B_B);
