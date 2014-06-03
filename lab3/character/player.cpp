@@ -1,6 +1,7 @@
 #include "player.h"
 #include "../environment/environment.h"
 #include "../object/pocket.h"
+#include "../object/weapon.h"
 
 #include <iostream>
 #include <sstream>
@@ -14,6 +15,7 @@ namespace lab3 {
 		name = name_;
 		hit_points = hp;
 		container = new Pocket();
+		weapon = new Weapon(5, 1, "fists", "these are your fists");
 	}
 
 	void Player::action(Environment & env){

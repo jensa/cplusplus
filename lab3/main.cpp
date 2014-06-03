@@ -6,6 +6,7 @@
 #include "environment/environment.h"
 #include "object/bag.h"
 #include "object/key.h"
+#include "object/weapon.h"
 #include "object/lamp.h"
 #include "environment/darkroom.h"
 #include "environment/lockedroom.h"
@@ -55,8 +56,8 @@ std::vector<Environment *> initialize(Player& player){
 	Environment* D_D = new Lockedroom("This is the gardener's office, or what's left of it. There's a locked door here.", "This is the gardener's office, or what's left of it. The door to the gardens is unlocked.", E_D);
 	Environment* F_C = new Environment("You're standing in the ruins of the old lampmaker's hut. You know, the kind of hut you have in a castle garden.");
 	Environment* F_D = new Environment("You're in the castle gardens. Before you is a huge watchtower with a ladder.");
-	Environment* F_E = new Environment("This is the secret part of the garden. You're feeling full of all kinds of secrets.");
-	Environment* F_F = new Environment("Don't castle type people ever get tired of all the flowers? There's flowers literally everywhere. Oh, and dead bodies.");
+	Environment* F_E = new Environment("Don't castle type people ever get tired of all the flowers? There's flowers literally everywhere. Oh, and dead bodies.");
+	Environment* F_F = new Environment("This is the secret part of the garden. You're feeling full of all kinds of secrets. There's a sword sticking up from a stone in the corner. How unexpected");
 	Environment* G_D = new Environment("" + get_castle_view("castletopview.txt") + "WHOA! the view from here is amazing!");
 	Environment* G_E = new Environment("This is the most boring part of the garden. Not even the trolls like this place.");
 	Environment* HELL = new Environment("WELCOME TO HELL. THERES NO WAY OUT OF HERE!!!!!!!!!");
@@ -118,11 +119,17 @@ std::vector<Environment *> initialize(Player& player){
 	(*G_E).set_neighbor("west", F_E);
 
 	(*C_B).enter(player);
-
-	Troll* troll1 = new Troll("Ugly troll", 10);
-	Troll* troll2 = new Troll("Fancy troll", 10);
-	Troll* troll3 = new Troll("Stupid troll", 10);
-	Troll* troll4 = new Troll("GORGOG", 10);
+	std::cout << "wut" << std::endl;
+	Weapon * spear = new Weapon(10, 5, "spear", "a shiny spear");
+	Weapon* troll_sword = new Weapon(100, 15, "Trollsword", "a disgusting sword");
+	Weapon* sword = new Weapon(20, 8, "sword", "a shiny sword");
+	Weapon* axe = new Weapon(15, 7, "axe", "a shiny axe");
+	
+	Troll* troll1 = new Troll("Ugly troll", 10, spear);
+	Troll* troll2 = new Troll("Fancy troll", 10, axe);
+	Troll* troll3 = new Troll("Stupid troll", 10, sword);
+	Troll* troll4 = new Troll("GORGOG", 10, troll_sword);
+	(*troll4).set_weapon(troll_sword, *troll4, *D_E);
 
 	(*C_C).enter(*troll1);
 	(*D_C).enter(*troll2);
@@ -140,6 +147,9 @@ std::vector<Environment *> initialize(Player& player){
 
 	Lamp* lamp = new Lamp();
 	(*C_C).drop(*lamp);
+
+	Weapon* stone_sword = new Weapon(100, 15, "Dragon-killing-sword", "This sword could probably kill a dragon");
+	(*F_F).drop(*stone_sword);
 
 	environments.push_back(A_D);
 	environments.push_back(B_B);
