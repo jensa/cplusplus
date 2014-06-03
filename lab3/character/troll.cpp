@@ -4,19 +4,15 @@
 
 namespace lab3 {
 	
-	Troll::Troll(std::string name_, int hp, int mp){
+	Troll::Troll(std::string name_, int hp, int dmg){
 		type = "Troll";
 		name = name_;
 		hit_points = hp;
-		magic_points = mp;
+		damage = dmg;
 		container = new Pocket();
 		go_prob = 0.2;
-		fight_prob = 0.1;
+		fight_prob = 0.8;
 		pickup_prob = 0.1;
 		drop_prob = 0.1;
-	}
-	
-	void Troll::fight(Character &){
-
 	}
 }

@@ -12,6 +12,14 @@ namespace lab3 {
 		return name;
 	}
 
+	int Character::get_hit_points(){
+		return hit_points;
+	}
+
+	int Character::get_damage(){
+		return damage;
+	}
+
 	void Character::pick_up(Object& o){
 		(*container).add(o);
 	}
@@ -39,6 +47,10 @@ namespace lab3 {
 			(*new_container).add(*inventory[i]);
 		}
 		container = new_container;
+	}
+
+	void Character::hit(int damage){
+		hit_points -= damage;
 	}
 
 	void Character::talk_to(Character &){

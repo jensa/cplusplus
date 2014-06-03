@@ -63,6 +63,14 @@ namespace lab3 {
 		return *(*it);
 	}
 
+	Character* Environment::get_player(){
+		for (std::vector<Character *>::iterator it=characters.begin();it!=characters.end(); it++){
+		   if("Player" == (*(*it)).get_type()) 
+		      	return *it;
+		}
+		return NULL;
+	}
+
 	std::vector<std::string> Environment::get_character_names(){
 		std::vector<std::string> character_names;
 		for (int i = 0; i < characters.size(); i++){

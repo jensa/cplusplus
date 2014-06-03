@@ -3,9 +3,9 @@
 namespace lab3 {
 	class Player : public Character {
 		public:
-			Player(std::string name, int hp, int mp);
+			Player(std::string name, int hp, int dmg);
 			void action(Environment &);
-			void fight(Character &);
+			void fight(Character &, Environment &);
 		private: 
 			bool go_command(std::vector<std::string>, Environment &);
 			void inventory_command();

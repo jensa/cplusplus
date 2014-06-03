@@ -14,22 +14,25 @@ namespace lab3 {
 	public:
 		std::string get_type();
 		std::string get_name();
+		int get_hit_points();
+		int get_damage();
 
 		void pick_up(Object &);
 		void drop(Object &);
 		void talk_to(Character &);
+		void hit(int); 
 		Environment& go(Environment &, std::string);
 		Container& get_container();
 		void set_container(Container *);
 		
 		virtual void action(Environment &) = 0;
-		virtual void fight(Character &) = 0;
+		virtual void fight(Character &, Environment &) = 0;
 	
 	protected:
 		std::string type;
 		std::string name;
 		int hit_points;
-		int magic_points;
+		int damage;
 		Container* container;
 	};
 }
