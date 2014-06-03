@@ -4,10 +4,12 @@
 #include "character/troll.h"
 #include "character/lampmaker.h"
 #include "character/necromancer.h"
+#include "character/dragon.h"
 #include "object/ring.h"
 #include "environment/environment.h"
 #include "object/bag.h"
 #include "object/key.h"
+#include "object/pointeritem.h"
 #include "object/weapon.h"
 #include "object/lamp.h"
 #include "environment/darkroom.h"
@@ -25,7 +27,7 @@ int main(){
 
 	
 	std::string name = welcome();
-	Player player = Player("player", 100);
+	Player player = Player(name, 20000);
 	std::vector<Environment *> environments = initialize(player);
 	bool game_running = true;
 	while (game_running){
@@ -69,7 +71,7 @@ std::vector<Environment *> initialize(Player& player){
 	Environment* F_C = new Environment("You're standing in the ruins of the old lampmaker's hut. You know, the kind of hut you have in a castle garden.");
 	Environment* F_D = new Environment("You're in the castle gardens. Before you is a huge watchtower with a ladder.");
 	Environment* F_E = new Environment("Don't castle type people ever get tired of all the flowers? There's flowers literally everywhere. Oh, and dead bodies.");
-	Environment* F_F = new Environment("This is the secret part of the garden. You're feeling full of all kinds of secrets. There's a sword sticking up from a stone in the corner. How unexpected");
+	Environment* F_F = new Environment("This is the secret part of the garden. You're feeling full of all kinds of secrets. How unexpected.");
 	Environment* G_D = new Environment("" + get_castle_view("castletopview.txt") + "WHOA! the view from here is amazing!");
 	Environment* G_E = new Environment("This is the most boring part of the garden. Not even the trolls like this place.");
 	Environment* HELL = new Environment("WELCOME TO HELL. THERES NO WAY OUT OF HERE!!!!!!!!!");
@@ -112,6 +114,7 @@ std::vector<Environment *> initialize(Player& player){
 	(*D_E).set_neighbor("south", D_D);
 
 	(*E_D).set_neighbor("east", F_D);
+	(*E_D).set_neighbor("west", D_D);
 
 	(*F_C).set_neighbor("north", F_D);
 
@@ -131,27 +134,33 @@ std::vector<Environment *> initialize(Player& player){
 	(*G_E).set_neighbor("west", F_E);
 
 	(*C_B).enter(player);
-	Weapon * spear = new Weapon(10, 5, "spear", "a shiny spear");
-	Weapon* troll_sword = new Weapon(25, 15, "Trollsword", "a disgusting sword");
-	Weapon* sword = new Weapon(20, 8, "sword", "a shiny sword");
-	Weapon* axe = new Weapon(15, 7, "axe", "a shiny axe");
+	Weapon * spear = new Weapon(7, 5, "spear", "a shiny spear");
+	Weapon* troll_sword = new Weapon(15, 15, "Trollsword", "a disgusting sword");
+	Weapon* sword = new Weapon(12, 8, "sword", "a shiny sword");
+	Weapon* axe = new Weapon(10, 7, "axe", "a shiny axe");
 	
-	Troll* troll1 = new Troll("Blobab", 10, spear);
-	Troll* troll2 = new Troll("Moggrog", 10, axe);
-	Troll* troll3 = new Troll("Flerp", 10, sword);
-	Troll* troll4 = new Troll("Gorgog", 10, troll_sword);
+	Troll* troll1 = new Troll("a", 10, spear);
+	Troll* troll2 = new Troll("b", 10, axe);
+	Troll* troll3 = new Troll("c", 15, sword);
+	Troll* troll4 = new Troll("d", 20, troll_sword);
 
 	C_C->enter(*troll1);
 	D_C->enter(*troll2);
 	B_C->enter(*troll3);
 	B_E->enter(*troll4);
 
-	Weapon* dagger = new Weapon(10, 5, "dagger", "a shitty dagger");
+	Weapon* dragon_claw = new Weapon(70, 3, "Dragon claw", "Whoa, it's so light!");
+	Dragon* dragon = new Dragon("Dragon", 100, dragon_claw);
+	Pointeritem* pointer = new Pointeritem();
+	dragon->pick_up(*pointer);
+	C_F->enter(*dragon);
+
+	Weapon* dagger = new Weapon(6, 5, "dagger", "a shitty dagger");
 	Lampmaker* maker = new Lampmaker("Simon", 10, dagger);
 	(*F_C).enter(*maker);
 
-	Weapon* mace = new Weapon(50, 10, "necromace", "a freaky looking mace");
-	Necromancer* necro = new Necromancer("Rorgot", 20, mace);
+	Weapon* mace = new Weapon(30, 10, "necromace", "a freaky looking mace");
+	Necromancer* necro = new Necromancer("r", 40, mace);
 
 	Key* key = new Key();
 	necro->pick_up(*key);
@@ -163,7 +172,7 @@ std::vector<Environment *> initialize(Player& player){
 	Bag* bag = new Bag();
 	D_D->drop(*bag);
 
-	Weapon* stone_sword = new Weapon(100, 15, "Dragon-killing-sword", "This sword could probably kill a dragon");
+	Weapon* stone_sword = new Weapon(100, 15, "Dragonkiller", "This sword could probably kill a dragon");
 	F_F->drop(*stone_sword);
 
 	environments.push_back(A_D);
@@ -201,6 +210,7 @@ std::string get_castle_view(std::string filepath){
 std::string get_file_contents (std::ifstream& file)
 {
     std::string lines = "";
+
     if (file){
 		while (file.good ()) {
 			std::string tempLine;
@@ -217,7 +227,7 @@ std::string get_file_contents (std::ifstream& file)
 std::string welcome(){
 	std::cout << get_castle_view("intro.txt") << std::endl;
 	std::cout << "Welcome to a not so exciting adventure! what is your name?" << std::endl;
-	std::cout << "> ";
+	std::cout << ">";
 	std::string name;
 	std::cin >> name;
 	std::cout << name << "! Our medieval castle has been defiled by traditional fantasy creatures! For whatever reason, you must go alone and extract vengeance, even though you only have your weak fists to help you. Now go!" << std::endl;

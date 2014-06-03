@@ -6,7 +6,7 @@ namespace lab3{
 Key::Key(void)
 {
 	name = "key";
-	description = "This key look key-y";
+	description = "This key looks key-y";
 	weight = 1;
 }
 

@@ -9,11 +9,12 @@ namespace lab3 {
 		name = name_;
 		hit_points = hp;
 		container = new Pocket();
-		go_prob = 0.2;
-		fight_prob = 0.9;
-		pickup_prob = 0.1;
-		drop_prob = 0;
+		go_prob = 0.0;
+		fight_prob = 1.0;
+		pickup_prob = 0.0;
+		drop_prob = 0.0;
 		weapon = weapon_;
+		damage = weapon->get_damage();
 	}
 
 	const std::string Necromancer::talk_to(Character &, Environment &){

@@ -157,7 +157,9 @@ namespace lab3 {
 		Object* object = env.get_object(name);
 
 		if (object != NULL){
-			if (get_container().get_weight() + (*object).get_weight() > get_container().get_hold_weight()){
+			std::cout << get_container().get_current_weight() << std::endl;
+			std::cout << (*object).get_weight() << std::endl;
+			if (get_container().get_current_weight() + (*object).get_weight() > get_container().get_hold_weight()){
 				std::cout << "You don't have enough room in your inventory for " << name << "." << std::endl;
 				return false;
 			};
@@ -182,7 +184,7 @@ namespace lab3 {
 		for (int i = 0; i < inventory.size(); i++){
 			if ((*inventory[i]).get_name() == name){
 				env.drop(*inventory[i]);
-				inventory.erase(inventory.begin()+i);
+				get_container().remove(*inventory[i]);
 				std::cout << "You dropped " << name << std::endl;
 				return true;
 			}
@@ -234,7 +236,8 @@ namespace lab3 {
 			std::cout << "\nCharacters in this environment: " << std::endl;
 			for (int i = 0; i < character_names.size(); i++){
 				Character& tmp_char = (*env.get_character(character_names[i]));
-				std::cout << tmp_char.get_name() << " (" << tmp_char.get_type() << ")" << std::endl;
+				if(tmp_char.get_name() != name)
+					std::cout << tmp_char.get_name() << " (" << tmp_char.get_type() << ")" << std::endl;
 			}
 		}
 
