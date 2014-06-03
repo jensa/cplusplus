@@ -1,3 +1,6 @@
+#ifndef CONTAINER
+#define CONTAINER
+
 #include "object.h"
 #include <vector>
 
@@ -19,3 +22,4 @@ namespace lab3 {
 			std::vector<Object *> objects;
 	};
 }
+#endif // !CONTAINER

@@ -3,9 +3,9 @@
 namespace lab3 {
 
 	Container::~Container(){
-		for (int i = 0; i < objects.size(); i++){
+		/*for (int i = 0; i < objects.size(); i++){
 			delete objects[i];
-		}
+		}*/
 	}
 
 	int Container::get_hold_weight(){

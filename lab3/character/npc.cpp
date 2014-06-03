@@ -52,6 +52,7 @@ namespace lab3 {
 				drop(object);
 			}
 		}
+		return true;
 	}
 
 	void NPC::fight(Character& player, Environment& env){

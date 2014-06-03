@@ -70,8 +70,10 @@ namespace lab3 {
 				return false;
 		    } else {
 		    	std::cout << "Command not recognized." << std::endl;
+				return true;
 		    }
 		}
+		return true;
 	}
 
 	bool Player::go_command(const std::vector<std::string> tokens, Environment& env){

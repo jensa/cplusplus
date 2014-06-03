@@ -1,3 +1,7 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 #include <vector>
 #include <fstream>
 #include "character/player.h"
@@ -37,17 +41,21 @@ int main(){
 			
 			for (int i = 0; i < character_names.size(); i++){
 				Character* character = env.get_character(character_names[i]);
-				if (character != NULL) {
-					game_running = character->action(env);
-				}
+				if (character != NULL ){
+					if(character_names[i] == name) {
+						game_running = character->action(env);
+					} else{
+						character->action(env);
+					}
+				} 
 			}
 		}
 	}
 
-	for (int i = 0; i < environments.size(); i++){
+	/*for (int i = 0; i < environments.size(); i++){
 		delete environments[i];
-	}
-
+	}*/
+	_CrtDumpMemoryLeaks();
 	std::cout << "Game ended." << std::endl;
 }
 
