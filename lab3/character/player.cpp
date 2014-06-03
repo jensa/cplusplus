@@ -198,7 +198,7 @@ namespace lab3 {
 	}
 
 	void Player::look_command(const Environment & env) const{
-		std::cout << "You are in " << env.description() << std::endl;
+		std::cout << env.description() << std::endl;
 
 		std::vector<std::string> character_names = env.get_character_names();
 		std::vector<std::string> object_names = env.get_object_names();

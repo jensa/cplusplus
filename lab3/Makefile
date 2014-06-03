@@ -18,9 +18,11 @@ bag:
 	c++ -std=c++0x -c object/bag.cpp -o bin/bag.o
 env:
 	c++ -std=c++0x -c environment/environment.cpp -o bin/environment.o
+darkroom:
+	c++ -std=c++0x -c environment/darkroom.cpp -o bin/darkroom.o
 
-main: char player npc troll obj ring container pocket bag env
-	c++ -std=c++0x -o main.o main.cpp bin/character.o bin/player.o bin/npc.o bin/troll.o bin/object.o bin/ring.o bin/container.o bin/pocket.o bin/bag.o bin/environment.o
+main: char player npc troll obj ring container pocket bag env darkroom
+	c++ -std=c++0x -o main.o main.cpp bin/character.o bin/player.o bin/npc.o bin/troll.o bin/object.o bin/ring.o bin/container.o bin/pocket.o bin/bag.o bin/environment.o bin/darkroom.o
 
 clean:
 	rm -r *.o

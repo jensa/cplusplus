@@ -4,9 +4,9 @@ class Darkroom :
 	public Environment
 {
 public:
-	Darkroom(std::string);
+	Darkroom(const std::string);
 	~Darkroom(void);
-	void interact(Object &);
+	void interact(const Object &);
 private:
 	bool lamped;
 };
