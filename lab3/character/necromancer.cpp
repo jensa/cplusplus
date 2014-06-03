@@ -14,4 +14,8 @@ namespace lab3 {
 		pickup_prob = 0.1;
 		drop_prob = 0;
 	}
+
+	const std::string Necromancer::talk_to(Character &, Environment &){
+		return "All I wanna do is eat your brainz...";
+	}
 }

@@ -6,7 +6,7 @@
 
 namespace lab3 {
 	
-	Lampmaker::Lampmaker(std::string name_, int hp, int dmg){
+	Lampmaker::Lampmaker(std::string name_, int hp){
 		type = "Lamp Maker";
 		name = name_;
 		hit_points = hp;

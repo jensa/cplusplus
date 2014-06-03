@@ -1,3 +1,6 @@
+#ifndef NPC_H
+#define NPC_H
+
 #include "character.h"
 
 namespace lab3 {
@@ -13,3 +16,4 @@ namespace lab3 {
 			float drop_prob;
 	};
 }
+#endif

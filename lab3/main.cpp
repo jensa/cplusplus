@@ -2,6 +2,7 @@
 #include <fstream>
 #include "character/player.h"
 #include "character/troll.h"
+#include "character/lampmaker.h"
 #include "object/ring.h"
 #include "environment/environment.h"
 #include "object/bag.h"
@@ -129,6 +130,9 @@ std::vector<Environment *> initialize(Player& player){
 	(*B_C).enter(*troll3);
 	(*D_E).enter(*troll4);
 
+	Lampmaker* maker = new Lampmaker("Dyingdude", 10);
+	(*F_C).enter(*maker);
+
 	Ring* ring = new Ring();
 	(*B_E).drop(*ring);
 
@@ -137,9 +141,6 @@ std::vector<Environment *> initialize(Player& player){
 
 	Key* key = new Key();
 	(*C_C).drop(*key);
-
-	Lamp* lamp = new Lamp();
-	(*C_C).drop(*lamp);
 
 	environments.push_back(A_D);
 	environments.push_back(B_B);
