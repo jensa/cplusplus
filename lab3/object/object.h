@@ -10,9 +10,9 @@ namespace lab3 {
 
 	class Object {
 	public:
-		std::string get_name();
-		std::string get_description();
-		int get_weight();
+		const std::string get_name() const;
+		const std::string get_description() const;
+		const int get_weight() const;
 
 		virtual void use(Character &, Environment &) = 0;
 
