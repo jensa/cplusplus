@@ -4,19 +4,19 @@
 
 namespace lab3 {
 
-	std::string Character::get_type(){
+	const std::string Character::get_type() const{
 		return type;
 	}
 
-	std::string Character::get_name(){
+	const std::string Character::get_name() const{
 		return name;
 	}
 
-	int Character::get_hit_points(){
+	const int Character::get_hit_points() const{
 		return hit_points;
 	}
 
-	int Character::get_damage(){
+	const int Character::get_damage() const{
 		return damage;
 	}
 
@@ -28,7 +28,7 @@ namespace lab3 {
 		(*container).remove(o);
 	}
 
-	Environment& Character::go(Environment& env, std::string direction){
+	Environment& Character::go(Environment& env, const std::string direction){
 		Environment& neighbor = *env.neighbor(direction);
 		env.leave(*this);
 		neighbor.enter(*this);
@@ -36,7 +36,7 @@ namespace lab3 {
 		return neighbor;
 	}
 
-	Container& Character::get_container(){
+	Container& Character::get_container() const{
 		return *container;
 	}
 
@@ -53,7 +53,7 @@ namespace lab3 {
 		hit_points -= damage;
 	}
 
-	void Character::talk_to(Character &){
-
+	const std::string Character::talk_to(const Character &) const{
+		return "";
 	}
 }

@@ -56,7 +56,7 @@ namespace lab3 {
 			} else if (tokens[0] == "use"){
 				executed_command = use_command(tokens, env);
 			} else if (tokens[0] == "examine"){
-				examine_command(tokens, env);
+				examine_command(tokens);
 			} else if (tokens[0] == "look"){
 				look_command(env);
 			} else if (tokens[0] == "directions"){
@@ -69,7 +69,7 @@ namespace lab3 {
 		}
 	}
 
-	bool Player::go_command(std::vector<std::string> tokens, Environment& env){
+	bool Player::go_command(const std::vector<std::string> tokens, Environment& env){
 		if (tokens.size() == 1){
 			std::cout << "You have to specify where to go." << std::endl;
 			return false;
@@ -90,7 +90,7 @@ namespace lab3 {
 		return false;
 	}
 
-	bool Player::fight_command(std::vector<std::string> tokens, Environment& env){
+	bool Player::fight_command(const std::vector<std::string> tokens, Environment & env){
 		if (tokens.size() == 1){
 			std::cout << "You have to specify who you want to fight." << std::endl;
 			return false;
@@ -108,7 +108,7 @@ namespace lab3 {
 		}
 	}
 
-	void Player::inventory_command(){
+	void Player::inventory_command() const{
 		std::vector<Object *>& inventory = (*container).get_objects();
 
 		if (inventory.size() > 0){
@@ -181,7 +181,7 @@ namespace lab3 {
 		return false;
 	}
 
-	void Player::examine_command(std::vector<std::string> tokens, Environment & env){
+	void Player::examine_command(const std::vector<std::string> tokens) const{
 		if (tokens.size() == 1){
 			std::cout << "You have to specify what object examine." << std::endl;
 			return;
@@ -197,7 +197,7 @@ namespace lab3 {
 		std::cout << "No object named " << name << " in inventory!" << std::endl;
 	}
 
-	void Player::look_command(Environment & env){
+	void Player::look_command(const Environment & env) const{
 		std::cout << "You are in " << env.description() << std::endl;
 
 		std::vector<std::string> character_names = env.get_character_names();
@@ -219,9 +219,9 @@ namespace lab3 {
 		}
 	}
 
-	void Player::directions_command(Environment & env){
+	void Player::directions_command(const Environment & env) const{
 		std::vector<std::string> directions = env.directions();
-		std::cout << "From " << env.description() << " you can go to: ";
+		std::cout << "Directions: ";
 		
 		for (int i = 0; i < directions.size(); i++){
 			std::cout << directions[i];

@@ -12,23 +12,23 @@ namespace lab3 {
 		description_string = "";
 	}
 
-	std::vector<std::string> Environment::directions(){
+	const std::vector<std::string> Environment::directions() const{
 		std::vector<std::string> directions;
-		for(std::map<std::string, Environment *>::iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
+		for(std::map<std::string, Environment *>::const_iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
 			directions.push_back(iter->first);
 		}
 		return directions;
 	}
 	
-	void Environment::set_neighbor(std::string direction, Environment* neighbor){
+	void Environment::set_neighbor(const std::string direction, Environment* neighbor){
 		neighbor_map.insert(std::pair<std::string,Environment*>(direction,neighbor));
 	}
 
-	Environment* Environment::neighbor(std::string direction){
+	Environment* Environment::neighbor(const std::string direction) {
 		return neighbor_map[direction];
 	}
 	
-	std::string Environment::description() const{
+	const std::string Environment::description() const{
 		return description_string;
 	}
 	
@@ -54,8 +54,8 @@ namespace lab3 {
 		}
 	}
 
-	Character& Environment::get_character(std::string name){
-		std::vector<Character *>::iterator it=characters.begin();
+	Character& Environment::get_character(const std::string name) const{
+		std::vector<Character *>::const_iterator it=characters.begin();
 		for (;it!=characters.end(); it++){
 		   if(name == (*(*it)).get_name()) 
 		      break;
@@ -63,15 +63,15 @@ namespace lab3 {
 		return *(*it);
 	}
 
-	Character* Environment::get_player(){
-		for (std::vector<Character *>::iterator it=characters.begin();it!=characters.end(); it++){
+	Character* Environment::get_player() const{
+		for (std::vector<Character *>::const_iterator it=characters.begin();it!=characters.end(); it++){
 		   if("Player" == (*(*it)).get_type()) 
 		      	return *it;
 		}
 		return NULL;
 	}
 
-	std::vector<std::string> Environment::get_character_names(){
+	const std::vector<std::string> Environment::get_character_names() const{
 		std::vector<std::string> character_names;
 		for (int i = 0; i < characters.size(); i++){
 			character_names.push_back((*characters[i]).get_name());
@@ -79,8 +79,8 @@ namespace lab3 {
 		return character_names;
 	}
 
-	Object& Environment::get_object(std::string name){
-		std::vector<Object *>::iterator it = objects.begin();
+	Object& Environment::get_object(const std::string name) const{
+		std::vector<Object *>::const_iterator it = objects.begin();
 		for (;it!=objects.end(); it++){
 		   	if(name == (*(*it)).get_name()) {
 		  		break;	
@@ -89,7 +89,7 @@ namespace lab3 {
 		return *(*it);
 	}
 
-	std::vector<std::string> Environment::get_object_names(){
+	const std::vector<std::string> Environment::get_object_names() const{
 		std::vector<std::string> object_names;
 		for (int i = 0; i < objects.size(); i++){
 			object_names.push_back((*objects[i]).get_name());
@@ -101,7 +101,7 @@ namespace lab3 {
 		objects.push_back(&o);
 	}
 
-	void Environment::interact(Object & o){
+	void Environment::interact(const Object & o){
 		std::cout << "Nothing happens. literally nothing." << std::endl;
 	}
 

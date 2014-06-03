@@ -17,19 +17,19 @@ namespace lab3{
 	public:
 		Environment();
 		Environment(std::string description);
-		std::vector<std::string> directions();
-		Environment* neighbor(std::string direction);
-		void set_neighbor(std::string direction, Environment* neighbor);
-		std::string description() const;
+		const std::vector<std::string> directions() const;
+		Environment* neighbor(const std::string direction);
+		void set_neighbor(const std::string direction, Environment* neighbor);
+		const std::string description() const;
 		void enter(Character &);
 		void leave(Character &);
-		Character& get_character(std::string);
-		Character* get_player();
-		std::vector<std::string> get_character_names();
-		Object& get_object(std::string);
-		std::vector<std::string> get_object_names();
+		Character& get_character(const std::string) const;
+		Character* get_player() const;
+		const std::vector<std::string> get_character_names() const;
+		Object& get_object(const std::string) const;
+		const std::vector<std::string> get_object_names() const;
 		void pick_up(Object &);
 		void drop(Object &);
-		virtual void interact(Object &);
+		virtual void interact(const Object &);
 	};
 }

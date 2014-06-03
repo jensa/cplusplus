@@ -7,14 +7,14 @@ namespace lab3 {
 			void action(Environment &);
 			void fight(Character &, Environment &);
 		private: 
-			bool go_command(std::vector<std::string>, Environment &);
-			void inventory_command();
-			bool pickup_command(std::vector<std::string>, Environment &);
-			bool drop_command(std::vector<std::string>, Environment &);
-			bool use_command(std::vector<std::string> tokens, Environment & env);
-			void examine_command(std::vector<std::string> tokens, Environment & env);
-			void look_command(Environment & env);
-			void directions_command(Environment & env);
-			bool fight_command(std::vector<std::string>, Environment &);
+			bool go_command(const std::vector<std::string>, Environment &);
+			void inventory_command() const;
+			bool pickup_command(const std::vector<std::string>, Environment &);
+			bool drop_command(const std::vector<std::string>, Environment &);
+			bool use_command(const std::vector<std::string> tokens, Environment & env);
+			void examine_command(const std::vector<std::string> tokens) const;
+			void look_command(const Environment & env) const;
+			void directions_command(const Environment & env) const;
+			bool fight_command(const std::vector<std::string>, Environment &);
 	};
 }

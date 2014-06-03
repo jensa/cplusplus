@@ -12,17 +12,17 @@ namespace lab3 {
 
 	class Character {
 	public:
-		std::string get_type();
-		std::string get_name();
-		int get_hit_points();
-		int get_damage();
+		const std::string get_type() const;
+		const std::string get_name() const;
+		const int get_hit_points() const;
+		const int get_damage() const;
 
 		void pick_up(Object &);
 		void drop(Object &);
-		void talk_to(Character &);
-		void hit(int); 
-		Environment& go(Environment &, std::string);
-		Container& get_container();
+		const std::string talk_to(const Character &) const;
+		void hit(const int); 
+		Environment& go(Environment &, const std::string);
+		Container& get_container() const;
 		void set_container(Container *);
 		
 		virtual void action(Environment &) = 0;
