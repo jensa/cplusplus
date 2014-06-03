@@ -14,6 +14,7 @@ namespace lab3 {
 
 	class Character {
 	public:
+		~Character();
 		const std::string get_type() const;
 		const std::string get_name() const;
 		const int get_hit_points() const;
@@ -29,7 +30,7 @@ namespace lab3 {
 
 		const int get_damage() const;
 		Weapon* get_weapon();
-		virtual void action(Environment &) = 0;
+		virtual bool action(Environment &) = 0;
 		virtual void fight(Character &, Environment &) = 0;
 		virtual const std::string talk_to(Character &, Environment &) = 0;
 

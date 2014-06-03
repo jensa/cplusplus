@@ -27,7 +27,8 @@ int main(){
 	std::string name = welcome();
 	Player player = Player("player", 100);
 	std::vector<Environment *> environments = initialize(player);
-	while (true){
+	bool game_running = true;
+	while (game_running){
 		for (int i = 0; i < environments.size(); i++){
 			Environment& env = *environments[i];
 			std::vector<std::string> character_names = env.get_character_names();
@@ -35,11 +36,17 @@ int main(){
 			for (int i = 0; i < character_names.size(); i++){
 				Character* character = env.get_character(character_names[i]);
 				if (character != NULL) {
-					character->action(env);
+					game_running = character->action(env);
 				}
 			}
 		}
 	}
+
+	for (int i = 0; i < environments.size(); i++){
+		delete environments[i];
+	}
+
+	std::cout << "Game ended." << std::endl;
 }
 
 std::vector<Environment *> initialize(Player& player){
@@ -184,6 +191,7 @@ std::vector<Environment *> initialize(Player& player){
 }
 
 std::string get_castle_view(std::string filepath){
+	return "";
 	std::ifstream reader (filepath);
     std::string contents =  get_file_contents (reader);
 	reader.close ();

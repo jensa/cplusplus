@@ -4,6 +4,11 @@
 
 namespace lab3 {
 
+	Character::~Character(){
+		delete container;
+		delete weapon;
+	}
+
 	const std::string Character::get_type() const{
 		return type;
 	}

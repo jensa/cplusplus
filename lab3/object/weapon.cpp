@@ -9,6 +9,7 @@ Weapon::Weapon(void)
 
 Weapon::~Weapon(void)
 {
+	delete &damage;
 }
 
 Weapon::Weapon(int dmg, int weapon_weight, std::string weapon_name, std::string desc){

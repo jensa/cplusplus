@@ -4,7 +4,7 @@ namespace lab3 {
 	class Player : public Character {
 		public:
 			Player(std::string name, int hp);
-			void action(Environment &);
+			bool action(Environment &);
 			void fight(Character &, Environment &);
 			const std::string talk_to(Character &, Environment &);
 		private: 

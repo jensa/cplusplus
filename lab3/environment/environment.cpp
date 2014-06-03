@@ -12,6 +12,18 @@ namespace lab3 {
 		description_string = "";
 	}
 
+	Environment::~Environment(){
+		for (int i = 0; i < objects.size(); i++){
+			delete objects[i];
+		}
+		for (int i = 0; i < characters.size(); i++){
+			delete characters[i];
+		}
+
+		delete &description_string;
+		delete &neighbor_map;
+	}
+
 	const std::vector<std::string> Environment::directions() const{
 		std::vector<std::string> directions;
 		for(std::map<std::string, Environment *>::const_iterator iter = neighbor_map.begin(); iter != neighbor_map.end(); ++iter){
@@ -108,6 +120,5 @@ namespace lab3 {
 	void Environment::set_description(std::string new_desc){
 		description_string = new_desc;
 	}
-
 }
 

@@ -5,6 +5,7 @@ namespace lab3 {
 
 	class Container : public Object {
 		public:
+			~Container();
 			virtual void use(Character &, Environment &) = 0;
 			int get_hold_weight();
 			int get_current_weight();

@@ -5,7 +5,7 @@
 
 namespace lab3 {
 
-	void NPC::action(Environment& env){
+	bool NPC::action(Environment& env){
 
 		float r = ((float) rand() / (RAND_MAX));
 		if (r < go_prob){

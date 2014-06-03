@@ -20,7 +20,7 @@ namespace lab3 {
 		damage = weapon->get_damage();
 	}
 
-	void Player::action(Environment & env){
+	bool Player::action(Environment & env){
 
 		bool executed_command = false;
 
@@ -67,7 +67,7 @@ namespace lab3 {
 			} else if (tokens[0] == "directions"){
 				directions_command(env);
 			} else if (tokens[0] == "quit"){
-				exit(0);
+				return false;
 		    } else {
 		    	std::cout << "Command not recognized." << std::endl;
 		    }

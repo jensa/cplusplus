@@ -13,7 +13,6 @@ namespace lab3{
 
 Darkroom::~Darkroom(void)
 {
-
 }
 
 void Darkroom::interact(const Object & o){

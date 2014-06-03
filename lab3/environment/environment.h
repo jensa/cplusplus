@@ -21,6 +21,7 @@ namespace lab3{
 	public:
 		Environment();
 		Environment(std::string description);
+		~Environment();
 
 		const std::vector<std::string> directions() const;
 		Environment* neighbor(const std::string direction);

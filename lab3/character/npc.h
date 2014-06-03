@@ -6,7 +6,7 @@
 namespace lab3 {
 	class NPC : public Character {
 		public:
-			void action(Environment &);
+			bool action(Environment &);
 			void fight(Character &, Environment &);
 			virtual const std::string talk_to(Character &, Environment &) = 0;
 		protected:
