@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iterator>
 #include <string>
+#include <cstring>
 
 namespace lab3 {
 
