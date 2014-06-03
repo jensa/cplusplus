@@ -19,9 +19,6 @@ namespace lab3 {
 		for (int i = 0; i < characters.size(); i++){
 			delete characters[i];
 		}
-
-		delete &description_string;
-		delete &neighbor_map;
 	}
 
 	const std::vector<std::string> Environment::directions() const{
