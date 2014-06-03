@@ -64,9 +64,14 @@ namespace lab3 {
 		}
 		weapon = weap;
 		damage = (*weap).get_damage();
+		std::cout << "You equipped the " << weapon->get_name() << ". it has a damage value of " << weapon->get_damage() << "." << std::endl;
 	}
 
 	const int Character::get_damage() const{
 		return damage;
+	}
+
+	Weapon* Character::get_weapon(){
+		return weapon;
 	}
 }
