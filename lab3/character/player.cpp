@@ -275,8 +275,8 @@ namespace lab3 {
 		if (c.get_hit_points() <= 0){
 			std::cout << c.get_name() << " dies." << std::endl;
 			std::vector<Object *> character_inventory = c.get_container().get_objects();
+			std::cout << c.get_name() << " drops: ";
 			if (character_inventory.size() > 0){
-				std::cout << c.get_name() << " drops: ";
 				for (int i = 0; i < character_inventory.size(); i++){
 					Object& dropped_object = *character_inventory[i];
 					std::cout << dropped_object.get_name();
@@ -284,6 +284,9 @@ namespace lab3 {
 				}
 				std::cout << std::endl;
 			}
+			Weapon* dropped_weapon = c.get_weapon();
+			env.drop(*dropped_weapon);
+			std::cout << dropped_weapon->get_name() << std::endl;
 			env.leave(c);
 		}
 	}

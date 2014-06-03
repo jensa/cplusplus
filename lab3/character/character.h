@@ -28,6 +28,7 @@ namespace lab3 {
 		void set_weapon(Weapon *, Character &, Environment &);
 
 		const int get_damage() const;
+		Weapon* get_weapon();
 		virtual void action(Environment &) = 0;
 		virtual void fight(Character &, Environment &) = 0;
 		virtual const std::string talk_to(Character &, Environment &) = 0;

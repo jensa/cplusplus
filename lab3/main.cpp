@@ -129,7 +129,6 @@ std::vector<Environment *> initialize(Player& player){
 	Troll* troll2 = new Troll("Moggrog", 10, axe);
 	Troll* troll3 = new Troll("Flerp", 10, sword);
 	Troll* troll4 = new Troll("Gorgog", 10, troll_sword);
-	troll4->set_weapon(troll_sword, *troll4, *D_E);
 
 	C_C->enter(*troll1);
 	D_C->enter(*troll2);
