@@ -42,6 +42,9 @@ namespace lab3 {
 		for (int i = 0; i < inventory.size(); i++){
 			(*new_container).add(*inventory[i]);
 		}
+		inventory.clear();
+		Container* old_container = container;
+		delete old_container;
 		container = new_container;
 	}
 
@@ -61,6 +64,9 @@ namespace lab3 {
 			} else{
 				pick_up(*weapon);
 			}
+		} else {
+			Weapon* old_weapon = weapon;
+			delete old_weapon;
 		}
 		weapon = weap;
 		damage = (*weap).get_damage();
@@ -78,5 +84,9 @@ namespace lab3 {
 
 	void Character::set_alive(bool alive_){
 		alive = alive_;
+	}
+
+	const bool Character::get_alive(){
+		return alive;
 	}
 }
