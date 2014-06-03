@@ -47,6 +47,8 @@ namespace lab3 {
 		   		executed_command = go_command(tokens, env);
 		   	} else if (tokens[0] == "fight"){
 		   		executed_command = fight_command(tokens, env);
+		   	} else if (tokens[0] == "talk"){
+		   		executed_command = talk_command(tokens, env);
 		    } else if (tokens[0] == "inventory"){
 		    	inventory_command();
 	    	} else if (tokens[0] == "pickup"){
@@ -97,10 +99,28 @@ namespace lab3 {
 		}
 
 		std::string name = tokens[1];
-		Character& character = env.get_character(name);
+		Character* character = env.get_character(name);
+
+		if (character != NULL){
+			fight(*character, env);
+			return true;
+		} else {
+			std::cout << "No character named " << name << " in this environment." << std::endl;
+			return false;
+		}
+	}
+
+	bool Player::talk_command(const std::vector<std::string> tokens, Environment & env){
+		if (tokens.size() == 1){
+			std::cout << "You have to specify who you want to talk to." << std::endl;
+			return false;
+		}
+
+		std::string name = tokens[1];
+		Character& character = *env.get_character(name);
 
 		if (&character != NULL){
-			fight(character, env);
+			std::cout << character.get_name() << " says: '" << character.talk_to(*this) << "'" << std::endl;
 			return true;
 		} else {
 			std::cout << "No character named " << name << " in this environment." << std::endl;
@@ -210,7 +230,7 @@ namespace lab3 {
 		if (character_names.size() > 0){
 			std::cout << "\nCharacters in this room: " << std::endl;
 			for (int i = 0; i < character_names.size(); i++){
-				Character& tmp_char = env.get_character(character_names[i]);
+				Character& tmp_char = (*env.get_character(character_names[i]));
 				std::cout << tmp_char.get_name() << " (" << tmp_char.get_type() << ")" << std::endl;
 			}
 		}
@@ -264,5 +284,9 @@ namespace lab3 {
 			}
 			env.leave(c);
 		}
+	}
+
+	const std::string Player::talk_to(Character &){
+		return "";
 	}
 }

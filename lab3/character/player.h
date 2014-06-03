@@ -6,6 +6,7 @@ namespace lab3 {
 			Player(std::string name, int hp, int dmg);
 			void action(Environment &);
 			void fight(Character &, Environment &);
+			const std::string talk_to(Character &);
 		private: 
 			bool go_command(const std::vector<std::string>, Environment &);
 			void inventory_command() const;
@@ -16,5 +17,6 @@ namespace lab3 {
 			void look_command(const Environment & env) const;
 			void directions_command(const Environment & env) const;
 			bool fight_command(const std::vector<std::string>, Environment &);
+			bool talk_command(const std::vector<std::string>, Environment &);
 	};
 }

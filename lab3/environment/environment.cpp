@@ -54,13 +54,13 @@ namespace lab3 {
 		}
 	}
 
-	Character& Environment::get_character(const std::string name) const{
+	Character* Environment::get_character(const std::string name) const{
 		std::vector<Character *>::const_iterator it=characters.begin();
 		for (;it!=characters.end(); it++){
 		   if(name == (*(*it)).get_name()) 
-		      break;
+		      return *it;
 		}
-		return *(*it);
+		return NULL;
 	}
 
 	Character* Environment::get_player() const{

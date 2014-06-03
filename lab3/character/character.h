@@ -19,15 +19,15 @@ namespace lab3 {
 
 		void pick_up(Object &);
 		void drop(Object &);
-		const std::string talk_to(const Character &) const;
 		void hit(const int); 
 		Environment& go(Environment &, const std::string);
 		Container& get_container() const;
 		void set_container(Container *);
-		
+
 		virtual void action(Environment &) = 0;
 		virtual void fight(Character &, Environment &) = 0;
-	
+		virtual const std::string talk_to(Character &) = 0;
+
 	protected:
 		std::string type;
 		std::string name;

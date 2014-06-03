@@ -5,6 +5,7 @@ namespace lab3 {
 		public:
 			void action(Environment &);
 			void fight(Character &, Environment &);
+			virtual const std::string talk_to(Character &) = 0;
 		protected:
 			float go_prob;
 			float fight_prob;
