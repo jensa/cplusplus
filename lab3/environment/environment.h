@@ -24,6 +24,7 @@ namespace lab3{
 		void enter(Character &);
 		void leave(Character &);
 		Character& get_character(std::string);
+		Character* get_player();
 		std::vector<std::string> get_character_names();
 		Object& get_object(std::string);
 		std::vector<std::string> get_object_names();

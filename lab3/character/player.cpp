@@ -9,11 +9,11 @@
 
 namespace lab3 {
 
-	Player::Player(std::string name_, int hp, int mp){
+	Player::Player(std::string name_, int hp, int dmg){
 		type = "Player";
 		name = name_;
 		hit_points = hp;
-		magic_points = mp;
+		damage = dmg;
 		container = new Pocket();
 	}
 
@@ -45,6 +45,8 @@ namespace lab3 {
 
 		    if (tokens[0] == "go"){
 		   		executed_command = go_command(tokens, env);
+		   	} else if (tokens[0] == "fight"){
+		   		executed_command = fight_command(tokens, env);
 		    } else if (tokens[0] == "inventory"){
 		    	inventory_command();
 	    	} else if (tokens[0] == "pickup"){
@@ -78,14 +80,32 @@ namespace lab3 {
 
 		for (int i = 0; i < directions.size(); i++){
 			if(directions[i] == direction){
-				Environment new_location = go(env, direction);
-				std::cout << "You are now in " << new_location.description() << std::endl;
+				Environment& new_location = go(env, direction);
+				look_command(new_location);
     			return true;
 			}
 		}
 
 		std::cout << "You can't go to " << direction << " from here." << std::endl;
 		return false;
+	}
+
+	bool Player::fight_command(std::vector<std::string> tokens, Environment& env){
+		if (tokens.size() == 1){
+			std::cout << "You have to specify who you want to fight." << std::endl;
+			return false;
+		}
+
+		std::string name = tokens[1];
+		Character& character = env.get_character(name);
+
+		if (&character != NULL){
+			fight(character, env);
+			return true;
+		} else {
+			std::cout << "No character named " << name << " in this environment." << std::endl;
+			return false;
+		}
 	}
 
 	void Player::inventory_command(){
@@ -178,11 +198,13 @@ namespace lab3 {
 	}
 
 	void Player::look_command(Environment & env){
+		std::cout << "You are in " << env.description() << std::endl;
+
 		std::vector<std::string> character_names = env.get_character_names();
 		std::vector<std::string> object_names = env.get_object_names();
 
 		if (character_names.size() > 0){
-			std::cout << "Characters in this room: " << std::endl;
+			std::cout << "\nCharacters in this room: " << std::endl;
 			for (int i = 0; i < character_names.size(); i++){
 				Character& tmp_char = env.get_character(character_names[i]);
 				std::cout << tmp_char.get_name() << " (" << tmp_char.get_type() << ")" << std::endl;
@@ -209,12 +231,34 @@ namespace lab3 {
 				std::cout << std::endl;
 		}
 	}
-	
-	bool Player::fight_command(std::vector<std::string> tokens, Environment & env){
-		return false;
-	}
 
-	void Player::fight(Character &){
+	void Player::fight(Character & c, Environment& env){
+		if (c.get_type() == "Player"){
+			std::cout << "You can't fight yourself." << std::endl;
+			return;
+		}
 
+		int random_damage = damage + (rand() % damage);
+		c.hit(random_damage);
+		std::cout << name << " hits " << c.get_name() << " for " << random_damage << " damage.";
+		if (random_damage > (random_damage*2)-(random_damage/2))
+			std::cout << " Critical strike!" << std::endl;
+		else
+			std::cout << std::endl;
+
+		if (c.get_hit_points() <= 0){
+			std::cout << c.get_name() << " dies." << std::endl;
+			std::vector<Object *> character_inventory = c.get_container().get_objects();
+			if (character_inventory.size() > 0){
+				std::cout << c.get_name() << " drops: ";
+				for (int i = 0; i < character_inventory.size(); i++){
+					Object& dropped_object = *character_inventory[i];
+					std::cout << dropped_object.get_name();
+					env.drop(dropped_object);
+				}
+				std::cout << std::endl;
+			}
+			env.leave(c);
+		}
 	}
 }

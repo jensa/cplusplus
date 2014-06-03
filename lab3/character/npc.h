@@ -4,7 +4,7 @@ namespace lab3 {
 	class NPC : public Character {
 		public:
 			void action(Environment &);
-			virtual void fight(Character &) = 0;
+			void fight(Character &, Environment &);
 		protected:
 			float go_prob;
 			float fight_prob;

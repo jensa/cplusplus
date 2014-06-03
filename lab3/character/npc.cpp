@@ -20,6 +20,10 @@ namespace lab3 {
 		r = ((float) rand() / (RAND_MAX));
 		if (r < fight_prob){
 			//FIGHT
+			Character* player = env.get_player();
+			if (player != NULL){
+				fight(*player, env);
+			}
 		}
 
 		r = ((float) rand() / (RAND_MAX));
@@ -45,6 +49,21 @@ namespace lab3 {
 				env.drop(object);
 				drop(object);
 			}
+		}
+	}
+
+	void NPC::fight(Character& player, Environment& env){
+		int random_damage = damage + (rand() % damage);
+		player.hit(random_damage);
+		std::cout << std::endl << name << " hits " << player.get_name() << " for " << random_damage << " damage.";
+		if (random_damage > (random_damage*2)-(random_damage/2))
+			std::cout << " Critical strike!" << std::endl;
+		else
+			std::cout << std::endl;
+
+		if (player.get_hit_points() <= 0){
+			std::cout << player.get_name() << " dies." << std::endl;
+			exit(0);
 		}
 	}
 }
