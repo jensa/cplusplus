@@ -23,7 +23,7 @@ namespace lab3 {
 
 		while (!executed_command){
 		
-			std::cout << "\n>";
+			std::cout << ">";
 
 			char command[256];
 
@@ -131,11 +131,15 @@ namespace lab3 {
 		}
 
 		std::string name = tokens[1];
-		Object& object = env.get_object(name);
+		Object* object = env.get_object(name);
 
-		if (&object != NULL){
-			pick_up(object);
-			env.pick_up(object);
+		if (object != NULL){
+			if (get_container().get_weight() + (*object).get_weight() > get_container().get_hold_weight()){
+				std::cout << "You don't have enough room in your inventory for " << name << "." << std::endl;
+				return false;
+			};
+			pick_up(*object);
+			env.pick_up(*object);
 			std::cout << "You picked up " << name << std::endl;
 			return true;
 		} else {

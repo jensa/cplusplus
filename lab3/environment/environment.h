@@ -32,7 +32,7 @@ namespace lab3{
 		Character& get_character(const std::string) const;
 		Character* get_player() const;
 		const std::vector<std::string> get_character_names() const;
-		Object& get_object(const std::string) const;
+		Object* get_object(const std::string) const;
 		const std::vector<std::string> get_object_names() const;
 		void pick_up(Object &);
 		void drop(Object &);

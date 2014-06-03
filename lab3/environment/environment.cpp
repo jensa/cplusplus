@@ -79,14 +79,14 @@ namespace lab3 {
 		return character_names;
 	}
 
-	Object& Environment::get_object(const std::string name) const{
+	Object* Environment::get_object(const std::string name) const{
 		std::vector<Object *>::const_iterator it = objects.begin();
 		for (;it!=objects.end(); it++){
 		   	if(name == (*(*it)).get_name()) {
-		  		break;	
+		  		return *it;	
 		  	} 
 		}
-		return *(*it);
+		return NULL;
 	}
 
 	const std::vector<std::string> Environment::get_object_names() const{

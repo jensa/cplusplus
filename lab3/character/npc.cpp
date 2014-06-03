@@ -33,9 +33,9 @@ namespace lab3 {
 				std::vector<std::string> object_names = env.get_object_names();
 				int random_index = rand() % object_names.size();
 				std::string name = object_names[random_index];
-				Object& object = env.get_object(name);
-				env.pick_up(object);
-				pick_up(object);
+				Object* object = env.get_object(name);
+				env.pick_up(*object);
+				pick_up(*object);
 			}
 		}
 
