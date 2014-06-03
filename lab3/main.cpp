@@ -129,11 +129,11 @@ std::vector<Environment *> initialize(Player& player){
 	Troll* troll2 = new Troll("Fancy troll", 10, axe);
 	Troll* troll3 = new Troll("Stupid troll", 10, sword);
 	Troll* troll4 = new Troll("GORGOG", 10, troll_sword);
-	(*troll4).set_weapon(troll_sword, *troll4, *D_E);
+	troll4->set_weapon(troll_sword, *troll4, *D_E);
 
-	(*C_C).enter(*troll1);
-	(*D_C).enter(*troll2);
-	(*B_C).enter(*troll3);
+	C_C->enter(*troll1);
+	D_C->enter(*troll2);
+	B_C->enter(*troll3);
 	(*D_E).enter(*troll4);
 
 	Ring* ring = new Ring();

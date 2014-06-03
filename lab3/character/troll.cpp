@@ -14,6 +14,7 @@ namespace lab3 {
 		pickup_prob = 0.1;
 		drop_prob = 0.1;
 		weapon = wep;
+		damage = wep->get_damage();
 	}
 
 	const std::string Troll::talk_to(Character &, Environment &){
