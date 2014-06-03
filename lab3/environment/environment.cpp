@@ -101,5 +101,9 @@ namespace lab3 {
 		objects.push_back(&o);
 	}
 
+	void Environment::interact(Object & o){
+		std::cout << "Nothing happens. literally nothing." << std::endl;
+	}
+
 }
 

@@ -30,5 +30,6 @@ namespace lab3{
 		std::vector<std::string> get_object_names();
 		void pick_up(Object &);
 		void drop(Object &);
+		virtual void interact(Object &);
 	};
 }
