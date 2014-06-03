@@ -3,6 +3,7 @@
 #include "character/player.h"
 #include "character/troll.h"
 #include "character/lampmaker.h"
+#include "character/necromancer.h"
 #include "object/ring.h"
 #include "environment/environment.h"
 #include "object/bag.h"
@@ -31,8 +32,10 @@ int main(){
 			std::vector<std::string> character_names = env.get_character_names();
 			
 			for (int i = 0; i < character_names.size(); i++){
-				Character& character = (*env.get_character(character_names[i]));
-		  		character.action(env);
+				Character* character = env.get_character(character_names[i]);
+				if (character != NULL) {
+					character->action(env);
+				}
 			}
 		}
 	}
@@ -135,8 +138,10 @@ std::vector<Environment *> initialize(Player& player){
 	B_C->enter(*troll3);
 	(*D_E).enter(*troll4);
 
-	Lampmaker* maker = new Lampmaker("Dyingdude", 10);
+	Lampmaker* maker = new Lampmaker("Simon", 10);
 	(*F_C).enter(*maker);
+
+	Necromancer* necro = new Necromancer("Rorgot", 20);
 
 	Ring* ring = new Ring();
 	(*B_E).drop(*ring);
