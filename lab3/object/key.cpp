@@ -16,8 +16,6 @@ Key::~Key(void)
 }
 
 void Key::use(Character & character , Environment & env){
-	std::cout << "KEY USE" << typeid(env).name() << std::endl;
-	
 	env.interact(*this);
 }
 

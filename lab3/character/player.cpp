@@ -9,11 +9,10 @@
 
 namespace lab3 {
 
-	Player::Player(std::string name_, int hp, int dmg){
+	Player::Player(std::string name_, int hp){
 		type = "Player";
 		name = name_;
 		hit_points = hp;
-		damage = dmg;
 		container = new Pocket();
 	}
 

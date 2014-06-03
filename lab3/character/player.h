@@ -3,7 +3,7 @@
 namespace lab3 {
 	class Player : public Character {
 		public:
-			Player(std::string name, int hp, int dmg);
+			Player(std::string name, int hp);
 			void action(Environment &);
 			void fight(Character &, Environment &);
 		private: 

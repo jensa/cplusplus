@@ -3,6 +3,6 @@
 namespace lab3 {
 	class Troll : public NPC {
 		public:
-			Troll(std::string name, int hp, int dmg);
+			Troll(std::string name, int hp);
 	};
 }

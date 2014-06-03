@@ -56,4 +56,15 @@ namespace lab3 {
 	const std::string Character::talk_to(const Character &) const{
 		return "";
 	}
+
+	void Character::set_weapon(Weapon * weap){
+		if((*weapon).get_name() != "fists"){
+			pick_up(*weapon);
+		}
+		weapon = weap;
+	}
+
+	int Character::get_damage(){
+		return (*weapon).get_damage;
+	}
 }

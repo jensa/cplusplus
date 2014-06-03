@@ -53,7 +53,7 @@ namespace lab3 {
 	}
 
 	void NPC::fight(Character& player, Environment& env){
-		int random_damage = damage + (rand() % damage);
+		int random_damage = get_damage() + (rand() % get_damage());
 		player.hit(random_damage);
 		std::cout << std::endl << name << " hits " << player.get_name() << " for " << random_damage << " damage.";
 		if (random_damage > (random_damage*2)-(random_damage/2))

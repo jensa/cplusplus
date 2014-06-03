@@ -19,11 +19,9 @@ Darkroom::~Darkroom(void)
 void Darkroom::interact(const Object & o){
 	if (o.get_name() == "lamp"){
 		set_description(light_desc);
-
 			set_neighbor("north", light_environment);
 			std::cout << "You see a new door. A huge door! oh my god. there's probably something there..." << std::endl;
 		} else{
-			std::cout << o.get_name() << std::endl;
 			Environment::interact(o);
 		}
 }

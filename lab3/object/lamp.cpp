@@ -16,7 +16,6 @@ Lamp::~Lamp(void)
 
 void Lamp::use(Character & character, Environment & env){
 	env.interact(*this);
-
 }
 
 }

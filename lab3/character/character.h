@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "../object/object.h"
+#include "../object/weapon.h"
 
 namespace lab3 {
 
@@ -24,6 +25,10 @@ namespace lab3 {
 		Environment& go(Environment &, const std::string);
 		Container& get_container() const;
 		void set_container(Container *);
+
+		void set_weapon(Weapon *);
+
+		int get_damage();
 		
 		virtual void action(Environment &) = 0;
 		virtual void fight(Character &, Environment &) = 0;
@@ -32,8 +37,8 @@ namespace lab3 {
 		std::string type;
 		std::string name;
 		int hit_points;
-		int damage;
 		Container* container;
+		Weapon* weapon;
 	};
 }
 #endif

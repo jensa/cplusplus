@@ -119,10 +119,10 @@ std::vector<Environment *> initialize(Player& player){
 
 	(*C_B).enter(player);
 
-	Troll* troll1 = new Troll("Ugly troll", 10, 10);
-	Troll* troll2 = new Troll("Fancy troll", 10, 10);
-	Troll* troll3 = new Troll("Stupid troll", 10, 10);
-	Troll* troll4 = new Troll("GORGOG", 10, 10);
+	Troll* troll1 = new Troll("Ugly troll", 10);
+	Troll* troll2 = new Troll("Fancy troll", 10);
+	Troll* troll3 = new Troll("Stupid troll", 10);
+	Troll* troll4 = new Troll("GORGOG", 10);
 
 	(*C_C).enter(*troll1);
 	(*D_C).enter(*troll2);
