@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include <iostream>
+#include <string>
 
 namespace lab3 {
 
