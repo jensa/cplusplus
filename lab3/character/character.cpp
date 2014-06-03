@@ -53,14 +53,20 @@ namespace lab3 {
 		return "";
 	}
 
-	void Character::set_weapon(Weapon * weap){
+	void Character::set_weapon(Weapon * weap, Character & character, Environment & env){
 		if((*weapon).get_name() != "fists"){
-			pick_up(*weapon);
+			Container & container = character.get_container();
+			if(container.get_current_weight() + (*weapon).get_weight() > container.get_hold_weight()){
+				env.drop(*weapon);
+			} else{
+				pick_up(*weapon);
+			}
 		}
 		weapon = weap;
+		damage = (*weap).get_damage();
 	}
 
 	const int Character::get_damage() const{
-		return (*weapon).get_damage();
+		return damage;
 	}
 }

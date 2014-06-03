@@ -10,6 +10,7 @@ namespace lab3 {
 
 	class Environment;
 	class Container;
+	class Weapon;
 
 	class Character {
 	public:
@@ -24,7 +25,7 @@ namespace lab3 {
 		Container& get_container() const;
 		void set_container(Container *);
 
-		void set_weapon(Weapon *);
+		void set_weapon(Weapon *, Character &, Environment &);
 
 		const int get_damage() const;
 		virtual void action(Environment &) = 0;
@@ -35,6 +36,7 @@ namespace lab3 {
 		std::string type;
 		std::string name;
 		int hit_points;
+		int damage;
 		Container* container;
 		Weapon* weapon;
 	};
