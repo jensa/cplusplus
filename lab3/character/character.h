@@ -29,7 +29,7 @@ namespace lab3 {
 		const int get_damage() const;
 		virtual void action(Environment &) = 0;
 		virtual void fight(Character &, Environment &) = 0;
-		virtual const std::string talk_to(const Character &) const = 0;
+		virtual const std::string talk_to(Character &, Environment &) = 0;
 
 	protected:
 		std::string type;

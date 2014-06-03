@@ -119,7 +119,7 @@ namespace lab3 {
 		Character& character = *env.get_character(name);
 
 		if (&character != NULL){
-			std::cout << character.get_name() << " says: '" << character.talk_to(*this) << "'" << std::endl;
+			std::cout << character.get_name() << " says: '" << character.talk_to(*this, env) << "'" << std::endl;
 			return true;
 		} else {
 			std::cout << "No character named " << name << " in this environment." << std::endl;
@@ -285,7 +285,7 @@ namespace lab3 {
 		}
 	}
 
-	const std::string Player::talk_to(Character &){
+	const std::string Player::talk_to(Character &, Environment &){
 		return "";
 	}
 }

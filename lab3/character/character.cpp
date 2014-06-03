@@ -49,7 +49,7 @@ namespace lab3 {
 		hit_points -= damage;
 	}
 
-	const std::string Character::talk_to(const Character &) const{
+	const std::string Character::talk_to(Character &, Environment &){
 		return "";
 	}
 

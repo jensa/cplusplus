@@ -8,7 +8,6 @@ namespace lab3 {
 		type = "Necromancer";
 		name = name_;
 		hit_points = hp;
-		damage = dmg;
 		container = new Pocket();
 		go_prob = 0.2;
 		fight_prob = 0.9;

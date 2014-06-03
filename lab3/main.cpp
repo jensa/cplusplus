@@ -19,7 +19,7 @@ std::string get_file_contents (std::ifstream&);
 
 int main(){
 
-	Player player = Player("player", 100, 100);
+	Player player = Player("player", 100);
 
 	std::vector<Environment *> environments = initialize(player);
 
