@@ -1,6 +1,6 @@
 #include "troll.h"
 
-#import "../object/pocket.h"
+#include "../object/pocket.h"
 
 namespace lab3 {
 	
