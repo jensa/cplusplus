@@ -29,6 +29,7 @@ int main(){
 	std::string name = welcome();
 	Player* player = new Player(name, 20000);
 	std::vector<Environment *> environments = initialize(*player);
+	player->print_help();
 	bool game_running = true;
 	while (game_running){
 		for (int i = 0; i < environments.size(); i++){
@@ -136,21 +137,21 @@ std::vector<Environment *> initialize(Player& player){
 
 	(*C_B).enter(player);
 	Weapon * spear = new Weapon(7, 5, "spear", "a shiny spear");
-	Weapon* troll_sword = new Weapon(15, 15, "Trollsword", "a disgusting sword");
+	Weapon* troll_sword = new Weapon(15, 15, "trollsword", "a disgusting sword");
 	Weapon* sword = new Weapon(12, 8, "sword", "a shiny sword");
 	Weapon* axe = new Weapon(10, 7, "axe", "a shiny axe");
 	
-	Troll* troll1 = new Troll("a", 10, spear);
-	Troll* troll2 = new Troll("b", 10, axe);
-	Troll* troll3 = new Troll("c", 15, sword);
-	Troll* troll4 = new Troll("d", 20, troll_sword);
+	Troll* troll1 = new Troll("Ardlef", 10, spear);
+	Troll* troll2 = new Troll("Borkork", 10, axe);
+	Troll* troll3 = new Troll("Crogg", 15, sword);
+	Troll* troll4 = new Troll("GORGOG", 20, troll_sword);
 
 	C_C->enter(*troll1);
 	D_C->enter(*troll2);
 	B_C->enter(*troll3);
 	B_E->enter(*troll4);
 
-	Weapon* dragon_claw = new Weapon(70, 3, "Dragon claw", "Whoa, it's so light!");
+	Weapon* dragon_claw = new Weapon(70, 3, "dragon claw", "Whoa, it's so light!");
 	Dragon* dragon = new Dragon("Dragon", 100, dragon_claw);
 	Pointeritem* pointer = new Pointeritem();
 	dragon->pick_up(*pointer);
@@ -161,7 +162,7 @@ std::vector<Environment *> initialize(Player& player){
 	(*F_C).enter(*maker);
 
 	Weapon* mace = new Weapon(30, 10, "necromace", "a freaky looking mace");
-	Necromancer* necro = new Necromancer("r", 40, mace);
+	Necromancer* necro = new Necromancer("Rogert", 40, mace);
 
 	Key* key = new Key();
 	necro->pick_up(*key);

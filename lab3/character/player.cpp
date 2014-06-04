@@ -26,6 +26,11 @@ namespace lab3 {
 		alive = true;
 	}
 
+	const void Player::print_help() const{
+		std::cout << "Available commands are:" << std::endl;
+		std::cout << "help" << std::endl << "go" << std::endl << "fight" << std::endl << "talk" << std::endl << "inventory" << std::endl << "pickup" << std::endl << "drop" << std::endl << "use" << std::endl << "examine" << std::endl << "look" << std::endl << "directions" << std::endl << "quit" << std::endl; 
+	}
+
 	bool Player::action(Environment & env){
 
 		bool executed_command = false;
@@ -60,6 +65,8 @@ namespace lab3 {
 		   		executed_command = talk_command(tokens, env);
 		    } else if (tokens[0] == "inventory"){
 		    	inventory_command();
+			} else if (tokens[0] == "help"){
+		    	print_help();
 	    	} else if (tokens[0] == "pickup"){
 	    		executed_command = pickup_command(tokens, env);
     		} else if (tokens[0] == "drop"){
