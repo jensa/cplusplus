@@ -23,6 +23,7 @@ namespace lab3 {
 		container = new Pocket();
 		weapon = new Weapon(5, 1, "fists", "these are your fists");
 		damage = weapon->get_damage();
+		alive = true;
 	}
 
 	bool Player::action(Environment & env){
@@ -118,8 +119,13 @@ namespace lab3 {
 		Character* character = env.get_character(name);
 
 		if (character != NULL){
-			fight(*character, env);
-			return true;
+			if (character->get_alive()){
+				fight(*character, env);
+				return true;
+			} else {
+				std::cout << character->get_name() << " is already dead. Stupid." << std::endl;
+				return false;
+			}
 		} else {
 			std::cout << "No character named " << name << " in this environment." << std::endl;
 			return false;
@@ -246,7 +252,7 @@ namespace lab3 {
 		std::vector<std::string> character_names = env.get_character_names();
 		std::vector<std::string> object_names = env.get_object_names();
 
-		if (character_names.size() > 0){
+		if (character_names.size() > 1){
 			std::cout << "\nCharacters in this environment: " << std::endl;
 			for (int i = 0; i < character_names.size(); i++){
 				Character& tmp_char = (*env.get_character(character_names[i]));
@@ -299,13 +305,16 @@ namespace lab3 {
 					Object& dropped_object = *character_inventory[i];
 					std::cout << dropped_object.get_name();
 					env.drop(dropped_object);
+					c.drop(dropped_object);
 				}
 				std::cout << std::endl;
 			}
 			Weapon* dropped_weapon = c.get_weapon();
 			env.drop(*dropped_weapon);
 			std::cout << dropped_weapon->get_name() << std::endl;
+			c.set_alive(false);
 			env.leave(c);
+			delete &c;
 		}
 	}
 

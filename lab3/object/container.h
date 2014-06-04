@@ -10,8 +10,8 @@ namespace lab3 {
 		public:
 			virtual ~Container() {};
 			virtual bool use(Character &, Environment &) = 0;
-			int get_hold_weight();
-			int get_current_weight();
+			const int get_hold_weight() const;
+			const int get_current_weight() const;
 			bool add(Object &);
 			bool remove(Object &);
 			std::vector<Object *>& get_objects();
