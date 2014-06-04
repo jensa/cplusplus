@@ -231,6 +231,6 @@ std::string welcome(){
 	std::cin >> name;
 	std::cout << name << "! Our medieval castle has been defiled by traditional fantasy creatures! For whatever reason, you must go alone and extract vengeance, even though you only have your weak fists to help you. Now go!" << std::endl;
 	std::cout << std::endl << std::endl;
-	std::cout << "you are left alone in front of the huge, super cliché castle. Good luck!" << std::endl;
+	std::cout << "you are left alone in front of the huge, super cliche castle. Good luck!" << std::endl;
 	return name;
 }
