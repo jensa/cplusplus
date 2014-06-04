@@ -9,7 +9,7 @@ public:
 
 	Weapon(void);
 	Weapon(int damage, int weight, std::string, std::string);
-	int get_damage();
+	const int get_damage() const;
 	bool use(Character &, Environment &);
 
 private:

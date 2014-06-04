@@ -2,11 +2,11 @@
 
 namespace lab3 {
 
-	int Container::get_hold_weight(){
+	const int Container::get_hold_weight() const{
 		return hold_weight;
 	}
 
-	int Container::get_current_weight(){
+	const int Container::get_current_weight() const{
 		return current_weight;
 	}
 
