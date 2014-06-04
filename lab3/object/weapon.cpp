@@ -13,7 +13,7 @@ Weapon::Weapon(int dmg, int weapon_weight, std::string weapon_name, std::string 
 	damage = dmg;
 }
 
-int Weapon::get_damage(){
+const int Weapon::get_damage() const{
 	return damage;
 }
 

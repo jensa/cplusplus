@@ -124,8 +124,8 @@ namespace lab3 {
 				return true;
 			} else {
 				std::cout << character->get_name() << " is already dead. Stupid." << std::endl;
+				return false;
 			}
-			
 		} else {
 			std::cout << "No character named " << name << " in this environment." << std::endl;
 			return false;
@@ -252,7 +252,7 @@ namespace lab3 {
 		std::vector<std::string> character_names = env.get_character_names();
 		std::vector<std::string> object_names = env.get_object_names();
 
-		if (character_names.size() > 0){
+		if (character_names.size() > 1){
 			std::cout << "\nCharacters in this environment: " << std::endl;
 			for (int i = 0; i < character_names.size(); i++){
 				Character& tmp_char = (*env.get_character(character_names[i]));

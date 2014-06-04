@@ -60,7 +60,7 @@ std::vector<Environment *> initialize(Player& player){
 	Environment* A_D = new Environment("You see a giant pit. Is this some sort of grave?");
 	Environment* B_B = new Environment("You're standing in a deserted garden. All you see are dead plants");
 	Environment* B_C = new Environment("You're in the west guard tower.");
-	Environment* B_D = new Environment("You're inside the ritual chamber. There's a portal to hell here, and a suspicious door that seems to lead to certain death.");
+	Environment* B_D = new Environment("You're inside the ritual chamber. There's a suspicious door that seems to lead to certain death.");
 	Environment* B_E = new Environment("You're in the west bedroom chamber. There's an unbelievable stench permeating the room");
 	Environment* C_A = new Environment("You're basically at the end of the world. Just go back, please.");
 	Environment* C_B = new Environment("" + get_castle_view("castlefrontview.txt") + "You're facing a giant castle. Well, maybe not GIANT, but it's bigger than your home(hint: you don't have a home). The door seems open...");
@@ -77,7 +77,6 @@ std::vector<Environment *> initialize(Player& player){
 	Environment* F_F = new Environment("This is the secret part of the garden. You're feeling full of all kinds of secrets. How unexpected.");
 	Environment* G_D = new Environment("" + get_castle_view("castletopview.txt") + "WHOA! the view from here is amazing!");
 	Environment* G_E = new Environment("This is the most boring part of the garden. Not even the trolls like this place.");
-	Environment* HELL = new Environment("WELCOME TO HELL. THERES NO WAY OUT OF HERE!!!!!!!!!");
 
 	(*B_B).set_neighbor("east", C_B);
 
@@ -87,7 +86,6 @@ std::vector<Environment *> initialize(Player& player){
 	(*B_D).set_neighbor("south", B_C);
 	(*B_D).set_neighbor("west", A_D);
 	(*B_D).set_neighbor("north", B_E);
-	(*B_D).set_neighbor("portal", HELL);
 
 	(*B_E).set_neighbor("south", B_D);
 	(*B_E).set_neighbor("east", C_E);
@@ -198,7 +196,6 @@ std::vector<Environment *> initialize(Player& player){
 	environments.push_back(F_F);
 	environments.push_back(G_D);
 	environments.push_back(G_E);
-	environments.push_back(HELL);
 	return environments;
 }
 
