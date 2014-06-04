@@ -19,7 +19,7 @@
 using namespace lab3;
 
 std::vector<Environment *> initialize(Player& player);
-std::string get_castle_view(std::string);
+std::string ascii(std::string);
 std::string get_file_contents (std::ifstream&);
 std::string welcome();
 
@@ -63,19 +63,19 @@ std::vector<Environment *> initialize(Player& player){
 	Environment* B_D = new Environment("You're inside the ritual chamber. There's a portal to hell here, and a suspicious door that seems to lead to certain death.");
 	Environment* B_E = new Environment("You're in the west bedroom chamber. There's an unbelievable stench permeating the room");
 	Environment* C_A = new Environment("You're basically at the end of the world. Just go back, please.");
-	Environment* C_B = new Environment("" + get_castle_view("castlefrontview.txt") + "You're facing a giant castle. Well, maybe not GIANT, but it's bigger than your home(hint: you don't have a home). The door seems open...");
+	Environment* C_B = new Environment("" + ascii("castlefrontview.txt") + "You're facing a giant castle. Well, maybe not GIANT, but it's bigger than your home(hint: you don't have a home). The door seems open...");
 	Environment* C_C = new Environment("You're just inside the castle gates. You feel... stereotypical");
-	Environment* C_F = new Environment("OH MY GOD THIS HUGE DRAGON WILL KILL YOU DEAD KILL IT KILL IT");
+	Environment* C_F = new Environment(""+ascii("dragon.txt")+"OH MY GOD THIS HUGE DRAGON WILL KILL YOU DEAD KILL IT KILL IT");
 	Environment* C_E = new Darkroom("Oh god everything is so bright. There's a BIG GIANT LOOMING DOOR, among other things", "This is literally the darkest room you've ever seen. Better go back.", C_F);
 	Environment* D_C = new Environment("You're standing the the east guard tower. Typical tower, you know.");
 	Environment* D_E = new Environment("Wow. OK. This room sucks. just... just get out of here.");
 	Environment* E_D = new Environment("Aaah, fresh air. Mingled with a stench of rotten flesh. There's a huge hedge of both of your sides.");
 	Environment* D_D = new Lockedroom("This is the gardener's office, or what's left of it. There's a locked door here.", "This is the gardener's office, or what's left of it. The door to the gardens is unlocked.", E_D);
 	Environment* F_C = new Environment("You're standing in the ruins of the old lampmaker's hut. You know, the kind of hut you have in a castle garden.");
-	Environment* F_D = new Environment("You're in the castle gardens. Before you is a huge watchtower with a ladder.");
+	Environment* F_D = new Environment(""+ascii("tower.txt")+"You're in the castle gardens. Before you is a huge watchtower with a ladder.");
 	Environment* F_E = new Environment("Don't castle type people ever get tired of all the flowers? There's flowers literally everywhere. Oh, and dead bodies.");
 	Environment* F_F = new Environment("This is the secret part of the garden. You're feeling full of all kinds of secrets. How unexpected.");
-	Environment* G_D = new Environment("" + get_castle_view("castletopview.txt") + "WHOA! the view from here is amazing!");
+	Environment* G_D = new Environment("" + ascii("castletopview.txt") + "WHOA! the view from here is amazing!");
 	Environment* G_E = new Environment("This is the most boring part of the garden. Not even the trolls like this place.");
 	Environment* HELL = new Environment("WELCOME TO HELL. THERES NO WAY OUT OF HERE!!!!!!!!!");
 
@@ -202,7 +202,7 @@ std::vector<Environment *> initialize(Player& player){
 	return environments;
 }
 
-std::string get_castle_view(std::string filepath){
+std::string ascii(std::string filepath){
 	std::ifstream reader (filepath);
     std::string contents =  get_file_contents (reader);
 	reader.close ();
@@ -227,7 +227,7 @@ std::string get_file_contents (std::ifstream& file)
 }
 
 std::string welcome(){
-	std::cout << get_castle_view("intro.txt") << std::endl;
+	std::cout << ascii("intro.txt") << std::endl;
 	std::cout << "Welcome to a not so exciting adventure! what is your name?" << std::endl;
 	std::cout << ">";
 	std::string name;
